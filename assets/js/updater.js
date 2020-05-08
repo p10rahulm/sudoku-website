@@ -34,33 +34,33 @@ function addInputSudoku(inputValID, inputValue) {
     for (let i = 0; i < elemsinRow.length; i++) {
         const currSudokuIndex = elemsinRow[i];
         if (currSudokuIndex != inputValID) {
-            const currWorkingVal = Sudoku.workElemArray[currSudokuIndex];
+            const oldWorkingVal = Sudoku.workElemArray[currSudokuIndex];
             const newWorkingVal = Sudoku.workElemArray[currSudokuIndex] & ~workingAddVal;
             Sudoku.workElemArray[currSudokuIndex] = newWorkingVal;
-            if (currWorkingVal != newWorkingVal) {
-                decWEIBL(currSudokuIndex);
+            if (oldWorkingVal != newWorkingVal) {
+                updateWEIBL(currSudokuIndex, oldWorkingVal, newWorkingVal);
             }
         }
     }
     for (let i = 0; i < elemsinCol.length; i++) {
         const currSudokuIndex = elemsinCol[i];
         if (currSudokuIndex != inputValID) {
-            const currWorkingVal = Sudoku.workElemArray[currSudokuIndex];
+            const oldWorkingVal = Sudoku.workElemArray[currSudokuIndex];
             const newWorkingVal = Sudoku.workElemArray[currSudokuIndex] & ~workingAddVal;
             Sudoku.workElemArray[currSudokuIndex] = newWorkingVal;
-            if (currWorkingVal != newWorkingVal) {
-                decWEIBL(currSudokuIndex);
+            if (oldWorkingVal != newWorkingVal) {
+                updateWEIBL(currSudokuIndex, oldWorkingVal, newWorkingVal);
             }
         }
     }
     for (let i = 0; i < elemsinBox.length; i++) {
         const currSudokuIndex = elemsinBox[i];
         if (currSudokuIndex != inputValID) {
-            const currWorkingVal = Sudoku.workElemArray[currSudokuIndex];
+            const oldWorkingVal = Sudoku.workElemArray[currSudokuIndex];
             const newWorkingVal = Sudoku.workElemArray[currSudokuIndex] & ~workingAddVal;
             Sudoku.workElemArray[currSudokuIndex] = newWorkingVal;
-            if (currWorkingVal != newWorkingVal) {
-                decWEIBL(currSudokuIndex);
+            if (oldWorkingVal != newWorkingVal) {
+                updateWEIBL(currSudokuIndex, oldWorkingVal, newWorkingVal);
             }
         }
     }
@@ -75,7 +75,8 @@ function addInputSudoku(inputValID, inputValue) {
 
 function deleteInputSudoku(inputValID, inputValueDeleted) {
     const workingDelVal = powerofTwo(inputValueDeleted - 1);
-    let newInputWorkingVal = 511;
+    let updatingInputWorkingVal = 511;
+    console.log("updatingInputWorkingVal=", updatingInputWorkingVal);
     Sudoku.sudokuInputArray[inputValID] = 0;
 
     const [row, col, box] = Sudoku.elemIndices[inputValID];
@@ -83,49 +84,37 @@ function deleteInputSudoku(inputValID, inputValueDeleted) {
     const elemsinCol = Sudoku.indicesinCols[col];
     const elemsinBox = Sudoku.indicesinBoxes[box];
 
-    for (let i = 0; i < elemsinRow.length; i++) {
-        const currSudokuIndex = elemsinRow[i];
-        if (currSudokuIndex != inputValID) {
-            const oldWorkingVal = Sudoku.workElemArray[currSudokuIndex];
-            const newWorkingVal = Sudoku.workElemArray[currSudokuIndex] | workingDelVal;
-            Sudoku.workElemArray[currSudokuIndex] = newWorkingVal;
-            newInputWorkingVal = newInputWorkingVal & ~newWorkingVal;
-            if (oldWorkingVal != newWorkingVal) {
-                incWEIBL(currSudokuIndex, oldWorkingVal, newWorkingVal);
-            }
-        }
-    }
-    for (let i = 0; i < elemsinCol.length; i++) {
-        if (currSudokuIndex != inputValID) {
-            const currSudokuIndex = elemsinCol[i];
-            const oldWorkingVal = Sudoku.workElemArray[currSudokuIndex];
-            const newWorkingVal = Sudoku.workElemArray[currSudokuIndex] | workingDelVal;
-            Sudoku.workElemArray[currSudokuIndex] = newWorkingVal;
-            newInputWorkingVal = newInputWorkingVal & ~newWorkingVal;
-            if (oldWorkingVal != newWorkingVal) {
-                incWEIBL(currSudokuIndex, oldWorkingVal, newWorkingVal);
-            }
-        }
-    }
-    for (let i = 0; i < elemsinBox.length; i++) {
-        if (currSudokuIndex != inputValID) {
-            const currSudokuIndex = elemsinBox[i];
-            const oldWorkingVal = Sudoku.workElemArray[currSudokuIndex];
-            const newWorkingVal = Sudoku.workElemArray[currSudokuIndex] | workingDelVal;
-            Sudoku.workElemArray[currSudokuIndex] = newWorkingVal;
-            newInputWorkingVal = newInputWorkingVal & ~newWorkingVal;
-            if (oldWorkingVal != newWorkingVal) {
-                incWEIBL(currSudokuIndex, oldWorkingVal, newWorkingVal);
-            }
-        }
-    }
-    Sudoku.workElemArray[inputValID] = newInputWorkingVal;
+    updatingInputWorkingVal = updateDeletionforElems(elemsinRow, inputValID, workingDelVal, updatingInputWorkingVal);
+    updatingInputWorkingVal = updateDeletionforElems(elemsinCol, inputValID, workingDelVal, updatingInputWorkingVal);
+    updatingInputWorkingVal = updateDeletionforElems(elemsinBox, inputValID, workingDelVal, updatingInputWorkingVal);
+
+    Sudoku.workElemArray[inputValID] = updatingInputWorkingVal;
     Sudoku.processed.delete(inputValID);
-    const numBits = bitCount(newInputWorkingVal);
+    const numBits = bitCount(updatingInputWorkingVal);
     Sudoku.workElemIndicesByLength[numBits].add(inputValID);
 }
 
-function incWEIBL(elemID, oldWorkingVal, newWorkingVal) {
+function updateDeletionforElems(elemsinSameGroup, inputValID, workingDeleteVal, updatedInputWorkingVal) {
+    let updatedInputWorkingVar = updatedInputWorkingVal;
+    for (let i = 0; i < elemsinSameGroup.length; i++) {
+        const currSudokuIndex = elemsinSameGroup[i];
+        if (currSudokuIndex != inputValID) {
+            if (!Sudoku.sudokuInputArray[currSudokuIndex]) {
+                const oldWorkingVal = Sudoku.workElemArray[currSudokuIndex];
+                const newWorkingVal = Sudoku.workElemArray[currSudokuIndex] | workingDeleteVal;
+                Sudoku.workElemArray[currSudokuIndex] = newWorkingVal;
+                if (oldWorkingVal != newWorkingVal) {
+                    updateWEIBL(currSudokuIndex, oldWorkingVal, newWorkingVal);
+                }
+            } else {
+                updatedInputWorkingVar = updatedInputWorkingVar & ~Sudoku.workElemArray[currSudokuIndex];
+            }
+        }
+    }
+    return updatedInputWorkingVar;
+}
+
+function updateWEIBL(elemID, oldWorkingVal, newWorkingVal) {
     if (Sudoku.processed.has(elemID)) {
         Sudoku.processed.delete(elemID);
     } else {
@@ -147,20 +136,4 @@ function decWEIBL(elemID) {
             lengthFound = true;
         }
     }
-}
-
-function resetWorkingValforID(inputValID) {
-    let WorkingVal = 511;
-    const [row, col, box] = Sudoku.elemIndices[inputValID];
-    const elemsinRow = Sudoku.indicesinRows[row];
-    const elemsinCol = Sudoku.indicesinCols[col];
-    const elemsinBox = Sudoku.indicesinBoxes[box];
-
-    for (let i = 0; i < elemsinRow.length; i++) {
-        const currSudokuIndex = elemsinRow[i];
-        if (currSudokuIndex != inputValID) {
-            WorkingVal = WorkingVal & ~Sudoku.workElemArray[currSudokuIndex]
-        }
-    }
-    Sudoku.sudokuInputArray[inputValID] = 0;
 }
