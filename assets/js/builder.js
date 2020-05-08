@@ -5,6 +5,7 @@
     * 1. Each variable = workElem in our working array is represented as a number between 1 and 512.
     * 2. A number that is
  */
+Sudoku ={};
 function setIDs(){
     const sBox = document.getElementById("sudoku-box");
     const sudokuElemDivs= sBox.getElementsByTagName("input");
@@ -16,33 +17,23 @@ function setIDs(){
 function buildSudoku() {
     const sBox = document.getElementById("sudoku-box");
     const sudokuElemDivs= sBox.getElementsByTagName("input");
-    // console.log("sudokuElemDivs=",sudokuElemDivs);
     const sudokuInputArray = []
     for (let i =0;i<sudokuElemDivs.length;i++){
         sudokuInputArray.push(Number(sudokuElemDivs[i].value));
     }
-    // console.log("sudokuInputArray=",sudokuInputArray);
 
-    const [workElemArray,workElemIndicesByLength] = buildSudokuWorkArray(sudokuInputArray);
-    // console.log("workElemArray=",workElemArray);
-    // console.log("workElemIndicesByLength=",workElemIndicesByLength);
+    const [workElemArray,workElemIndicesByLength] = buildNewSudokuWorkArray(sudokuInputArray);
 
 
     const [elemIndices,indicesinRows,indicesinCols,indicesinBoxes] = buildElemIndices();
-    // console.log("elemIndices=",elemIndices);
-    // console.log("indicesinRows=",indicesinRows);
-    // console.log("indicesinCols=",indicesinCols);
-    // console.log("indicesinBoxes=",indicesinBoxes);
 
-
-    const Sudoku = createSudokuObject(sudokuInputArray,workElemArray,workElemIndicesByLength,
+    createNewSudokuObject(sudokuInputArray,workElemArray,workElemIndicesByLength,
                                         elemIndices,indicesinRows,indicesinCols,indicesinBoxes);
     console.log("Sudoku = ",Sudoku);
 }
 
-function createSudokuObject(sudokuInputArray,workElemArray,workElemIndicesByLength,
+function createNewSudokuObject(sudokuInputArray,workElemArray,workElemIndicesByLength,
                             elemIndices,indicesinRows,indicesinCols,indicesinBoxes) {
-    const Sudoku = {}
     Sudoku.sudokuInputArray = sudokuInputArray;
     Sudoku.workElemArray = workElemArray;
     Sudoku.workElemIndicesByLength = workElemIndicesByLength;
@@ -54,39 +45,39 @@ function createSudokuObject(sudokuInputArray,workElemArray,workElemIndicesByLeng
     Sudoku.indicesinBoxes = indicesinBoxes;
 
     Sudoku.done = isSudokuDone(workElemIndicesByLength)
+    Sudoku.processed = new Set()
     return Sudoku;
 }
 
 function isSudokuDone(workElemIndicesByLength){
     let done = true;
     for(let i =2; i<=9 && done; i++){
-        if(workElemIndicesByLength[i] === undefined || workElemIndicesByLength[i].length == 0){
+        if(workElemIndicesByLength[i].size == 0){
             done = false;
         }
     }
     return done;
 }
 
-function buildSudokuWorkArray(sudokuInputArray){
+function buildNewSudokuWorkArray(sudokuInputArray){
     //sudokuWorkArray contains the 81 variables corresponding to numbers between 1 and 512 (2^9)
     const workElemArray = {};
     const workElemIndicesByLength = {};
-    for (let i = 1;i<10;i++){
-        workElemIndicesByLength[i] = [];
+    for(let i=1;i<=9;i++){
+        workElemIndicesByLength[i] = new Set();
     }
+
     for (let i =0;i<81;i++){
         if(sudokuInputArray[i]==0){
             workElemArray[i] = 511;
-            workElemIndicesByLength[9].push(i);
-        } else {
-            workElemArray[i] = 1<<(sudokuInputArray[i]-1);
-            workElemIndicesByLength[1].push(i);
+            workElemIndicesByLength[9].add(i);
         }
     }
     return [workElemArray,workElemIndicesByLength];
-
 }
-
+function powerofTwo(power){
+    return 1<<power;
+}
 function buildElemIndices() {
     //Integer Division: https://stackoverflow.com/questions/4228356/integer-division-with-remainder-in-javascript
     const elemIndices = {}

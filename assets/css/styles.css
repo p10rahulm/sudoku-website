@@ -234,3 +234,19 @@ a:hover {
 #sudoku-box .inner-left{
     border-left: 1px solid #0047cc;
 }
+
+.mainer #output .output-heading{
+    font-size: max(16px,1.5em);
+    font-family: Lora,Georgia,Cambria,Times,serif;
+    margin: 10px 0px;
+    padding: 10px 0px;
+    font-weight: bold;
+    color: #830000;
+}
+.mainer #output #output-errors .output-error{
+    font-size: max(15px,1.25em);
+    font-family: Lora,Georgia,Cambria,Times,serif;
+    padding: 10px 0px;
+    font-weight: bold;
+    color: #003ee4;
+}

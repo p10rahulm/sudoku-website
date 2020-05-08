@@ -10,6 +10,7 @@
 
     <!--Most Important Scripts-->
     <script type="text/javascript" src="assets/js/builder.js"></script>
+    <script type="text/javascript" src="assets/js/utilities.js"></script>
     <script type="text/javascript" src="assets/js/updater.js"></script>
     <script type="text/javascript" src="assets/js/solver.js"></script>
 
@@ -37,7 +38,7 @@
     <!--Title-->
     <title>Students of MTech AI 2020</title>
 </head>
-<body onload="setIDs()">
+<body onload="buildSudoku();setIDs()">
 <div class="container">
     <div class="header container-element">
         <div class="HeaderTitle-text">Sudoku Solver</div>
@@ -174,6 +175,13 @@
                         <option value=8>
                         <option value=9>
                     </datalist>
+                </div>
+            </div>
+            <div id="output">
+                <div class="output-heading">
+                    Outputs
+                </div>
+                <div id = "output-errors">
                 </div>
             </div>
         </div>
