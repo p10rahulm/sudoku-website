@@ -1,12 +1,17 @@
 function checkInput(id, value) {
+    logError("");
     const elemChanged = document.getElementById(id);
-    const allowed = new Set(["1", "2", "3", "4", "5", "6", "7", "8", "9"]);
-
+    const allowedArray = getAllowedNumbersforIndex(id).toString().split(",");
+    const allowed = new Set(allowedArray);
+    // const allowedNums = getAllowedNumbersforIndex(id).toString().split(",")
+    // for(let i=0;i<allowedNums.length;i++){
+    //     allowed.add(allowedNums.toString());
+    // }
     const valID = Number(id);
     const valNum = Number(value);
 
     if (!allowed.has(value)) {
-        const alertText = "Error! You have input value = '" + value + "'. Please add values between [1-9]";
+        const alertText = "Error! You have input value = '" + value + "'. The allowed values are: " + allowedArray.toString();
         elemChanged.value = "";
         logError(alertText);
         //in case valid previous value existed at id fix Sudoku.
@@ -14,7 +19,7 @@ function checkInput(id, value) {
             deleteInputSudoku(valID, Sudoku.sudokuInputArray[valID]);
             console.log("Sudoku =", Sudoku);
         }
-    } else{
+    } else {
         addInputSudoku(valID, valNum);
         console.log("Sudoku =", Sudoku);
     }
