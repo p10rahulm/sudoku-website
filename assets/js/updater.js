@@ -13,12 +13,12 @@ function checkInput(id, value) {
         if (Sudoku.sudokuInputArray[valID] != 0) {
             deleteInputSudoku(valID, Sudoku.sudokuInputArray[valID]);
             console.log("Sudoku =", Sudoku);
-            return
         }
-
+    } else{
+        addInputSudoku(valID, valNum);
+        console.log("Sudoku =", Sudoku);
     }
-    addInputSudoku(valID, valNum);
-    console.log("Sudoku =", Sudoku);
+
 }
 
 function addInputSudoku(inputValID, inputValue) {

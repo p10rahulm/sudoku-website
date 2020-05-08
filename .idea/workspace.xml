@@ -3,7 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="74631bf2-b197-47e6-a7fe-3448746f7870" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/builder.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/builder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/ui-elements.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/ui-elements.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/updater.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/updater.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/utilities.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/utilities.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +79,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1588934256599</updated>
-      <workItem from="1588934257812" duration="28651000" />
+      <workItem from="1588934257812" duration="34990000" />
     </task>
     <servers />
   </component>
@@ -82,10 +87,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2576" y="278" width="1092" height="524" key="find.popup" timestamp="1588966727986">
+    <state x="2576" y="278" width="1092" height="592" key="find.popup" timestamp="1588974629732">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2576" y="278" width="1092" height="524" key="find.popup/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1588966727986" />
+    <state x="2576" y="278" width="1092" height="592" key="find.popup/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1588974629732" />
     <state x="2543" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1588964536004">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>

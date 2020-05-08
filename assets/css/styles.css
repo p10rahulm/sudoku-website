@@ -250,3 +250,25 @@ a:hover {
     font-weight: bold;
     color: #003ee4;
 }
+
+#sudoku-box .options-box{
+    position: absolute;
+    border: 2px solid #5052b5;
+    color: #002f5e;
+    width: 50px;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: white;
+}
+#sudoku-box #elem-options-holder .sudokuElem-number{
+    flex-basis: 100%;
+    border: 1px dashed rgba(0, 62, 228, 0.11);
+}
+#sudoku-box .invisibleOptionsList{
+    display: none;
+}
+#sudoku-box .visibleOptionsList{
+    display: block;
+}

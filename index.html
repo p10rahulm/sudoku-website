@@ -12,6 +12,7 @@
     <script type="text/javascript" src="assets/js/builder.js"></script>
     <script type="text/javascript" src="assets/js/utilities.js"></script>
     <script type="text/javascript" src="assets/js/updater.js"></script>
+    <script type="text/javascript" src="assets/js/ui-elements.js"></script>
     <script type="text/javascript" src="assets/js/solver.js"></script>
 
     <!--Fonts-->
@@ -38,7 +39,7 @@
     <!--Title-->
     <title>Students of MTech AI 2020</title>
 </head>
-<body onload="buildSudoku();setIDs()">
+<body onload="start()">
 <div class="container">
     <div class="header container-element">
         <div class="HeaderTitle-text">Sudoku Solver</div>
@@ -64,104 +65,105 @@
             </div>
             <div id="sudoku-box-holder">
                 <div id="sudoku-box">
+                    <div id ="elem-options-holder" class="options-box invisibleOptionsList"></div>
                     <div class="sudoku-box-row">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem outer-left outer-top">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem outer-top">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-right outer-top">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-left outer-top">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem outer-top">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-right outer-top">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-left outer-top">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem outer-top">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem outer-right outer-top">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem outer-left outer-top">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem outer-top">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-right outer-top">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-left outer-top">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem outer-top">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-right outer-top">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-left outer-top">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem outer-top">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem outer-right outer-top">
                     </div>
                     <div class="sudoku-box-row">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem outer-left">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-right">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-left">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-right">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-left">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem outer-right">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem outer-left">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-right">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-left">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-right">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-left">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem outer-right">
                     </div>
                     <div class="sudoku-box-row">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem outer-left inner-bottom">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-bottom">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-right inner-bottom">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-left inner-bottom">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-bottom">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-right inner-bottom">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-left inner-bottom">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-bottom">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem outer-right inner-bottom">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem outer-left inner-bottom">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-bottom">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-right inner-bottom">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-left inner-bottom">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-bottom">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-right inner-bottom">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-left inner-bottom">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-bottom">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem outer-right inner-bottom">
                     </div>
                     <div class="sudoku-box-row">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem outer-left inner-top">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-top">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-right inner-top">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-left inner-top">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-top">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-right inner-top">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-left inner-top">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-top">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem outer-right inner-top">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem outer-left inner-top">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-top">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-right inner-top">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-left inner-top">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-top">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-right inner-top">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-left inner-top">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-top">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem outer-right inner-top">
                     </div>
                     <div class="sudoku-box-row">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem outer-left">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-right">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-left">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-right">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-left">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem outer-right">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem outer-left">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-right">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-left">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-right">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-left">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem outer-right">
                     </div>
                     <div class="sudoku-box-row">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem outer-left inner-bottom">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-bottom">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-right inner-bottom">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-left inner-bottom">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-bottom">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-right inner-bottom">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-left inner-bottom">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-bottom">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem outer-right inner-bottom">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem outer-left inner-bottom">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-bottom">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-right inner-bottom">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-left inner-bottom">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-bottom">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-right inner-bottom">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-left inner-bottom">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-bottom">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem outer-right inner-bottom">
                     </div>
                     <div class="sudoku-box-row">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem outer-left inner-top">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-top">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-right inner-top">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-left inner-top">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-top">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-right inner-top">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-left inner-top">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-top">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem outer-right inner-top">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem outer-left inner-top">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-top">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-right inner-top">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-left inner-top">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-top">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-right inner-top">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-left inner-top">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-top">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem outer-right inner-top">
                     </div>
                     <div class="sudoku-box-row">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem outer-left">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-right">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-left">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-right">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-left">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem outer-right">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem outer-left">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-right">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-left">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-right">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-left">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem outer-right">
                     </div>
                     <div class="sudoku-box-row">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem outer-left outer-bottom">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem outer-bottom">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-right outer-bottom">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-left outer-bottom">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem outer-bottom">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-right outer-bottom">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem inner-left outer-bottom">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem outer-bottom">
-                        <input type="text" oninput="checkInput(this.id,this.value)" list="numbers-one-nine" class="input-elem outer-right outer-bottom">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem outer-left outer-bottom">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem outer-bottom">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-right outer-bottom">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-left outer-bottom">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem outer-bottom">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-right outer-bottom">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem inner-left outer-bottom">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem outer-bottom">
+                        <input type="text" oninput="checkInput(this.id,this.value)" class="input-elem outer-right outer-bottom">
                     </div>
 
                     <datalist id="numbers-one-nine">

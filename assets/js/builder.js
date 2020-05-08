@@ -6,6 +6,25 @@
     * 2. A number that is
  */
 Sudoku ={};
+sudokuElemOptionsShowing = false;
+function start(){
+    buildSudoku();
+    setIDs();
+    createChoiceDivs();
+}
+
+function createChoiceDivs(){
+    const sBox = document.getElementById("sudoku-box");
+    const sudokuElemDivs= sBox.getElementsByTagName("input");
+    for(let i = 0;i<sudokuElemDivs.length;i++){
+        sudokuElemDivs[i].addEventListener("click", createOptions, false);
+        sudokuElemDivs[i].addEventListener("change", checkInputDiv, false);
+    }
+}
+function checkInputDiv(event){
+    console.log("Hi $event.target.id has been triggered with $event.target.value");
+    checkInput(event.target.id, event.target.value);
+}
 function setIDs(){
     const sBox = document.getElementById("sudoku-box");
     const sudokuElemDivs= sBox.getElementsByTagName("input");
