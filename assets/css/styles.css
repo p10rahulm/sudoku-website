@@ -174,25 +174,25 @@ a:hover {
 
 
 /*Sudoku*/
-#sudoku-box-holder{
+.gameBox-holder{
     margin: 25px 0px;
     display: flex;
     justify-content: center;
 }
-#sudoku-box-holder #sudoku-box{
+.gameBox-holder .gameBox{
     flex-basis: 450px;
     flex-shrink: 1;
     flex-grow: 0;
     flex-wrap: nowrap;
 }
-#sudoku-box-holder #sudoku-box .sudoku-box-row{
+.gameBox-holder .gameBox .sudoku-box-row{
     flex-basis: 450px;
     flex-grow: 0;
     flex-shrink: 1;
     display: flex;
     flex-wrap: nowrap;
 }
-#sudoku-box .input-elem{
+.gameBox .input-elem{
     height: min(50px,10vw);
     width: min(50px,10vw);
     margin: 0px;
@@ -206,32 +206,32 @@ a:hover {
     flex-shrink: 1;
 
 }
-#sudoku-box input::-webkit-calendar-picker-indicator{
+.gameBox input::-webkit-calendar-picker-indicator{
     display: none;
 }
-#sudoku-box .outer-top{
+.gameBox .outer-top{
     border-top: 2px solid #0043cc;
 }
-#sudoku-box .outer-right{
+.gameBox .outer-right{
     border-right: 2px solid #0043cc;
 }
-#sudoku-box .outer-bottom{
+.gameBox .outer-bottom{
     border-bottom: 2px solid #0043cc;
 }
-#sudoku-box .outer-left{
+.gameBox .outer-left{
     border-left: 2px solid #0043cc;
 }
 
-#sudoku-box .inner-top{
+.gameBox .inner-top{
     border-top: 1px solid #0047cc;
 }
-#sudoku-box .inner-right{
+.gameBox .inner-right{
     border-right: 1px solid #0047cc;
 }
-#sudoku-box .inner-bottom{
+.gameBox .inner-bottom{
     border-bottom: 1px solid #0047cc;
 }
-#sudoku-box .inner-left{
+.gameBox .inner-left{
     border-left: 1px solid #0047cc;
 }
 
@@ -272,3 +272,4 @@ a:hover {
 #sudoku-box .visibleOptionsList{
     display: block;
 }
+

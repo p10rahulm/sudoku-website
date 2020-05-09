@@ -49,7 +49,7 @@
                 Home
             </div>
             <div id="navbar-Students" class="navbar_button" onclick="clickNav(this.id);setAbstracts();setHash(this.id)">
-                Students
+                About
             </div>
             <div id="navbar-Labs" class="navbar_button" onclick="clickNav(this.id);setHash(this.id)">
                 Labs
@@ -63,8 +63,8 @@
             <div class="home-textpara">
                 Please input your contents below and then click on submit. You will see your results below
             </div>
-            <div id="sudoku-box-holder">
-                <div id="sudoku-box">
+            <div id="sudoku-box-holder" class="gameBox-holder">
+                <div id="sudoku-box" class="gameBox">
                     <div id ="elem-options-holder" class="options-box invisibleOptionsList"></div>
                     <div class="sudoku-box-row">
                         <input type="text" class="input-elem outer-left outer-top">
@@ -165,18 +165,6 @@
                         <input type="text" class="input-elem outer-bottom">
                         <input type="text" class="input-elem outer-right outer-bottom">
                     </div>
-
-                    <datalist id="numbers-one-nine">
-                        <option value=1>
-                        <option value=2>
-                        <option value=3>
-                        <option value=4>
-                        <option value=5>
-                        <option value=6>
-                        <option value=7>
-                        <option value=8>
-                        <option value=9>
-                    </datalist>
                 </div>
             </div>
             <div id="output">
@@ -184,6 +172,9 @@
                     Outputs
                 </div>
                 <div id = "output-errors">
+                </div>
+                <div id="output-boxes">
+
                 </div>
             </div>
         </div>
@@ -196,7 +187,7 @@
 
 
     </div>
-    <div class="footer container-element" onclick="buildSudoku()">
+    <div class="footer container-element" onclick="dfsCreatorSudoku()">
         <div id="copyright">
             &copy; 2020 <a href="http://www.thinkingtree.me/" target="_blank">Developed by Rahul Madhavan</a>,
         </div>

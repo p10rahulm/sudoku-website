@@ -16,7 +16,7 @@ function bitCount (n) {
     return ((n + (n >> 4) & 0xF0F0F0F) * 0x1010101) >> 24
 }
 
-function getAllowedNumbersforIndex(index){
+function getAllowedNumbersforIndex(index,Sudoku){
     let workingElem = Sudoku.workElemArray[index];
     outNumbers = [];
     for(let i=0;i<9;i++){
@@ -26,4 +26,24 @@ function getAllowedNumbersforIndex(index){
         workingElem = workingElem>>1;
     }
     return outNumbers;
+}
+
+
+function isSudokuDone(sudokuInput) {
+    if(globalDone){
+        return true;
+    }
+    let done = true;
+    for (let i = 2; i <= 9 && done; i++) {
+        if (sudokuInput.workElemIndicesByLength[i].size !== 0) {
+            done = false;
+        }
+    }
+    if(done===true){
+        globalDone=true;
+        console.log("sudokuis done! sudokuInput=",sudokuInput)
+        drawSudoku(sudokuInput);
+    }
+
+    return done;
 }

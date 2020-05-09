@@ -1,144 +1,133 @@
 function checkInput(id, value) {
     logError("");
     const elemChanged = document.getElementById(id);
-    const allowedArray = getAllowedNumbersforIndex(id).toString().split(",");
+    const allowedArray = getAllowedNumbersforIndex(id, Sudoku).toString().split(",");
     const allowed = new Set(allowedArray);
-    // const allowedNums = getAllowedNumbersforIndex(id).toString().split(",")
-    // for(let i=0;i<allowedNums.length;i++){
-    //     allowed.add(allowedNums.toString());
-    // }
+
     const valID = Number(id);
     const valNum = Number(value);
 
     if (!allowed.has(value)) {
-        const alertText = "Error! You have input value = '" + value + "'. The allowed values are: " + allowedArray.toString();
         elemChanged.value = "";
-        logError(alertText);
+        let alertText;
+
         //in case valid previous value existed at id fix Sudoku.
-        if (Sudoku.sudokuInputArray[valID] != 0) {
-            deleteInputSudoku(valID, Sudoku.sudokuInputArray[valID]);
+        const prevInputValue = Sudoku.sudokuInputArray[valID];
+        if (prevInputValue != 0) {
+            Sudoku = deleteInputSudoku(Sudoku, valID, prevInputValue);
             console.log("Sudoku =", Sudoku);
+            alertText = "Your input: \"" + value + "\" lead to an Error! There was a previous value here: " + prevInputValue + " which is now deleted.";
+        } else {
+            alertText = "Error! You have input value = '" + value + "'. The allowed values are: " + allowedArray.toString();
         }
+        logError(alertText);
     } else {
-        addInputSudoku(valID, valNum);
+        Sudoku = addInputSudoku(Sudoku, valID, valNum, 0);
         console.log("Sudoku =", Sudoku);
     }
-
+    finalInputArray = Sudoku.sudokuInputArray;
 }
 
-function addInputSudoku(inputValID, inputValue) {
+function addInputSudoku(inputSudoku, inputValID, inputValue, callerFuncLocation = 0) {
     const workingAddVal = powerofTwo(inputValue - 1);
-    Sudoku.sudokuInputArray[inputValID] = inputValue;
-
-
-    const [row, col, box] = Sudoku.elemIndices[inputValID];
-    const elemsinRow = Sudoku.indicesinRows[row];
-    const elemsinCol = Sudoku.indicesinCols[col];
-    const elemsinBox = Sudoku.indicesinBoxes[box];
-
-    for (let i = 0; i < elemsinRow.length; i++) {
-        const currSudokuIndex = elemsinRow[i];
-        if (currSudokuIndex != inputValID) {
-            const oldWorkingVal = Sudoku.workElemArray[currSudokuIndex];
-            const newWorkingVal = Sudoku.workElemArray[currSudokuIndex] & ~workingAddVal;
-            Sudoku.workElemArray[currSudokuIndex] = newWorkingVal;
-            if (oldWorkingVal != newWorkingVal) {
-                updateWEIBL(currSudokuIndex, oldWorkingVal, newWorkingVal);
-            }
-        }
-    }
-    for (let i = 0; i < elemsinCol.length; i++) {
-        const currSudokuIndex = elemsinCol[i];
-        if (currSudokuIndex != inputValID) {
-            const oldWorkingVal = Sudoku.workElemArray[currSudokuIndex];
-            const newWorkingVal = Sudoku.workElemArray[currSudokuIndex] & ~workingAddVal;
-            Sudoku.workElemArray[currSudokuIndex] = newWorkingVal;
-            if (oldWorkingVal != newWorkingVal) {
-                updateWEIBL(currSudokuIndex, oldWorkingVal, newWorkingVal);
-            }
-        }
-    }
-    for (let i = 0; i < elemsinBox.length; i++) {
-        const currSudokuIndex = elemsinBox[i];
-        if (currSudokuIndex != inputValID) {
-            const oldWorkingVal = Sudoku.workElemArray[currSudokuIndex];
-            const newWorkingVal = Sudoku.workElemArray[currSudokuIndex] & ~workingAddVal;
-            Sudoku.workElemArray[currSudokuIndex] = newWorkingVal;
-            if (oldWorkingVal != newWorkingVal) {
-                updateWEIBL(currSudokuIndex, oldWorkingVal, newWorkingVal);
-            }
-        }
+    if (callerFuncLocation == 0) {
+        inputSudoku.sudokuInputArray[inputValID] = inputValue;
     }
 
-    Sudoku.processed.add(inputValID);
-    const oldWorkingVal = Sudoku.workElemArray[inputValID]
-    Sudoku.workElemArray[inputValID] = workingAddVal;
+
+    const [row, col, box] = Game.elemIndices[inputValID];
+    const elemsinRow = Game.indicesinRows[row];
+    const elemsinCol = Game.indicesinCols[col];
+    const elemsinBox = Game.indicesinBoxes[box];
+    if(!inputSudoku.contradiction){updateAdditionForElems(inputSudoku, elemsinRow, inputValID, workingAddVal);}
+    else {return inputSudoku;}
+    if(!inputSudoku.contradiction){updateAdditionForElems(inputSudoku, elemsinCol, inputValID, workingAddVal);}
+    else {return inputSudoku;}
+    if(!inputSudoku.contradiction){updateAdditionForElems(inputSudoku, elemsinBox, inputValID, workingAddVal);}
+    else {return inputSudoku;}
+
+    inputSudoku.processed.add(inputValID);
+    const oldWorkingVal = inputSudoku.workElemArray[inputValID]
+    inputSudoku.workElemArray[inputValID] = workingAddVal;
     const numBits = bitCount(oldWorkingVal);
-    Sudoku.workElemIndicesByLength[numBits].delete(inputValID);
+    inputSudoku.workElemIndicesByLength[numBits].delete(inputValID);
+    return inputSudoku;
 }
 
+function updateAdditionForElems(inputSudoku, elemsinSameGroup, inputValID, workingAddVal) {
+    for (let i = 0; i < elemsinSameGroup.length; i++) {
+        const currSudokuIndex = elemsinSameGroup[i];
+        if (currSudokuIndex != inputValID) {
+            const oldWorkingVal = inputSudoku.workElemArray[currSudokuIndex];
+            const newWorkingVal = inputSudoku.workElemArray[currSudokuIndex] & ~workingAddVal;
+            inputSudoku.workElemArray[currSudokuIndex] = newWorkingVal;
+            if(newWorkingVal==0){
+                inputSudoku.contradiction = true;
+                return inputSudoku;
+            }
+            if (oldWorkingVal != newWorkingVal) {
+                updateWEIBL(inputSudoku, currSudokuIndex, oldWorkingVal, newWorkingVal);
+            }
+        }
+    }
+}
 
-function deleteInputSudoku(inputValID, inputValueDeleted) {
+function deleteInputSudoku(inputSudoku, inputValID, inputValueDeleted,callerFunctionLocation=0) {
     const workingDelVal = powerofTwo(inputValueDeleted - 1);
     let updatingInputWorkingVal = 511;
     console.log("updatingInputWorkingVal=", updatingInputWorkingVal);
-    Sudoku.sudokuInputArray[inputValID] = 0;
+    if(callerFunctionLocation===0){
+        inputSudoku.sudokuInputArray[inputValID] = 0;
+    }
 
-    const [row, col, box] = Sudoku.elemIndices[inputValID];
-    const elemsinRow = Sudoku.indicesinRows[row];
-    const elemsinCol = Sudoku.indicesinCols[col];
-    const elemsinBox = Sudoku.indicesinBoxes[box];
 
-    updatingInputWorkingVal = updateDeletionforElems(elemsinRow, inputValID, workingDelVal, updatingInputWorkingVal);
-    updatingInputWorkingVal = updateDeletionforElems(elemsinCol, inputValID, workingDelVal, updatingInputWorkingVal);
-    updatingInputWorkingVal = updateDeletionforElems(elemsinBox, inputValID, workingDelVal, updatingInputWorkingVal);
+    const [row, col, box] = Game.elemIndices[inputValID];
+    const elemsinRow = Game.indicesinRows[row];
+    const elemsinCol = Game.indicesinCols[col];
+    const elemsinBox = Game.indicesinBoxes[box];
 
-    Sudoku.workElemArray[inputValID] = updatingInputWorkingVal;
-    Sudoku.processed.delete(inputValID);
+    updatingInputWorkingVal = updateDeletionforElems(inputSudoku, elemsinRow, inputValID, workingDelVal, updatingInputWorkingVal);
+    updatingInputWorkingVal = updateDeletionforElems(inputSudoku, elemsinCol, inputValID, workingDelVal, updatingInputWorkingVal);
+    updatingInputWorkingVal = updateDeletionforElems(inputSudoku, elemsinBox, inputValID, workingDelVal, updatingInputWorkingVal);
+
+    inputSudoku.workElemArray[inputValID] = updatingInputWorkingVal;
+    inputSudoku.processed.delete(inputValID);
     const numBits = bitCount(updatingInputWorkingVal);
-    Sudoku.workElemIndicesByLength[numBits].add(inputValID);
+    inputSudoku.workElemIndicesByLength[numBits].add(inputValID);
+    return inputSudoku;
 }
 
-function updateDeletionforElems(elemsinSameGroup, inputValID, workingDeleteVal, updatedInputWorkingVal) {
+function updateDeletionforElems(inputSudoku, elemsinSameGroup, inputValID, workingDeleteVal, updatedInputWorkingVal) {
     let updatedInputWorkingVar = updatedInputWorkingVal;
     for (let i = 0; i < elemsinSameGroup.length; i++) {
         const currSudokuIndex = elemsinSameGroup[i];
         if (currSudokuIndex != inputValID) {
-            if (!Sudoku.sudokuInputArray[currSudokuIndex]) {
+            if (!finalInputArray[currSudokuIndex]) {
                 const oldWorkingVal = Sudoku.workElemArray[currSudokuIndex];
                 const newWorkingVal = Sudoku.workElemArray[currSudokuIndex] | workingDeleteVal;
-                Sudoku.workElemArray[currSudokuIndex] = newWorkingVal;
+                inputSudoku.workElemArray[currSudokuIndex] = newWorkingVal;
                 if (oldWorkingVal != newWorkingVal) {
-                    updateWEIBL(currSudokuIndex, oldWorkingVal, newWorkingVal);
+                    updateWEIBL(inputSudoku, currSudokuIndex, oldWorkingVal, newWorkingVal);
                 }
             } else {
-                updatedInputWorkingVar = updatedInputWorkingVar & ~Sudoku.workElemArray[currSudokuIndex];
+                updatedInputWorkingVar = updatedInputWorkingVar & ~inputSudoku.workElemArray[currSudokuIndex];
             }
         }
     }
     return updatedInputWorkingVar;
 }
 
-function updateWEIBL(elemID, oldWorkingVal, newWorkingVal) {
-    if (Sudoku.processed.has(elemID)) {
-        Sudoku.processed.delete(elemID);
+function updateWEIBL(sudokuInput, elemID, oldWorkingVal, newWorkingVal) {
+    if (sudokuInput.processed.has(elemID)) {
+        sudokuInput.processed.delete(elemID);
     } else {
         const bitCountOld = bitCount(oldWorkingVal);
-        Sudoku.workElemIndicesByLength[bitCountOld].delete(elemID);
+        sudokuInput.workElemIndicesByLength[bitCountOld].delete(elemID);
     }
 
     const numBits = bitCount(newWorkingVal);
-    Sudoku.workElemIndicesByLength[numBits].add(elemID);
+    // console.log("elemID=",elemID,"numBits=",numBits,"oldWorkingVal=",oldWorkingVal,"newWorkingVal=",newWorkingVal)
+    sudokuInput.workElemIndicesByLength[numBits].add(elemID);
 }
 
-function decWEIBL(elemID) {
-    let lengthFound = false;
-    for (let i = 9; i > 1 && !lengthFound; i--) {
-        //Note we are looping only upto length 2 here, if we don't find it till 2, there's nothing to do in length 1
-        if (Sudoku.workElemIndicesByLength[i].has(elemID)) {
-            Sudoku.workElemIndicesByLength[i].delete(elemID);
-            Sudoku.workElemIndicesByLength[i - 1].add(elemID);
-            lengthFound = true;
-        }
-    }
-}
+
