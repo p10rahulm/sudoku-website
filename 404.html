@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+
+    <!--Most Important Scripts-->
+
+
+    <!--Fonts-->
+    <!--    <link href='https://fonts.googleapis.com/css?family=Alegreya SC&display=swap' rel='stylesheet'>-->
+    <!--    <link href='https://fonts.googleapis.com/css?family=Lora&display=swap' rel='stylesheet'>-->
+    <!--    <link href='https://fonts.googleapis.com/css?family=Open Sans&display=swap' rel='stylesheet'>-->
+
+    <link rel="icon" type="image/png" href="assets/images/sudoku.png">
+
+
+    <!--Social Media Tags-->
+    <meta property="og:title" content="Sudoku Solver">
+    <meta property="og:site_name" content="Sudoku Solver">
+    <meta property="og:image" itemprop="image"
+          content="assets/images/solver.png"/>
+    <meta property="og:updated_time" content="2020-04-30T18:19:00+05:30"/>
+    <meta property="og:description"
+          content="Solves your sudoku in double quick time! Check it out!">
+    <meta property="og:url" content="https://csa.iisc.ac.in">
+    <meta property="og:updated_time" content="1440432930"/>
+    <meta name="twitter:card" content="summary_large_image">
+
+
+    <!--Title-->
+    <title>Students of MTech AI 2020</title>
+</head>
+<body onload="start()">
+<div class="container">
+    <div class="header container-element">
+        <div class="HeaderTitle-text">Sudoku Solver</div>
+
+        <div id="navbar" class="header-elem">
+            <div id="navbar-Home" class="navbar-active navbar_button" onclick="clickNav(this.id);setHash(this.id)">
+                Home
+            </div>
+            <div id="navbar-Students" class="navbar_button" onclick="clickNav(this.id);setAbstracts();setHash(this.id)">
+                About
+            </div>
+            <div id="navbar-Labs" class="navbar_button" onclick="clickNav(this.id);setHash(this.id)">
+                Labs
+            </div>
+
+        </div>
+    </div>
+    <div class="mainer container-element">
+        <div id="Home" class="main active">
+            <div class="home-header">You have reached a wrong page!</div>
+            <div class="home-textpara">Do you want to <a href="https://www.sudokusolver.in/">Solve a sudoku today?</a> </div>
+        <div id="Students" class="main inactive">
+
+        </div>
+        <div id="Labs" class="main inactive">
+
+        </div>
+
+
+    </div>
+    <div class="footer container-element" onclick="dfsCreatorSudoku()">
+        <div id="copyright">
+            &copy; 2020 <a href="http://www.thinkingtree.me/" target="_blank">Developed by Rahul Madhavan</a>,
+        </div>
+
+    </div>
+
+</div>
+
+
+<script type="text/javascript" defer>
+    WebFontConfig = {
+        google: {
+            families: ['Lora', 'Open Sans', 'Alegreya SC']
+        }
+    };
+
+    (function (d) {
+        var wf = d.createElement('script'), s = d.scripts[0];
+        wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
+        wf.async = true;
+        s.parentNode.insertBefore(wf, s);
+    })(document);
+</script>
+
+</body>
+</html>
