@@ -32,6 +32,8 @@ totalRunDFSTT=0;
 nflTT=0;
 AddInputDirectLoopTT=0;
 
+
+hitsDelete=0;
 function start() {
     buildSudoku();
     setIDs();
