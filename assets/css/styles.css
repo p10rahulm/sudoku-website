@@ -254,7 +254,18 @@ a:hover {
 .gameBox .inner-left{
     border-left: 1px solid #0047cc;
 }
-
+.mainer #buttons-holder{
+    display: flex;
+    justify-content: center;
+}
+.mainer #solve-button{
+    background-color: #33aaff;
+    color: rgb(246, 244, 255);
+    font-weight: bold;
+    font-family: Lora, Georgia, Cambria, Times, "Times New Roman", Serif;
+    font-size: max(16px,1.5em);
+    padding: 10px 20px;
+}
 .mainer #output .output-heading{
     font-size: max(16px,1.5em);
     font-family: Lora,Georgia,Cambria,Times,serif;
@@ -277,6 +288,7 @@ a:hover {
     font-weight: bold;
     color: #003ee4;
 }
+
 
 #sudoku-box .options-box{
     position: absolute;

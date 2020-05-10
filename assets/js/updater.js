@@ -38,10 +38,36 @@ function checkInput(id, value) {
         }
         logError(alertText);
     } else {
-        Sudoku = addInputSudoku(Sudoku, valID, valNum, 0);
-        // console.log("Sudoku =", Sudoku);
+        Sudoku = addInputSudokuHeap(Sudoku, valID, valNum, 0);
     }
     finalInputArray = Sudoku.sudokuInputArray;
+}
+
+
+
+function addInputSudokuHeap(inputSudoku, inputValID, inputValue, callerFuncLocation = 0,iteration=startIter) {
+    const addinputSudokuTS = performance.now()
+    const workingAddVal = powerofTwo(inputValue - 1);
+    if (callerFuncLocation == 0) {
+        inputSudoku.sudokuInputArray[inputValID] = inputValue;
+    }
+
+
+    const [row, col, box] = Game.elemIndices[inputValID];
+    const elemsinRow = Game.indicesinRows[row];
+    const elemsinCol = Game.indicesinCols[col];
+    const elemsinBox = Game.indicesinBoxes[box];
+
+    updateAdditionForElemsHeap(inputSudoku, elemsinRow, inputValID, workingAddVal,iteration);
+    updateAdditionForElemsHeap(inputSudoku, elemsinCol, inputValID, workingAddVal,iteration);
+    updateAdditionForElemsHeap(inputSudoku, elemsinBox, inputValID, workingAddVal,iteration);
+    if(inputSudoku.contradiction){return inputSudoku;}
+
+    // inputSudoku.processed[inputValID] =1;
+    inputSudoku.workElemArray[inputValID] = workingAddVal;
+    iteration.addinputSudokuTT += (performance.now() -  addinputSudokuTS);
+    inputSudoku.numProcessed +=1;
+    return inputSudoku;
 }
 
 function addInputSudoku(inputSudoku, inputValID, inputValue, callerFuncLocation = 0) {
@@ -70,7 +96,33 @@ function addInputSudoku(inputSudoku, inputValID, inputValue, callerFuncLocation 
     inputSudoku.workElemIndicesByLength[numBits].delete(inputValID);
 
     addinputSudokuTT = addinputSudokuTT + (performance.now() -  addinputSudokuTS);
+    inputSudoku.numProcessed +=1;
     return inputSudoku;
+}
+
+function updateAdditionForElemsHeap(inputSudoku, elemsinSameGroup, inputValID, workingAddVal,iteration=startIter) {
+    if(inputSudoku.contradiction){return;}
+    const updateAdditionForElemsTS = performance.now();
+    for (let i = 0; i < elemsinSameGroup.length; i++) {
+        const currSudokuIndex = elemsinSameGroup[i];
+        if (currSudokuIndex !== inputValID) {
+            const oldWorkingVal = inputSudoku.workElemArray[currSudokuIndex];
+            const newWorkingVal = inputSudoku.workElemArray[currSudokuIndex] & ~workingAddVal;
+            inputSudoku.workElemArray[currSudokuIndex] = newWorkingVal;
+            if(newWorkingVal===0){
+                inputSudoku.contradiction = true;
+                return inputSudoku;
+            }
+            if (oldWorkingVal !== newWorkingVal) {
+                const newNumbits = bitCount(newWorkingVal);
+                if(newNumbits===1){
+                    inputSudoku.toProcess.push(currSudokuIndex)
+                }
+                updateHeap(inputSudoku, currSudokuIndex, newNumbits, newWorkingVal,iteration);
+            }
+        }
+    }
+    iteration.updateAdditionForElemsTimeTaken += (performance.now() -  updateAdditionForElemsTS);
 }
 
 function updateAdditionForElems(inputSudoku, elemsinSameGroup, inputValID, workingAddVal) {
@@ -119,6 +171,7 @@ function deleteInputSudoku(inputSudoku, inputValID, inputValueDeleted,callerFunc
     // inputSudoku.processed[inputValID]=0;
     const numBits = bitCount(updatingInputWorkingVal);
     inputSudoku.workElemIndicesByLength[numBits].add(inputValID);
+    inputSudoku.numProcessed -=1;
     return inputSudoku;
 }
 
@@ -142,6 +195,15 @@ function updateDeletionforElems(inputSudoku, elemsinSameGroup, inputValID, worki
     return updatedInputWorkingVar;
 }
 
+function updateHeap(sudokuInput, elemID, newNumbits, newWorkingVal,iteration=startIter) {
+
+    const updateWEIBLTimeStart = performance.now();
+    const heapValue = newNumbits*100+elemID;
+    addToHeap(sudokuInput.workElemIndicesByLength,heapValue);
+    iteration.updateWEIBLTimeTaken += (performance.now() -  updateWEIBLTimeStart);
+}
+
+
 function updateWEIBL(sudokuInput, elemID, oldWorkingVal, newWorkingVal) {
     updateWEIBLTimeStart = performance.now();
 
@@ -154,5 +216,3 @@ function updateWEIBL(sudokuInput, elemID, oldWorkingVal, newWorkingVal) {
     sudokuInput.workElemIndicesByLength[numBits].add(elemID);
     updateWEIBLTimeTaken = updateWEIBLTimeTaken + (performance.now() -  updateWEIBLTimeStart);
 }
-
-

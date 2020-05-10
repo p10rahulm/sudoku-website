@@ -12,32 +12,12 @@ sudokuElemOptionsShowing = false;
 globalDone = false;
 
 
-leastIndexIterationtimeTaken=0;
-copytimetaken=0;
-copyworkElemArrayTT=0;
-copyworkElemIndicesByLengthTT=0;
-copyprocessedTT=0;
-copyinitTT=0;
-copycontradictionTT=0;
-copyTotalTT=0
-updateWEIBLTimeTaken=0;
-updateAdditionForElemsTimeTaken=0;
-addinputSudokuTT=0;
-AddInputTT=0;
-skpushTT=0;
-flTT=0;
-poppingTT=0;
-afterIsDoneTT=0;
-totalRunDFSTT=0;
-nflTT=0;
-AddInputDirectLoopTT=0;
 
-
-hitsDelete=0;
 function start() {
     buildSudoku();
     setIDs();
     createChoiceDivs();
+    startIter = new Iteration();
 }
 
 function createChoiceDivs() {
@@ -69,14 +49,33 @@ function buildSudoku() {
     for (let i = 0; i < sudokuElemDivs.length; i++) {
         sudokuInputArray.push(Number(sudokuElemDivs[i].value));
     }
-    createNewSudoku(sudokuInputArray);
+    createNewSudokuHeap(sudokuInputArray);
     buildGameIndices();
     // console.log("Sudoku = ", Sudoku);
+}
+
+function createNewSudokuHeap(sudokuInputArray) {
+    //sudokuWorkArray contains the 81 variables corresponding to numbers between 1 and 512 (2^9)
+    const workElemArray = new Array(81).fill(511);
+    const workElemIndicesByLength = [0].concat(Array.from(Array(81), (e,i)=>i+900));
+
+
+    Sudoku.sudokuInputArray = sudokuInputArray;
+    Sudoku.workElemArray = workElemArray;
+    Sudoku.workElemIndicesByLength = workElemIndicesByLength;
+
+    Sudoku.done = false;
+    // Sudoku.processed = new Array(81).fill(0);
+    Sudoku.toProcess = [];
+    Sudoku.contradiction = false;
+    Sudoku.numProcessed = 0;
+    return Sudoku;
 }
 
 function createNewSudoku(sudokuInputArray) {
     //sudokuWorkArray contains the 81 variables corresponding to numbers between 1 and 512 (2^9)
     const workElemArray = new Array(81);
+
     const workElemIndicesByLength = {};
     for (let i = 1; i <= 9; i++) {
         workElemIndicesByLength[i] = new Set();
@@ -100,10 +99,6 @@ function createNewSudoku(sudokuInputArray) {
     return Sudoku;
 }
 
-
-function powerofTwo(power) {
-    return 1 << power;
-}
 
 function buildGameIndices() {
     //Integer Division: https://stackoverflow.com/questions/4228356/integer-division-with-remainder-in-javascript

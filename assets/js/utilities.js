@@ -51,6 +51,9 @@ function bitCount (n) {
 }
 
 function getAllowedNumbersforIndex(index,Sudoku){
+    if(index<0) {
+        return [];
+    }
     let workingElem = Sudoku.workElemArray[index];
     outNumbers = [];
     for(let i=0;i<9;i++){
@@ -60,6 +63,9 @@ function getAllowedNumbersforIndex(index,Sudoku){
         workingElem = workingElem>>1;
     }
     return outNumbers;
+}
+function powerofTwo(power) {
+    return 1 << power;
 }
 
 
@@ -74,4 +80,70 @@ function isSudokuDone(sudokuInput) {
         }
     }
     return done;
+}
+function isSudokuDoneHeap(sudokuInput) {
+    if(globalDone||sudokuInput.numProcessed>=81){
+        return true;
+    }
+
+    return false;
+}
+
+function addToHeap(Arr,heapValue){
+    Arr.push(heapValue);
+    heapifyUP(Arr,Arr.length-1);
+}
+function heapifyUP(Arr,index){
+    if(index<=1){
+        return;
+    }
+    //integer division
+    const parentIndex =  ~~(index/2);
+    if(Arr[parentIndex]<=Arr[index]){
+        return;
+    }
+    swap(Arr,parentIndex,index);
+    heapifyUP(Arr,parentIndex);
+}
+
+function delMinHeap(heap){
+    if(heap.length<=1){
+        return -1;
+    }
+    const minval = heap[1];
+    heap[1] = heap[heap.length-1];
+    heap.pop();
+    heapifyDown(heap,1);
+    return minval;
+}
+
+function heapifyDown(Arr,index) {
+    const leftChildIndex = index*2;
+    const rightChildIndex = index*2+1;
+    const arrLen = Arr.length;
+    if(arrLen<leftChildIndex){
+        return;
+    }
+    if(arrLen<rightChildIndex){
+        if(Arr[leftChildIndex]<Arr[index]){
+            swap(Arr,leftChildIndex,index);
+        }
+        return;
+    }
+    let leastChildIndex;
+    if(Arr[leftChildIndex]<Arr[rightChildIndex]){
+        leastChildIndex = leftChildIndex;
+    } else {
+        leastChildIndex = rightChildIndex;
+    }
+    if(Arr[leastChildIndex]<Arr[index]){
+        swap(Arr,leastChildIndex,index);
+        heapifyDown(Arr,leastChildIndex)
+    }
+
+}
+function swap(inputArr,index1,index2){
+    const temp = inputArr[index1];
+    inputArr[index1] = inputArr[index2];
+    inputArr[index2] = temp;
 }
