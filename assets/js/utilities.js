@@ -1,9 +1,18 @@
 function logError(message){
+    if(message==""){
+        const errorsDiv = document.getElementById("output-errors");
+        removeChildren(errorsDiv);
+        return;
+    }
     newError = document.createElement("div");
     newError.className = "output-error";
     newError.innerHTML = message;
+    newErrorHeading = document.createElement("div");
+    newErrorHeading.className = "output-heading";
+    newErrorHeading.innerHTML = "Error Message";
     const errorsDiv = document.getElementById("output-errors");
     removeChildren(errorsDiv);
+    errorsDiv.appendChild(newErrorHeading);
     errorsDiv.appendChild(newError);
     // alert(message);
 }
@@ -39,11 +48,5 @@ function isSudokuDone(sudokuInput) {
             done = false;
         }
     }
-    if(done===true){
-        globalDone=true;
-        console.log("sudokuis done! sudokuInput=",sudokuInput)
-        drawSudoku(sudokuInput);
-    }
-
     return done;
 }

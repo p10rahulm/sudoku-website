@@ -2,48 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="74631bf2-b197-47e6-a7fe-3448746f7870" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/404.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GoogleCloudStorageUpdate.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/about.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/sudoku-ui.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/swiped-events.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/home/intro.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/home/studyAreas.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/aashish-tolambiya.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/akhilesh-yadav.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/amith-n.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/arnoorla-someshwar.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/bathala-banuprasad.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/bazil-ahmed.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/bheshaj-kumar-dewangan.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/chavda-brijkumar-jentibhai.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/danish-shaikh.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/debabrata-kumar-karan.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/dhaval-parmar.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/files.list" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/hari-govid-shrawgi.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/himanshu-kumar.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/himanshu-sahu.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/himanshu-singh.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/jayant-priyadarshi.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/kavita-eknath-wagh.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/manthan-sharma.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/mayank-gupta.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/modukuri-sumanth-kumar.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/nishtha-gupta.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/pratik-likhar.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/rahul-madhavan.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/rajat-varma.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/rokkam-sandeep-reddy.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/sayan-kr-roy.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/shraddha-pandey.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/shrutina-agarwal.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/shubham-kumar.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/students.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/suraj-s-yadwad.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/tanvi-singh.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/tejasvi-sharma.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/vamsi-krishna-satya-chilamakurthi.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/vineeth-s.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/yash-narayan.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/students/yeduru-vinod-kumar-reddy.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/404.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/builder.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/builder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/solver.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/solver.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/ui-elements.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/ui-elements.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/updater.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/updater.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/utilities.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/utilities.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,8 +25,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -90,6 +62,7 @@
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\Projects\sudoku" />
+      <recent name="F:\Projects\sudoku\assets\js" />
     </key>
   </component>
   <component name="ServiceViewManager">
@@ -114,7 +87,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1588934256599</updated>
-      <workItem from="1588934257812" duration="55097000" />
+      <workItem from="1588934257812" duration="78371000" />
     </task>
     <servers />
   </component>
@@ -122,10 +95,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2576" y="278" width="1092" height="592" key="find.popup" timestamp="1589014958116">
+    <state x="2576" y="278" width="1092" height="592" key="find.popup" timestamp="1589132961590">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2576" y="278" width="1092" height="592" key="find.popup/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1589014958116" />
+    <state x="2576" y="278" width="1092" height="592" key="find.popup/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1589132961590" />
     <state x="2536" y="250" key="run.anything.popup" timestamp="1589011655509">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>

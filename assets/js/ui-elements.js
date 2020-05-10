@@ -1,79 +1,78 @@
-function createOptions(event) {
-    const xPosition = event.clientX;
-    const yPosition = event.clientY;
-    const inputBoxID = event.target.id;
+function clickNav(clicked_id) {
+    divIdString = clicked_id.substring(7)
+
+    document.getElementById("Home").classList.add("inactive")
+    document.getElementById("Talks").classList.add("inactive");
+    document.getElementById("Visits").classList.add("inactive");
+
+    document.getElementById("Home").classList.remove("active");
+    document.getElementById("Talks").classList.remove("active");
+    document.getElementById("Visits").classList.remove("active");
+
+    document.getElementById(divIdString).classList.remove("inactive");
+    document.getElementById(divIdString).classList.add("active");
 
 
-    const allowedNumbers = getAllowedNumbersforIndex(inputBoxID,Sudoku);
+    document.getElementById("navbar-Home").classList.remove("navbar-active");
+    document.getElementById("navbar-Talks").classList.remove("navbar-active");
+    document.getElementById("navbar-Visits").classList.remove("navbar-active");
+    document.getElementById(clicked_id).classList.add("navbar-active");
 
-    const sudokuElemOptionsDiv = document.getElementById("elem-options-holder");
-    sudokuElemOptionsDiv.removeAttribute("onclick");
-    removeChildren(sudokuElemOptionsDiv);
-    for (let i = 0; i < allowedNumbers.length; i++) {
-        let numberDiv = document.createElement("div");
-        numberDiv.className = "sudokuElem-number"
-        numberDiv.innerHTML = allowedNumbers[i];
-        sudokuElemOptionsDiv.appendChild(numberDiv);
-        numberDiv.setAttribute("onclick", "setValueofSudokuElemfromNumChoice(" + inputBoxID.valueOf() + "," + allowedNumbers[i].valueOf() + ")");
-
-    }
-    // sudokuElemOptionsDiv.style.left =xPosition;
-    // sudokuElemOptionsDiv.style.top =yPosition;
-    sudokuElemOptionsDiv.classList.add("visibleOptionsList");
-    sudokuElemOptionsDiv.classList.remove("invisibleOptionsList");
-    sudokuElemOptionsDiv.setAttribute("style", "left: " + xPosition + "px; top: " + yPosition + "px;");
-
-    sudokuElemOptionsShowing = true;
-}
-
-function removeChildren(someDiv) {
-    while (someDiv.hasChildNodes()) {
-        someDiv.removeChild(someDiv.firstChild);
-    }
-}
-
-function setValueofSudokuElemfromNumChoice(divID, inputValue) {
-    const sBox = document.getElementById("sudoku-box");
-    const sudokuElemDivs = sBox.getElementsByTagName("input");
-    sudokuElemDivs[divID].value = inputValue;
-    const sudokuElemOptionsDiv = document.getElementById("elem-options-holder");
-    sudokuElemOptionsDiv.removeAttribute("onclick");
-    removeChildren(sudokuElemOptionsDiv);
-    sudokuElemOptionsDiv.classList.remove("visibleOptionsList");
-    sudokuElemOptionsDiv.classList.add("invisibleOptionsList");
-    checkInput(divID, inputValue.toString());
-}
-
-function clearOptionsDiv() {
-    const sudokuElemOptionsDiv = document.getElementById("elem-options-holder");
-    sudokuElemOptionsDiv.removeAttribute("onclick");
-    removeChildren(sudokuElemOptionsDiv);
-    sudokuElemOptionsDiv.classList.remove("visibleOptionsList");
-    sudokuElemOptionsDiv.classList.add("invisibleOptionsList");
-}
-
-function drawSudoku(inputSudoku) {
-    const outputBoxesHolder = document.getElementById("output-boxes");
-    const outputBoxHolder = document.createElement("div");
-    outputBoxHolder.className="gameBox-holder"
-    outputBoxesHolder.appendChild(outputBoxHolder);
-    const outputBox = document.createElement("div");
-    outputBox.className="gameBox"
-    outputBoxHolder.appendChild(outputBox);
-    for (let i=0;i<9;i++){
-        const row = document.createElement("div");
-        row.className="sudoku-box-row"
-        for(let j=0;j<9;j++){
-            const currIndex=i*9+j;
-            const allowedString = getAllowedNumbersforIndex(currIndex,inputSudoku).join("");
-            const elemDiv = document.createElement("div");
-            elemDiv.className="input-elem"
-            elemDiv.innerHTML=allowedString;
-            row.appendChild(elemDiv);
-        }
-        outputBox.appendChild(row);
+    if(clicked_id=="navbar-Talks"){
+        document.getElementById("subscribe-holder").classList.add("subscribe-active");
+        document.getElementById("subscribe-holder").classList.remove("subscribe-inactive");
+    } else{
+        document.getElementById("subscribe-holder").classList.remove("subscribe-active");
+        document.getElementById("subscribe-holder").classList.add("subscribe-inactive");
     }
 
-    outputBox
+}
 
+function setHash(clicked_id){
+    divIdString = clicked_id.substring(7);
+    const navTitle = document.title;
+    const navUrl = window.location.origin + window.location.pathname + window.location.search + "#"+ divIdString;
+    let contentUrl;
+    const indexOfIndex = window.location.pathname.indexOf("index.html");
+    if(indexOfIndex==-1){
+        contentUrl = window.location.origin + window.location.pathname + 'content/'
+    } else {
+        contentUrl = window.location.origin + window.location.pathname.substr(0,indexOfIndex) + 'content/'
+    }
+
+    const navState = {"title":navTitle,"url":navUrl,"contentUrl":contentUrl};
+
+    history.pushState(navState, navTitle, navUrl);
+}
+
+//Touch
+
+function oneRingToSwipemAll(){
+    //right-swipe on Home
+    document.getElementById('Home').addEventListener('swiped-right', function (e) {
+        clickNav("navbar-Visits");
+    });
+    //left-swipe on Home
+    document.getElementById('Home').addEventListener('swiped-left', function (e) {
+        clickNav("navbar-Talks");
+    });
+
+
+    //right-swipe on Talks
+    document.getElementById('Talks').addEventListener('swiped-right', function (e) {
+        clickNav("navbar-Home");
+    });
+    //left-swipe on Talks
+    document.getElementById('Talks').addEventListener('swiped-left', function (e) {
+        clickNav("navbar-Visits");
+    });
+
+    //right-swipe on Visits
+    document.getElementById('Visits').addEventListener('swiped-right', function (e) {
+        clickNav("navbar-Talks");
+    });
+    //left-swipe on Visits
+    document.getElementById('Visits').addEventListener('swiped-left', function (e) {
+        clickNav("navbar-Home");
+    });
 }

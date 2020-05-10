@@ -10,6 +10,27 @@ Sudoku = {};
 finalInputArray = [];
 sudokuElemOptionsShowing = false;
 globalDone = false;
+
+
+leastIndexIterationtimeTaken=0;
+copytimetaken=0;
+copyworkElemArrayTT=0;
+copyworkElemIndicesByLengthTT=0;
+copyprocessedTT=0;
+copyinitTT=0;
+copycontradictionTT=0;
+copyTotalTT=0
+updateWEIBLTimeTaken=0;
+updateAdditionForElemsTimeTaken=0;
+addinputSudokuTT=0;
+AddInputTT=0;
+skpushTT=0;
+flTT=0;
+poppingTT=0;
+afterIsDoneTT=0;
+totalRunDFSTT=0;
+nflTT=0;
+
 function start() {
     buildSudoku();
     setIDs();
@@ -52,7 +73,7 @@ function buildSudoku() {
 
 function createNewSudoku(sudokuInputArray) {
     //sudokuWorkArray contains the 81 variables corresponding to numbers between 1 and 512 (2^9)
-    const workElemArray = {};
+    const workElemArray = new Array(81);
     const workElemIndicesByLength = {};
     for (let i = 1; i <= 9; i++) {
         workElemIndicesByLength[i] = new Set();
@@ -69,7 +90,7 @@ function createNewSudoku(sudokuInputArray) {
     Sudoku.workElemArray = workElemArray;
     Sudoku.workElemIndicesByLength = workElemIndicesByLength;
 
-    Sudoku.done = isSudokuDone(Sudoku)
+    Sudoku.done = false;
     Sudoku.processed = new Set()
     Sudoku.contradiction = false;
     return Sudoku;

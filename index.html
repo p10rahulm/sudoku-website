@@ -14,6 +14,7 @@
     <script type="text/javascript" src="assets/js/updater.js"></script>
     <script type="text/javascript" src="assets/js/ui-elements.js"></script>
     <script type="text/javascript" src="assets/js/solver.js"></script>
+    <script type="text/javascript" src="assets/js/sudoku-ui.js"></script>
 
     <!--Fonts-->
     <!--    <link href='https://fonts.googleapis.com/css?family=Alegreya SC&display=swap' rel='stylesheet'>-->
@@ -31,13 +32,13 @@
     <meta property="og:updated_time" content="2020-04-30T18:19:00+05:30"/>
     <meta property="og:description"
           content="Solves your sudoku in double quick time! Check it out!">
-    <meta property="og:url" content="https://csa.iisc.ac.in">
+    <meta property="og:url" content="http://www.sudokusolver.in/">
     <meta property="og:updated_time" content="1440432930"/>
     <meta name="twitter:card" content="summary_large_image">
 
 
     <!--Title-->
-    <title>Students of MTech AI 2020</title>
+    <title>Fast Sudoku Solver</title>
 </head>
 <body onload="start()">
 <div class="container">
@@ -45,14 +46,14 @@
         <div class="HeaderTitle-text">Sudoku Solver</div>
 
         <div id="navbar" class="header-elem">
-            <div id="navbar-Home" class="navbar-active navbar_button" onclick="clickNav(this.id);setHash(this.id)">
-                Home
+            <div id="navbar-Home" class="navbar-active navbar_button">
+                <a href="/">Game</a>
             </div>
-            <div id="navbar-Students" class="navbar_button" onclick="clickNav(this.id);setAbstracts();setHash(this.id)">
-                About
+            <div id="navbar-Students" class="navbar_button">
+                <a href="/solver.html">Solver</a>
             </div>
-            <div id="navbar-Labs" class="navbar_button" onclick="clickNav(this.id);setHash(this.id)">
-                Labs
+            <div id="navbar-Labs" class="navbar_button">
+                <a href="/about.html">About</a>
             </div>
 
         </div>
@@ -63,6 +64,7 @@
             <div class="home-textpara">
                 Please input your contents below and then click on submit. You will see your results below
             </div>
+            <input type="text" id="sudokuTextInput"style="width:50%" onchange="inputfromText()">
             <div id="sudoku-box-holder" class="gameBox-holder">
                 <div id="sudoku-box" class="gameBox">
                     <div id ="elem-options-holder" class="options-box invisibleOptionsList"></div>
@@ -168,9 +170,6 @@
                 </div>
             </div>
             <div id="output">
-                <div class="output-heading">
-                    Outputs
-                </div>
                 <div id = "output-errors">
                 </div>
                 <div id="output-boxes">
@@ -178,11 +177,21 @@
                 </div>
             </div>
         </div>
-        <div id="Students" class="main inactive">
+        <div id="About" class="main inactive">
+            <div class="home-header">
+                About the Game
+            </div>
+            <div class="home-textpara">
+                The technique can be broken into three parts: the state that's maintained, the update step and the
+                solving steps. We will go into each of these by parts
+                <b>State</b>
 
-        </div>
-        <div id="Labs" class="main inactive">
+                <b>Updates</b>
 
+                <b>Solving</b>
+
+
+            </div>
         </div>
 
 
@@ -196,7 +205,7 @@
 
 </div>
 
-
+<script type="text/javascript" async src="assets/js/swiped-events.min.js"></script>
 <script type="text/javascript" defer>
     WebFontConfig = {
         google: {

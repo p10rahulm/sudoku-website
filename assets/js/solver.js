@@ -3,59 +3,256 @@
 */
 
 function copySudoku(inputSudoku) {
+    copyTotalTS = performance.now();
+    copyinitTS = performance.now();
     const newSudoku = {};
-    newSudoku.workElemArray = Object.assign({}, inputSudoku.workElemArray);
-
+    copyinitTT += performance.now()-copyinitTS;
+    copyworkElemArrayTS = performance.now();
+    newSudoku.workElemArray = inputSudoku.workElemArray.slice(0);
+    copyworkElemArrayTT = copyworkElemArrayTT+(performance.now()-copyworkElemArrayTS);
+    copyworkElemIndicesByLengthTS=performance.now()
     newSudoku.workElemIndicesByLength = {};
     for (let i = 1; i < 10; i++) {
         newSudoku.workElemIndicesByLength[i] = new Set(inputSudoku.workElemIndicesByLength[i]);
     }
+    copyworkElemIndicesByLengthTT+=performance.now()-copyworkElemIndicesByLengthTS;
+    copyprocessedTS=performance.now()
     newSudoku.processed = new Set(inputSudoku.processed);
-    newSudoku.contradiction=inputSudoku.contradiction;
+    copyprocessedTT+=performance.now()-copyprocessedTS;
+    copycontradictionTS = performance.now();
+    newSudoku.contradiction = inputSudoku.contradiction;
+    copycontradictionTT += performance.now()-copycontradictionTS;
+    copyTotalTT += performance.now()-copyTotalTS;
     return newSudoku;
 }
-
+let startTime,stackdepth;
 function dfsCreatorSudoku() {
-    sudoFirstCopy = copySudoku(Sudoku);
-    sudokusHolder = [];
+    startTime = performance.now();
+    stackdepth=0;
+    globalDone = false;
+    const sudoFirstCopy = copySudoku(Sudoku);
+    let sudokusHolder = [];
     sudokusHolder.push(sudoFirstCopy);
+
     runDFSSudoku(sudokusHolder);
+
 }
 
 function runDFSSudoku(sudokuHolder) {
+    totalRunDFSTS=performance.now();
+    nflTS=performance.now();
+    poppingTS = performance.now();
+    // stackdepth++;console.log("stackdepth = ",stackdepth);
     const runningSudoku = sudokuHolder.pop();
-    drawSudoku(runningSudoku);
-    console.log("sudokusHolder popped current sudokusHolder = ",sudokusHolder);
+    poppingTT += performance.now()-poppingTS;
+    // drawSudoku(runningSudoku,document.getElementById("output-boxes"),"div");
+    // console.log("sudokuHolder popped current sudokuHolder = ", sudokuHolder);
     // console.log("sudoku popped  = ",runningSudoku);
-    if (isSudokuDone(runningSudoku) || globalDone) {
-        return;
+    if(globalDone){return;}
+    if (isSudokuDone(runningSudoku)) {
+        afterIsDoneTS = performance.now();
+        globalDone = true;
+        const timeTaken = performance.now() - startTime;
+        // console.log("sudokuis done! sudokuInput=", runningSudoku)
+        const holder = document.getElementById("output-boxes");
+        removeChildren(holder);
+        const solutionHeadingDiv = document.createElement("div");
+        solutionHeadingDiv.innerHTML = "Solution: Done in ";
+        solutionHeadingDiv.className = "output-heading";
+        holder.appendChild(solutionHeadingDiv);
+
+
+        const solutionTextDiv = document.createElement("div");
+
+        const outText = "solved in "+timeTaken+"ms.<br>" +
+            "totalRunDFSTT = "+totalRunDFSTT+"ms<br>"+
+            "non-for loop time taken = "+nflTT+"ms<br>"+
+            "for loop time taken = "+flTT+"ms<br><br><br>"+
+            "Non-forloop<br>"+
+            "least Index time taken = "+leastIndexIterationtimeTaken+"ms.<br>" +
+            "afterIsDoneTT = "+afterIsDoneTT+"ms<br>"+
+
+            "sudokuHolder popping time taken = "+poppingTT+"ms<br>"+
+            "<br>Forloop<br>"+
+            "copy time taken = "+copytimetaken+"ms.<br>"+
+            "AddInputTT time taken = "+AddInputTT+"ms.<br>"+
+            "sudokuHolder push time taken = "+skpushTT+"ms.<br>"+
+            "<br>Other pages:Deepdive<br>"+
+
+            "copy function: total time taken = "+copyTotalTT+"ms.<br>"+
+            "copy function: initialize time taken = "+copyinitTT+"ms.<br>"+
+            "copy function: workElemArray time taken = "+copyworkElemArrayTT+"ms.<br>"+
+            "copy function: workElemIndicesByLength time taken = "+copyworkElemIndicesByLengthTT+"ms.<br>"+
+            "copy function: processed time taken = "+copyprocessedTT+"ms.<br>"+
+            "copy function: contradiction time taken = "+copycontradictionTT+"ms.<br>"+
+            "updateWEIBL Function time taken = "+updateWEIBLTimeTaken+"ms.<br>"+
+            "function updateAdditionForElems time taken = "+updateAdditionForElemsTimeTaken+"ms.<br>"+
+            "function: addInputSudoku time taken = "+addinputSudokuTT+"ms.<br>";
+
+
+        solutionTextDiv.innerHTML = outText;
+
+        solutionTextDiv.className = "output-heading";
+        holder.appendChild(solutionTextDiv);
+
+        console.log("sudoku done. sudoku = ",runningSudoku);
+        drawSudoku(runningSudoku, holder, "div");
+        afterIsDoneTT += performance.now()-afterIsDoneTS;
+        return runningSudoku;
     }
+    leastIndexIterationTS = performance.now();
     const elemIndicesByLength = runningSudoku.workElemIndicesByLength;
     let leastIndex = 0;
     for (let i = 1; i <= 9 && !leastIndex; i++) {
         // console.log("runningSudoku.workElemIndicesByLength=",runningSudoku.workElemIndicesByLength);
         // console.log("runningSudoku.workElemIndicesByLength[i]=",runningSudoku.workElemIndicesByLength[i]);
-        if (runningSudoku.workElemIndicesByLength[i].size !== 0){
+        if (runningSudoku.workElemIndicesByLength[i].size !== 0) {
             leastIndex = i;
         }
     }
+
     // console.log("leastIndex = ",leastIndex);
 
     //get indices:
+
     const indexToIterate = runningSudoku.workElemIndicesByLength[leastIndex].values().next().value;
     const availableChoices = getAllowedNumbersforIndex(indexToIterate, runningSudoku);
+
+    leastIndexIterationtimeTaken = leastIndexIterationtimeTaken + (performance.now() - leastIndexIterationTS);
     // console.log("indexToIterate=",indexToIterate);
     // console.log("availableChoices=",availableChoices);
+    nflTT+=performance.now()-nflTS;
+    flTS=performance.now();
     for (let choiceIndex = 0; choiceIndex < availableChoices.length && !globalDone; choiceIndex++) {
         // console.log("choiceIndex=",choiceIndex);
         const choice = availableChoices[choiceIndex];
         // console.log("choice=",choice);
+        copyTimeStart = performance.now();
         const runningSudokuCopy = copySudoku(runningSudoku);
-        addInputSudoku(runningSudokuCopy,indexToIterate, choice,1);
-        if(!runningSudokuCopy.contradiction){
-            sudokusHolder.push(runningSudokuCopy);
+        copytimetaken = copytimetaken + (performance.now() - copyTimeStart);
+        AddInputTS = performance.now();
+        addInputSudoku(runningSudokuCopy, indexToIterate, choice, 1);
+        AddInputTT = AddInputTT + (performance.now() - AddInputTS);
+        skpushTS = performance.now();
+        if (!runningSudokuCopy.contradiction) {
+            sudokuHolder.push(runningSudokuCopy);
         }
+        skpushTT = skpushTT + (performance.now() - skpushTS);
         // console.log("sudokusHolder=",sudokusHolder)
     }
+    flTT+=performance.now()-flTS;
+    totalRunDFSTT+=performance.now()-totalRunDFSTS;
     runDFSSudoku(sudokuHolder);
+
+
+}
+
+
+function runDFSSudoku(sudokuHolder) {
+    totalRunDFSTS=performance.now();
+    nflTS=performance.now();
+    poppingTS = performance.now();
+    // stackdepth++;console.log("stackdepth = ",stackdepth);
+    const runningSudoku = sudokuHolder.pop();
+    poppingTT += performance.now()-poppingTS;
+    // drawSudoku(runningSudoku,document.getElementById("output-boxes"),"div");
+    // console.log("sudokuHolder popped current sudokuHolder = ", sudokuHolder);
+    // console.log("sudoku popped  = ",runningSudoku);
+    if(globalDone){return;}
+    if (isSudokuDone(runningSudoku)) {
+        afterIsDoneTS = performance.now();
+        globalDone = true;
+        const timeTaken = performance.now() - startTime;
+        // console.log("sudokuis done! sudokuInput=", runningSudoku)
+        const holder = document.getElementById("output-boxes");
+        removeChildren(holder);
+        const solutionHeadingDiv = document.createElement("div");
+        solutionHeadingDiv.innerHTML = "Solution: Done in ";
+        solutionHeadingDiv.className = "output-heading";
+        holder.appendChild(solutionHeadingDiv);
+
+
+        const solutionTextDiv = document.createElement("div");
+
+        const outText = "solved in "+timeTaken+"ms.<br>" +
+            "totalRunDFSTT = "+totalRunDFSTT+"ms<br>"+
+            "non-for loop time taken = "+nflTT+"ms<br>"+
+            "for loop time taken = "+flTT+"ms<br><br><br>"+
+            "Non-forloop<br>"+
+            "least Index time taken = "+leastIndexIterationtimeTaken+"ms.<br>" +
+            "afterIsDoneTT = "+afterIsDoneTT+"ms<br>"+
+
+            "sudokuHolder popping time taken = "+poppingTT+"ms<br>"+
+            "<br>Forloop<br>"+
+            "copy time taken = "+copytimetaken+"ms.<br>"+
+            "AddInputTT time taken = "+AddInputTT+"ms.<br>"+
+            "sudokuHolder push time taken = "+skpushTT+"ms.<br>"+
+            "<br>Other pages:Deepdive<br>"+
+
+            "copy function: total time taken = "+copyTotalTT+"ms.<br>"+
+            "copy function: initialize time taken = "+copyinitTT+"ms.<br>"+
+            "copy function: workElemArray time taken = "+copyworkElemArrayTT+"ms.<br>"+
+            "copy function: workElemIndicesByLength time taken = "+copyworkElemIndicesByLengthTT+"ms.<br>"+
+            "copy function: processed time taken = "+copyprocessedTT+"ms.<br>"+
+            "copy function: contradiction time taken = "+copycontradictionTT+"ms.<br>"+
+            "updateWEIBL Function time taken = "+updateWEIBLTimeTaken+"ms.<br>"+
+            "function updateAdditionForElems time taken = "+updateAdditionForElemsTimeTaken+"ms.<br>"+
+            "function: addInputSudoku time taken = "+addinputSudokuTT+"ms.<br>";
+
+
+        solutionTextDiv.innerHTML = outText;
+
+        solutionTextDiv.className = "output-heading";
+        holder.appendChild(solutionTextDiv);
+
+        console.log("sudoku done. sudoku = ",runningSudoku);
+        drawSudoku(runningSudoku, holder, "div");
+        afterIsDoneTT += performance.now()-afterIsDoneTS;
+        return runningSudoku;
+    }
+    leastIndexIterationTS = performance.now();
+    const elemIndicesByLength = runningSudoku.workElemIndicesByLength;
+    let leastIndex = 0;
+    for (let i = 1; i <= 9 && !leastIndex; i++) {
+        // console.log("runningSudoku.workElemIndicesByLength=",runningSudoku.workElemIndicesByLength);
+        // console.log("runningSudoku.workElemIndicesByLength[i]=",runningSudoku.workElemIndicesByLength[i]);
+        if (runningSudoku.workElemIndicesByLength[i].size !== 0) {
+            leastIndex = i;
+        }
+    }
+
+    // console.log("leastIndex = ",leastIndex);
+
+    //get indices:
+
+    const indexToIterate = runningSudoku.workElemIndicesByLength[leastIndex].values().next().value;
+    const availableChoices = getAllowedNumbersforIndex(indexToIterate, runningSudoku);
+
+    leastIndexIterationtimeTaken = leastIndexIterationtimeTaken + (performance.now() - leastIndexIterationTS);
+    // console.log("indexToIterate=",indexToIterate);
+    // console.log("availableChoices=",availableChoices);
+    nflTT+=performance.now()-nflTS;
+    flTS=performance.now();
+    for (let choiceIndex = 0; choiceIndex < availableChoices.length && !globalDone; choiceIndex++) {
+        // console.log("choiceIndex=",choiceIndex);
+        const choice = availableChoices[choiceIndex];
+        // console.log("choice=",choice);
+        copyTimeStart = performance.now();
+        const runningSudokuCopy = copySudoku(runningSudoku);
+        copytimetaken = copytimetaken + (performance.now() - copyTimeStart);
+        AddInputTS = performance.now();
+        addInputSudoku(runningSudokuCopy, indexToIterate, choice, 1);
+        AddInputTT = AddInputTT + (performance.now() - AddInputTS);
+        skpushTS = performance.now();
+        if (!runningSudokuCopy.contradiction) {
+            sudokuHolder.push(runningSudokuCopy);
+        }
+        skpushTT = skpushTT + (performance.now() - skpushTS);
+        // console.log("sudokusHolder=",sudokusHolder)
+    }
+    flTT+=performance.now()-flTS;
+    totalRunDFSTT+=performance.now()-totalRunDFSTS;
+    runDFSSudoku(sudokuHolder);
+
+
 }
