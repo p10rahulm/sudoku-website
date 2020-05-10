@@ -17,7 +17,32 @@ function logError(message){
     // alert(message);
 }
 
+function isPowerOf2(someNum) {
+    return someNum && !(someNum & (someNum - 1));
+}
 
+function getlog2for2Power(someNum) {
+    switch (someNum) {
+        case 1:
+            return 1;
+        case 2:
+            return 2;
+        case 4:
+            return 3;
+        case 8:
+            return 4;
+        case 16:
+            return 5;
+        case 32:
+            return 6;
+        case 64:
+            return 7;
+        case 128:
+            return 8;
+        case 256:
+            return 9;
+    }
+}
 
 function bitCount (n) {
     n = n - ((n >> 1) & 0x55555555)

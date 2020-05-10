@@ -30,6 +30,7 @@ poppingTT=0;
 afterIsDoneTT=0;
 totalRunDFSTT=0;
 nflTT=0;
+AddInputDirectLoopTT=0;
 
 function start() {
     buildSudoku();
@@ -91,7 +92,8 @@ function createNewSudoku(sudokuInputArray) {
     Sudoku.workElemIndicesByLength = workElemIndicesByLength;
 
     Sudoku.done = false;
-    Sudoku.processed = new Set()
+    // Sudoku.processed = new Array(81).fill(0);
+    Sudoku.toProcess = [];
     Sudoku.contradiction = false;
     return Sudoku;
 }
@@ -111,10 +113,14 @@ function buildGameIndices() {
         elemIndices[i] = [rowIndex, colIndex, squareIndex];
     }
 
-    //Initialize arrays
-    const indicesinRows = {};
-    const indicesinCols = {};
-    const indicesinBoxes = {};
+    //Initialize arrays: Turns out associative marginally faster here
+
+    const indicesinRows = [];
+    const indicesinCols = [];
+    const indicesinBoxes = [];
+    // const indicesinRows = {};
+    // const indicesinCols = {};
+    // const indicesinBoxes = {};
     for (let i = 0; i < 9; i++) {
         indicesinRows[i] = [];
         indicesinCols[i] = [];

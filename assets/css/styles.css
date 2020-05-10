@@ -263,6 +263,13 @@ a:hover {
     font-weight: bold;
     color: #830000;
 }
+.mainer #output .output-text{
+    font-size: max(12px,1.0em);
+    font-family: Lora,Georgia,Cambria,Times,serif;
+    margin: 10px 0px;
+    padding: 10px 0px;
+    color: #9a9bb6;
+}
 .mainer #output #output-errors .output-error{
     font-size: max(15px,1.25em);
     font-family: Lora,Georgia,Cambria,Times,serif;

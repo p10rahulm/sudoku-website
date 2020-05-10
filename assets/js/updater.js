@@ -57,37 +57,38 @@ function addInputSudoku(inputSudoku, inputValID, inputValue, callerFuncLocation 
     const elemsinCol = Game.indicesinCols[col];
     const elemsinBox = Game.indicesinBoxes[box];
 
-    if(!inputSudoku.contradiction){updateAdditionForElems(inputSudoku, elemsinRow, inputValID, workingAddVal);}
-    else {return inputSudoku;}
-    if(!inputSudoku.contradiction){updateAdditionForElems(inputSudoku, elemsinCol, inputValID, workingAddVal);}
-    else {return inputSudoku;}
-    if(!inputSudoku.contradiction){updateAdditionForElems(inputSudoku, elemsinBox, inputValID, workingAddVal);}
-    else {return inputSudoku;}
+    updateAdditionForElems(inputSudoku, elemsinRow, inputValID, workingAddVal);
+    updateAdditionForElems(inputSudoku, elemsinCol, inputValID, workingAddVal);
+    updateAdditionForElems(inputSudoku, elemsinBox, inputValID, workingAddVal);
+    if(inputSudoku.contradiction){return inputSudoku;}
 
-
-
-    inputSudoku.processed.add(inputValID);
+    // inputSudoku.processed[inputValID] =1;
     const oldWorkingVal = inputSudoku.workElemArray[inputValID]
     inputSudoku.workElemArray[inputValID] = workingAddVal;
     const numBits = bitCount(oldWorkingVal);
     inputSudoku.workElemIndicesByLength[numBits].delete(inputValID);
+
     addinputSudokuTT = addinputSudokuTT + (performance.now() -  addinputSudokuTS);
     return inputSudoku;
 }
 
 function updateAdditionForElems(inputSudoku, elemsinSameGroup, inputValID, workingAddVal) {
+    if(inputSudoku.contradiction){return;}
     updateAdditionForElemsTS = performance.now();
     for (let i = 0; i < elemsinSameGroup.length; i++) {
         const currSudokuIndex = elemsinSameGroup[i];
-        if (currSudokuIndex != inputValID) {
+        if (currSudokuIndex !== inputValID) {
             const oldWorkingVal = inputSudoku.workElemArray[currSudokuIndex];
             const newWorkingVal = inputSudoku.workElemArray[currSudokuIndex] & ~workingAddVal;
             inputSudoku.workElemArray[currSudokuIndex] = newWorkingVal;
-            if(newWorkingVal==0){
+            if(newWorkingVal===0){
                 inputSudoku.contradiction = true;
                 return inputSudoku;
             }
-            if (oldWorkingVal != newWorkingVal) {
+            if (oldWorkingVal !== newWorkingVal) {
+                if(isPowerOf2(newWorkingVal)){
+                    inputSudoku.toProcess.push(currSudokuIndex)
+                }
                 updateWEIBL(inputSudoku, currSudokuIndex, oldWorkingVal, newWorkingVal);
             }
         }
@@ -114,7 +115,7 @@ function deleteInputSudoku(inputSudoku, inputValID, inputValueDeleted,callerFunc
     updatingInputWorkingVal = updateDeletionforElems(inputSudoku, elemsinBox, inputValID, workingDelVal, updatingInputWorkingVal);
 
     inputSudoku.workElemArray[inputValID] = updatingInputWorkingVal;
-    inputSudoku.processed.delete(inputValID);
+    // inputSudoku.processed[inputValID]=0;
     const numBits = bitCount(updatingInputWorkingVal);
     inputSudoku.workElemIndicesByLength[numBits].add(inputValID);
     return inputSudoku;
@@ -142,12 +143,16 @@ function updateDeletionforElems(inputSudoku, elemsinSameGroup, inputValID, worki
 
 function updateWEIBL(sudokuInput, elemID, oldWorkingVal, newWorkingVal) {
     updateWEIBLTimeStart = performance.now();
-    if (sudokuInput.processed.has(elemID)) {
-        sudokuInput.processed.delete(elemID);
+    /*
+    if (sudokuInput.processed[elemID]==1) {
+        sudokuInput.processed[elemID]=0;
     } else {
         const bitCountOld = bitCount(oldWorkingVal);
         sudokuInput.workElemIndicesByLength[bitCountOld].delete(elemID);
     }
+    */
+    const bitCountOld = bitCount(oldWorkingVal);
+    sudokuInput.workElemIndicesByLength[bitCountOld].delete(elemID);
 
     const numBits = bitCount(newWorkingVal);
     // console.log("elemID=",elemID,"numBits=",numBits,"oldWorkingVal=",oldWorkingVal,"newWorkingVal=",newWorkingVal)
