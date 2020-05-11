@@ -15,11 +15,6 @@
     <script type="text/javascript" src="assets/js/solver.js"></script>
     <script type="text/javascript" src="assets/js/sudoku-ui.js"></script>
 
-    <!--Fonts-->
-    <!--    <link href='https://fonts.googleapis.com/css?family=Alegreya SC&display=swap' rel='stylesheet'>-->
-    <!--    <link href='https://fonts.googleapis.com/css?family=Lora&display=swap' rel='stylesheet'>-->
-    <!--    <link href='https://fonts.googleapis.com/css?family=Open Sans&display=swap' rel='stylesheet'>-->
-
     <link rel="icon" type="image/png" href="assets/images/sudoku.png">
 
 
@@ -60,41 +55,61 @@
     <div class="mainer container-element">
         <div id="Home" class="main active">
             <div class="home-header">Sudoku Solver</div>
-            <div class="home-textpara">
-                Please input your contents below and then click on submit. You will see your results below
+            <div class="home-textpara" onclick="toggleDisplay('home-instructions')">
+                Click to see instructions
             </div>
-            <input type="text" id="sudokuTextInput" size="81" maxlength="81" onchange="inputfromText()">
+            <div id="home-instructions" class="home-textpara2 inactive">
+                Please input the desired Sudoku you want to solve by selecting elements in the sudoku box below
+                and entering the numbers there.
+                <br><br>
+                Alternatively, you could fill the text box below where you can
+                fill in the numbers from top-left to bottom right. In the text box, fill in a '.' for an empty
+                element and a number from 1-9 for some filled element.
+            </div>
+            <div id="text-input-sizer" class="gameBox-holder">
+                <div id="text-input-holder">
+                    <div class="text-input-button" onclick="toggleDisplay('text-input-hideshow')">
+                        Enter Text Input
+                    </div>
+                    <div id="text-input-hideshow" class="inactive">
+                        <div class="text-fill-input-button">
+                            <input type="text" id="sudokuTextInput" size="81" maxlength="81"
+                                   placeholder="Example: '8..........36......7..9.2...5...7.......457.....1...3...1....68..85...1..9....4'">
+                            <div id="fill-sudoku-button" onclick="inputfromText()">
+                                Fill Sudoku
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div id="sudoku-box-holder" class="gameBox-holder">
                 <div id="sudoku-box" class="gameBox">
-                    <div id ="elem-options-holder" class="options-box invisibleOptionsList"></div>
+                    <div id="elem-options-holder" class="options-box invisibleOptionsList"></div>
                 </div>
             </div>
             <div id="buttons-holder">
-                <div id ="solve-button" onclick="dfsCreatorSudoku()">Solve!</div>
+                <div id="iteration-holder">
+
+                    <div id="iteration-options-box">
+                        <label class="iteration-option">
+                            Number of Iterations:
+                            <input type="number" class="iteration-option" id="num-iterations-option" max="10000" min="10"
+                                   autocomplete="on" value="10" size="5">
+                        </label>
+                        <label class="iteration-option">
+                            View Verbose:
+                            <input type="checkbox" class="iteration-option" id="verbose-time-results-option"
+                                   autocomplete="on">
+                        </label>
+                    </div>
+                    <div id="solve-button" onclick="dfsCreatorSudoku()">Solve!</div>
+
+                </div>
             </div>
 
             <div id="output">
-                <div id = "output-errors">
-                </div>
-                <div id="output-boxes">
-
-                </div>
-            </div>
-        </div>
-        <div id="About" class="main inactive">
-            <div class="home-header">
-                About the Game
-            </div>
-            <div class="home-textpara">
-                The technique can be broken into three parts: the state that's maintained, the update step and the
-                solving steps. We will go into each of these by parts
-                <b>State</b>
-
-                <b>Updates</b>
-
-                <b>Solving</b>
-
-
+                <div id="output-errors"></div>
+                <div id="output-boxes"></div>
             </div>
         </div>
 

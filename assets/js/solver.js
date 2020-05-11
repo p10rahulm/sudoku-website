@@ -56,15 +56,20 @@ function copySudoku(inputSudoku) {
 
 function dfsCreatorSudoku() {
 
-    iteration = new Iteration(Sudoku);
+    let iteration = new Iteration(Sudoku);
     const sudoFirstCopy = copySudokuHeap(Sudoku, iteration);
     const sudokusHolder = [];
     sudokusHolder.push(sudoFirstCopy);
 
     // runDFSSudokuRecursive(sudokusHolder);
     iteration = runDFSSudokuIterativeHeap(sudokusHolder, iteration);
+    let verboseTimeResultOption=0;
+    if(document.getElementById("verbose-time-results-option").checked){
+        verboseTimeResultOption=1;
+    }
+    const numberofIterations=document.getElementById("num-iterations-option").value;
     if(iteration.solutionFound){
-        for (let i=0;i<100;i++){
+        for (let i=0;i<numberofIterations;i++){
             const iterationLooper = new Iteration(Sudoku);
             const sudoFirstCopy = copySudokuHeap(Sudoku, iteration);
             const sudokusHolder = [];
@@ -73,7 +78,7 @@ function dfsCreatorSudoku() {
             updateIter(iteration,iterationLooper,i+2);
         }
         console.log("iteration=",iteration);
-        doFinishedProcessing(iteration.solvedSudoku, iteration,1, 0,0,"Finished 10 iterations. Average time values below:" );
+        doFinishedProcessing(iteration.solvedSudoku, iteration,1, 0,verboseTimeResultOption,"Finished 10 iterations. Average time values below:" );
     } else {
         doFinishedProcessing(Sudoku, iteration,0, 1, 1);
     }
@@ -103,40 +108,6 @@ function updateIter(iteration,newAddition,additionCount){
     iteration.nflTT = (additionCount-1)*iteration.nflTT/additionCount + 1/additionCount*newAddition.nflTT;
     iteration.AddInputDirectLoopTT = (additionCount-1)*iteration.AddInputDirectLoopTT/additionCount + 1/additionCount*newAddition.AddInputDirectLoopTT;
     iteration.numLoops = ((additionCount-1)*iteration.numLoops + newAddition.numLoops)/additionCount;
-
-}
-class Iteration {
-    constructor(Sudoku) {
-        this.startTime = performance.now();
-        this.stackdepth = 0;
-        this.solutionFound = false;
-
-        this.leastIndexIterationtimeTaken = 0;
-        this.copytimetaken = 0;
-        this.copyworkElemArrayTT = 0;
-        this.copyworkElemIndicesByLengthTT = 0;
-        this.copyprocessedTT = 0;
-        this.copyinitTT = 0;
-        this.copycontradictionTT = 0;
-        this.copyTotalTT = 0
-        this.updateWEIBLTimeTaken = 0;
-        this.updateAdditionForElemsTimeTaken = 0;
-        this.addinputSudokuTT = 0;
-        this.AddInputTT = 0;
-        this.skpushTT = 0;
-        this.flTT = 0;
-        this.poppingTT = 0;
-        this.afterIsDoneTT = 0;
-        this.totalRunDFSTT = 0;
-        this.nflTT = 0;
-        this.AddInputDirectLoopTT = 0;
-
-
-        this.numIterations = 0;
-        this.numLoops = 0;
-        this.solutionFound = 0;
-        this.solvedSudoku = Sudoku;
-    }
 
 }
 
@@ -383,7 +354,7 @@ function runDFSSudokuIterative(sudokuHolder) {
     }
 }
 
-function doFinishedProcessing(runningSudoku,iteration, solutionFound, errorlog = 0, verboseTime=1,message="") {
+function doFinishedProcessing(runningSudoku,iteration, solutionFound, errorlog = 0, verboseTime=1) {
 
     const holder = document.getElementById("output-boxes");
     if (!errorlog) {
@@ -403,7 +374,7 @@ function doFinishedProcessing(runningSudoku,iteration, solutionFound, errorlog =
 
     const solutionTextDiv = document.createElement("div");
     const timeTaken = (performance.now() - iteration.startTime)/iteration.numIterations;
-    let outText ="<b>"+ message+"</b><br>";
+    let outText =`<b>Finished ${iteration.numIterations} iterations. Average Time values below:</b><br>`;
 
     outText += "Time Taken: " + timeTaken + "ms.<br>";
     console.log("iteration.numLoops=",iteration.numLoops);

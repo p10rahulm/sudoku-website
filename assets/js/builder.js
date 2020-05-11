@@ -21,7 +21,7 @@ class SudokuClass {
     }
 }
 
-class Game {
+class GameClass {
     constructor() {
         //Integer Division: https://stackoverflow.com/questions/4228356/integer-division-with-remainder-in-javascript
         this.elemIndices = {}
@@ -54,6 +54,42 @@ class Game {
     }
 }
 
+class Iteration {
+    constructor(Sudoku) {
+        this.startTime = performance.now();
+        this.stackdepth = 0;
+        this.solutionFound = false;
+
+        this.leastIndexIterationtimeTaken = 0;
+        this.copytimetaken = 0;
+        this.copyworkElemArrayTT = 0;
+        this.copyworkElemIndicesByLengthTT = 0;
+        this.copyprocessedTT = 0;
+        this.copyinitTT = 0;
+        this.copycontradictionTT = 0;
+        this.copyTotalTT = 0
+        this.updateWEIBLTimeTaken = 0;
+        this.updateAdditionForElemsTimeTaken = 0;
+        this.addinputSudokuTT = 0;
+        this.AddInputTT = 0;
+        this.skpushTT = 0;
+        this.flTT = 0;
+        this.poppingTT = 0;
+        this.afterIsDoneTT = 0;
+        this.totalRunDFSTT = 0;
+        this.nflTT = 0;
+        this.AddInputDirectLoopTT = 0;
+
+
+        this.numIterations = 0;
+        this.numLoops = 0;
+        this.solutionFound = 0;
+        this.solvedSudoku = Sudoku;
+    }
+
+}
+
+
 // Sudoku = new SudokuClass([]);
 finalInputArray = [];
 sudokuElemOptionsShowing = false;
@@ -61,16 +97,8 @@ sudokuElemOptionsShowing = false;
 
 
 function start() {
-    buildSudoku();
-}
-
-function createChoiceDivs() {
-    const sBox = document.getElementById("sudoku-box");
-    const sudokuElemDivs = sBox.getElementsByTagName("input");
-    for (let i = 0; i < sudokuElemDivs.length; i++) {
-        sudokuElemDivs[i].addEventListener("click", createOptions, false);
-        sudokuElemDivs[i].addEventListener("change", checkInputDiv, false);
-    }
+    // buildSudoku();
+    drawFirstSudoku();
 }
 
 function checkInputDiv(event) {
@@ -78,31 +106,36 @@ function checkInputDiv(event) {
     checkInput(event.target.id, event.target.value);
 }
 
-function setIDs() {
-    const sBox = document.getElementById("sudoku-box");
-    const sudokuElemDivs = sBox.getElementsByTagName("input");
-    for (let i = 0; i < sudokuElemDivs.length; i++) {
-        sudokuElemDivs[i].id = i;
-    }
-}
 
 function buildSudoku() {
-    const sBox = document.getElementById("sudoku-box");
 
-    // const sudokuElemDivs = sBox.getElementsByTagName("input");
-    // const sudokuInputArray = []
-    // for (let i = 0; i < sudokuElemDivs.length; i++) {
-    //     sudokuInputArray.push(Number(sudokuElemDivs[i].value));
-    // }
     Sudoku = new SudokuClass([]);
-    Game = new Game();
-    drawSudoku(Sudoku, sBox, "input");
-    setIDs();
-    createChoiceDivs();
+    Game = new GameClass();
 
     startIter = new Iteration(Sudoku);
     // console.log("Sudoku = ", Sudoku);
 }
+buildSudoku();
+function drawFirstSudoku(){
+    const sBox = document.getElementById("sudoku-box");
+    drawSudoku(Sudoku, sBox, "input");
+    const sudokuElemDivs = sBox.getElementsByTagName("input");
+    setAttributes(sudokuElemDivs);
+}
+
+
+function setAttributes(sudokuElemDivs) {
+    for (let i = 0; i < sudokuElemDivs.length; i++) {
+        const elemDiv =sudokuElemDivs[i];
+        elemDiv.id = i;
+        elemDiv.addEventListener("click", createOptions, false);
+        elemDiv.addEventListener("change", checkInputDiv, false);
+        elemDiv.setAttribute("size",1);
+        elemDiv.setAttribute("maxlength",1);
+        elemDiv.setAttribute("autocomplete","off");
+    }
+}
+
 
 function createNewSudoku(sudokuInputArray) {
     //sudokuWorkArray contains the 81 variables corresponding to numbers between 1 and 512 (2^9)

@@ -8,6 +8,7 @@
     src: local('Alegreya SC Regular'), local('AlegreyaSC-Regular'),
     url('../fonts/alegreya-sc-v11-latin-regular.woff2') format('woff2'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
+
 /* open-sans-regular - latin */
 @font-face {
     font-family: 'Open Sans';
@@ -15,9 +16,9 @@
     font-weight: 400;
     font-display: fallback;
     src: local('Open Sans Regular'), local('OpenSans-Regular'),
-    url('../fonts/open-sans-v17-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-    url('../fonts/open-sans-v17-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    url('../fonts/open-sans-v17-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */ url('../fonts/open-sans-v17-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
+
 /* open-sans-italic - latin */
 @font-face {
     font-family: 'Open Sans';
@@ -25,9 +26,9 @@
     font-weight: 400;
     font-display: fallback;
     src: local('Open Sans Italic'), local('OpenSans-Italic'),
-    url('../fonts/open-sans-v17-latin-italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-    url('../fonts/open-sans-v17-latin-italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    url('../fonts/open-sans-v17-latin-italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */ url('../fonts/open-sans-v17-latin-italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
+
 /* open-sans-700 - latin */
 @font-face {
     font-family: 'Open Sans';
@@ -35,9 +36,9 @@
     font-weight: 700;
     font-display: fallback;
     src: local('Open Sans Bold'), local('OpenSans-Bold'),
-    url('../fonts/open-sans-v17-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-    url('../fonts/open-sans-v17-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    url('../fonts/open-sans-v17-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */ url('../fonts/open-sans-v17-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
+
 /* open-sans-700italic - latin */
 @font-face {
     font-family: 'Open Sans';
@@ -45,9 +46,9 @@
     font-weight: 700;
     font-display: fallback;
     src: local('Open Sans Bold Italic'), local('OpenSans-BoldItalic'),
-    url('../fonts/open-sans-v17-latin-700italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-    url('../fonts/open-sans-v17-latin-700italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    url('../fonts/open-sans-v17-latin-700italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */ url('../fonts/open-sans-v17-latin-700italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
+
 /* lora-regular - latin */
 @font-face {
     font-family: 'Lora';
@@ -55,9 +56,9 @@
     font-weight: 400;
     font-display: fallback;
     src: local(''),
-    url('../fonts/lora-v15-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-    url('../fonts/lora-v15-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    url('../fonts/lora-v15-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */ url('../fonts/lora-v15-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
+
 /* lora-700 - latin */
 @font-face {
     font-family: 'Lora';
@@ -65,9 +66,9 @@
     font-weight: 700;
     font-display: fallback;
     src: local(''),
-    url('../fonts/lora-v15-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-    url('../fonts/lora-v15-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    url('../fonts/lora-v15-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */ url('../fonts/lora-v15-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
+
 /* lora-italic - latin */
 @font-face {
     font-family: 'Lora';
@@ -75,9 +76,9 @@
     font-weight: 400;
     font-display: fallback;
     src: local(''),
-    url('../fonts/lora-v15-latin-italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-    url('../fonts/lora-v15-latin-italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    url('../fonts/lora-v15-latin-italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */ url('../fonts/lora-v15-latin-italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
+
 /* lora-700italic - latin */
 @font-face {
     font-family: 'Lora';
@@ -85,12 +86,11 @@
     font-weight: 700;
     font-display: fallback;
     src: local(''),
-    url('../fonts/lora-v15-latin-700italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-    url('../fonts/lora-v15-latin-700italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    url('../fonts/lora-v15-latin-700italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */ url('../fonts/lora-v15-latin-700italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
 body {
-    font-family: "Open Sans", Georgia,Cambria,Times,"Times New Roman",Serif;
+    font-family: "Open Sans", Georgia, Cambria, Times, "Times New Roman", Serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     line-height: 1.6;
@@ -113,18 +113,16 @@ a:hover {
     grid-template-rows: minmax(65px, auto) minmax(100px, auto) 65px [footer-end];
     /*grid-template-columns: minmax(2vw,1fr) repeat(4, 1fr) minmax(2vw,1fr);*/
     grid-template-columns: 2vw repeat(4, 1fr) 2vw;
-    grid-row-gap: min(4vw,40px);
-    grid-template-areas:
-            ". header header header header  ."
-            ". mainer mainer mainer mainer ."
-            ". footer footer footer footer .";
+    grid-row-gap: min(4vw, 40px);
+    grid-template-areas: ". header header header header  ." ". mainer mainer mainer mainer ." ". footer footer footer footer .";
     justify-items: center;
 }
 
-.container-element{
+.container-element {
     max-width: 1200px;
     width: 100%;
 }
+
 .header {
     top: 0px;
     grid-area: header;
@@ -143,21 +141,18 @@ a:hover {
 
 }
 
-.header .header-elem{
-
-    padding: min(1.5vw,10px) 0;
+.header .header-elem {
+    padding: min(1.5vw, 10px) 0;
 }
 
 
-
-
-.header .HeaderTitle-text{
+.header .HeaderTitle-text {
     vertical-align: center;
     padding-left: 10px;
 
-    font-family: "Lora",Georgia,Times,"Times New Roman",Serif;
+    font-family: "Lora", Georgia, Times, "Times New Roman", Serif;
     color: #005999;
-    font-size: min(8vw,2em);
+    font-size: min(8vw, 2em);
     font-weight: bold;
 }
 
@@ -170,18 +165,22 @@ a:hover {
     flex-grow: 0;
     flex-shrink: 1;
 }
+
 @media screen and (max-width: 725px) {
-    .header #logo-image{
+    .header #logo-image {
         display: none;
     }
-    .header #HeaderTitle{
+
+    .header #HeaderTitle {
         justify-content: center;
         padding-bottom: 0;
         text-align: center;
     }
-    .header #HeaderTitle-text{
+
+    .header #HeaderTitle-text {
         text-align: center;
     }
+
     .header #navbar {
         justify-content: center;
         flex-grow: 1;
@@ -191,8 +190,8 @@ a:hover {
 }
 
 .header #navbar .navbar_button {
-    padding: 10px min(2vw,10px);
-    font-family: "Alegreya SC","Felix Titling","Perpetua Titling MT",Georgia,Times,"Times New Roman",Serif;
+    padding: 10px min(2vw, 10px);
+    font-family: "Alegreya SC", "Felix Titling", "Perpetua Titling MT", Georgia, Times, "Times New Roman", Serif;
     font-size: max(1em, 12px);
     color: #cc0000;
 }
@@ -202,7 +201,7 @@ a:hover {
 }
 
 .header #navbar .navbar_button a {
-    font-family: "Alegreya SC","Felix Titling","Perpetua Titling MT",Georgia,Times,"Times New Roman",Serif;
+    font-family: "Alegreya SC", "Felix Titling", "Perpetua Titling MT", Georgia, Times, "Times New Roman", Serif;
     font-size: max(1em, 12px);
     color: #cc0000;
 }
@@ -211,53 +210,60 @@ a:hover {
     box-shadow: 0px 8px 6px -4px #c39fff;
 }
 
-.mainer{
+.mainer {
     grid-area: mainer;
 }
 
-.mainer .inactive{
+.mainer .inactive {
     display: none;
 }
 
-.mainer .active{
+.mainer .active {
     display: block;
 }
 
-.mainer .home-header{
-    font-family: "Lora", Georgia,Cambria,Times,"Times New Roman",Serif;
+.mainer .home-header {
+    font-family: "Lora", Georgia, Cambria, Times, "Times New Roman", Serif;
     /*color: rgba(0, 67, 204, 0.85);*/
     color: rgba(167, 0, 0, 0.85);
-    font-size: max(16px,1.75em);
+    font-size: max(16px, 1.75em);
     font-weight: bold;
     padding-top: 25px;
     padding-bottom: 10px;
 }
 
-.mainer .home-header2{
-    font-family: "Lora", Georgia,Cambria,Times,"Times New Roman",Serif;
+.mainer .home-header2 {
+    font-family: "Lora", Georgia, Cambria, Times, "Times New Roman", Serif;
     /*color: rgba(0, 67, 204, 0.85);*/
     color: rgba(0, 67, 204, 0.85);
-    font-size: max(16px,1.5em);
+    font-size: max(16px, 1.5em);
     font-weight: bold;
     padding-top: 15px;
     padding-bottom: 5px;
 }
 
-.mainer .home-header3{
-    font-family: "Lora", Georgia,Cambria,Times,"Times New Roman",Serif;
+.mainer .home-header3 {
+    font-family: "Lora", Georgia, Cambria, Times, "Times New Roman", Serif;
     /*color: rgba(0, 67, 204, 0.85);*/
     color: rgba(200, 0, 160, 0.85);
-    font-size: max(16px,1.25em);
+    font-size: max(16px, 1.25em);
     font-weight: bold;
     padding-top: 10px;
     padding-bottom: 5px;
 }
 
-.mainer .home-textpara{
+.mainer .home-textpara {
     color: rgb(90, 91, 106);
-    font-size: max(12px,1em);
+    font-size: max(12px, 1em);
     font-weight: bold;
     padding: 10px 0;
+}
+
+.mainer .home-textpara2 {
+    color: rgb(0, 67, 204);
+    font-size: max(12px, 1em);
+    padding: 10px 0px 15px 0px;
+    font-family: Lora, Georgia, Cambria, Times, "Times New Roman", Serif;
 }
 
 .mainer .home-textpara a {
@@ -278,34 +284,93 @@ a:hover {
 }
 
 .footer #copyright {
-    font-family: "Alegreya SC","Felix Titling","Perpetua Titling MT",Georgia,Times,"Times New Roman",Serif;
+    font-family: "Alegreya SC", "Felix Titling", "Perpetua Titling MT", Georgia, Times, "Times New Roman", Serif;
     color: #005999;
     text-align: center;
 }
 
 
 /*Sudoku*/
-.gameBox-holder{
+#text-input-holder{
+    display: flex;
+    flex-basis: 470px;
+    flex-wrap: wrap;
+}
+#text-input-holder .text-input-button{
+    font-family: Lora, Georgia, Cambria, Times, "Times New Roman", Serif;
+    font-size: max(1.25em,12px);
+    background-color: #0079fa;
+    color: white;
+    border-radius: 45px;
+    padding: 10px 20px;
+    text-align: center;
+    flex-basis: 100%;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+@media only screen and (max-width: 500px) {
+    #text-input-holder .text-input-button{
+        font-size: max(1em,12px);
+    }
+}
+#text-input-holder .text-fill-input-button{
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+
+}
+#text-input-holder #fill-sudoku-button{
+    font-family: Lora, Georgia, Cambria, Times, "Times New Roman", Serif;
+    font-size: max(1em,12px);
+    background-color: rgb(1, 50, 99);
+    color: white;
+    flex-basis: 70px;
+    border-radius: 50%;
+    text-align: center;
+    padding: 10px 5px 0px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 70px;
+    vertical-align: center;
+}
+#text-input-holder input{
+    width: 100%;
+    height: 25px;
+    border: 1px solid blue;
+    margin: 10px 10px 10px 0px;
+    font-family: Lora, Georgia, Cambria, Times, "Times New Roman", Serif;
+    flex-basis: 200px;
+    flex-grow: 1;
+    flex-shrink: 1;
+    border-radius: 30px;
+    height: 30px;
+}
+
+
+.gameBox-holder {
     margin: 25px 0px;
     display: flex;
     justify-content: center;
 }
-.gameBox-holder .gameBox{
+
+.gameBox-holder .gameBox {
     flex-basis: 450px;
     flex-shrink: 1;
     flex-grow: 0;
     flex-wrap: nowrap;
 }
-.gameBox-holder .gameBox .sudoku-box-row{
+
+.gameBox-holder .gameBox .sudoku-box-row {
     flex-basis: 450px;
     flex-grow: 0;
     flex-shrink: 1;
     display: flex;
     flex-wrap: nowrap;
 }
-.gameBox .input-elem{
-    height: min(50px,10vw);
-    width: min(50px,10vw);
+
+.gameBox .input-elem {
+    height: min(50px, 10vw);
+    width: min(50px, 10vw);
     margin: 0px;
     padding: 0;
     border: none;
@@ -317,71 +382,76 @@ a:hover {
     flex-shrink: 1;
 
 }
-.gameBox input::-webkit-calendar-picker-indicator{
+
+@media only screen and (max-width: 600px) {
+    .gameBox .input-elem {
+        font-size: max(1em, 10px);
+    }
+}
+
+.gameBox input::-webkit-calendar-picker-indicator {
     display: none;
 }
-.gameBox .outer-top{
+
+.gameBox .outer-top {
     border-top: 2px solid #0043cc;
 }
-.gameBox .outer-right{
+
+.gameBox .outer-right {
     border-right: 2px solid #0043cc;
 }
-.gameBox .outer-bottom{
+
+.gameBox .outer-bottom {
     border-bottom: 2px solid #0043cc;
 }
-.gameBox .outer-left{
+
+.gameBox .outer-left {
     border-left: 2px solid #0043cc;
 }
 
-.gameBox .inner-top{
+.gameBox .inner-top {
     border-top: 1px solid #0047cc;
 }
-.gameBox .inner-right{
+
+.gameBox .inner-right {
     border-right: 1px solid #0047cc;
 }
-.gameBox .inner-bottom{
+
+.gameBox .inner-bottom {
     border-bottom: 1px solid #0047cc;
 }
-.gameBox .inner-left{
+
+.gameBox .inner-left {
     border-left: 1px solid #0047cc;
 }
-.mainer #buttons-holder{
-    display: flex;
-    justify-content: center;
-}
-.mainer #solve-button{
-    background-color: #33aaff;
-    color: rgb(246, 244, 255);
-    font-weight: bold;
-    font-family: Lora, Georgia, Cambria, Times, "Times New Roman", Serif;
-    font-size: max(16px,1.5em);
-    padding: 10px 20px;
-}
-.mainer #output .output-heading{
-    font-size: max(16px,1.5em);
-    font-family: Lora,Georgia,Cambria,Times,serif;
+
+.mainer #output .output-heading {
+    font-size: max(16px, 1.5em);
+    font-family: Lora, Georgia, Cambria, Times, serif;
     margin: 10px 0px;
     padding: 10px 0px;
     font-weight: bold;
     color: #830000;
 }
-.mainer #output .output-text{
-    font-size: max(12px,1.0em);
-    font-family: Lora,Georgia,Cambria,Times,serif;
+
+.mainer #output .output-text {
+    font-size: max(12px, 1.0em);
+    font-family: Lora, Georgia, Cambria, Times, serif;
     margin: 10px 0px;
     padding: 10px 0px;
     color: #9a9bb6;
 }
-.mainer #output #output-errors .output-error{
-    font-size: max(15px,1.25em);
-    font-family: Lora,Georgia,Cambria,Times,serif;
+
+.mainer #output #output-errors .output-error {
+    font-size: max(15px, 1.25em);
+    font-family: Lora, Georgia, Cambria, Times, serif;
     padding: 10px 0px;
     font-weight: bold;
     color: #003ee4;
 }
 
 
-#sudoku-box .options-box{
+#sudoku-box .options-box {
     position: absolute;
     border: 2px solid #5052b5;
     color: #002f5e;
@@ -392,14 +462,76 @@ a:hover {
     justify-content: center;
     background: white;
 }
-#sudoku-box #elem-options-holder .sudokuElem-number{
+
+
+
+#sudoku-box #elem-options-holder .sudokuElem-number {
     flex-basis: 100%;
     border: 1px dashed rgba(0, 62, 228, 0.11);
 }
-#sudoku-box .invisibleOptionsList{
+
+#sudoku-box .invisibleOptionsList {
     display: none;
 }
-#sudoku-box .visibleOptionsList{
+
+#sudoku-box .visibleOptionsList {
     display: block;
 }
 
+
+.mainer #buttons-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainer #buttons-holder #iteration-holder {
+    flex-basis: 470px;
+    flex-shrink: 1;
+    flex-grow: 0;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.mainer #solve-button {
+    /*background-color: #33aaff;*/
+    background-color: #0079fa;
+    color: rgb(246, 244, 255);
+    font-family: Lora, Georgia, Cambria, Times, "Times New Roman", Serif;
+    font-size: max(12px, 1.5em);
+    padding: 5px 10px;
+    border-radius: 40px;
+    text-align: center;
+    /* min-width: 75px; */
+    flex-basis: 100px;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+@media only screen and (max-width: 500px) {
+
+    .mainer #solve-button{
+        font-size: max(1em,12px);
+    }
+}
+
+.mainer #iteration-options-box {
+    flex-basis: 250px;
+    flex-grow: 0;
+    flex-shrink: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    color: rgb(0, 48, 97);
+    font-family: Lora, Georgia, Cambria, Times, "Times New Roman", Serif;
+    font-size: max(14px, 1.0em);
+    margin: 10px;
+}
+
+.mainer #iteration-options-holder .iteration-option {
+    flex-basis: 300px;
+    flex-grow: 1;
+    flex-shrink: 1;
+}

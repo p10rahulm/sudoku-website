@@ -78,12 +78,7 @@ function drawSudoku(inputSudoku,holdingBox,type) {
             if(j==8){elemDiv.classList.add("outer-right");}
             if(type=="div"){
                 elemDiv.innerHTML=allowedString;
-            } else {
-                elemDiv.setAttribute("size",1);
-                elemDiv.setAttribute("maxlength",1);
-                elemDiv.setAttribute("autocomplete","off");
             }
-
             row.appendChild(elemDiv);
         }
         outputBox.appendChild(row);
@@ -92,3 +87,17 @@ function drawSudoku(inputSudoku,holdingBox,type) {
     outputBox
 }
 
+function toggleDisplay(divID){
+    divtoToggle = document.getElementById(divID);
+    if(divtoToggle.classList.contains("active")){
+        divtoToggle.classList.remove("active");
+        divtoToggle.classList.add("inactive");
+        divtoToggle.innerText.replace("Enter","Hide");
+        divtoToggle.innerText.replace("see","hide");
+    } else if(divtoToggle.classList.contains("inactive")){
+        divtoToggle.classList.remove("inactive");
+        divtoToggle.classList.add("active");
+        divtoToggle.innerText.replace("Enter","Hide");
+        divtoToggle.innerText.replace("see","hide");
+    }
+}

@@ -1,4 +1,5 @@
 function inputfromText(){
+    console.log("input from text");
     const textInputDiv = document.getElementById("sudokuTextInput");
     const textinput =textInputDiv.value;
     const sBox = document.getElementById("sudoku-box");
