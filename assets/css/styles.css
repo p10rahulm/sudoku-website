@@ -146,7 +146,7 @@ a:hover {
 }
 
 
-.header .HeaderTitle-text {
+.header #HeaderTitle-text {
     vertical-align: center;
     padding-left: 10px;
 
@@ -155,7 +155,9 @@ a:hover {
     font-size: min(8vw, 2em);
     font-weight: bold;
 }
-
+.header .heading-link:hover{
+    text-decoration: none;
+}
 .header #navbar {
     text-align: center;
     display: flex;
@@ -261,8 +263,8 @@ a:hover {
 }
 
 .mainer .home-textpara2 {
-    color: rgb(154, 155, 182);
-    color: #d05a5a;
+    color: #d5673b;
+    /*color: #d05a5a;*/
     font-weight: bold;
     font-size: max(12px, 1em);
     padding: 10px 0px 15px 0px;

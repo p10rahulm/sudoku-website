@@ -78,9 +78,10 @@ function dfsCreatorSudoku() {
             updateIter(iteration,iterationLooper,i+2);
         }
         console.log("iteration=",iteration);
-        doFinishedProcessing(iteration.solvedSudoku, iteration,1, 0,verboseTimeResultOption,"Finished 10 iterations. Average time values below:" );
+        doFinishedProcessing(iteration.solvedSudoku, iteration,1, 0,verboseTimeResultOption );
     } else {
-        doFinishedProcessing(Sudoku, iteration,0, 1, 1);
+        doFinishedProcessing(Sudoku, iteration,0, 0, verboseTimeResultOption);
+
     }
 
 

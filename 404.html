@@ -38,17 +38,17 @@
 <body onload="start()">
 <div class="container">
     <div class="header container-element">
-        <div class="HeaderTitle-text">Sudoku Solver</div>
+        <div id="HeaderTitle-text"><a class="heading-link" href="http://www.sudokusolver.in"> Sudoku Solver</a></div>
 
         <div id="navbar" class="header-elem">
-            <div id="navbar-Home" class="navbar-active navbar_button" onclick="clickNav(this.id);setHash(this.id)">
-                Home
+            <div id="navbar-Home" class="navbar-active navbar_button">
+                <a href="/">Game</a>
             </div>
-            <div id="navbar-Students" class="navbar_button" onclick="clickNav(this.id);setAbstracts();setHash(this.id)">
-                About
+            <div id="navbar-Students" class="navbar_button">
+                <a href="/solver.html">Solver</a>
             </div>
-            <div id="navbar-Labs" class="navbar_button" onclick="clickNav(this.id);setHash(this.id)">
-                Labs
+            <div id="navbar-Labs" class="navbar_button">
+                <a href="/about.html">About</a>
             </div>
 
         </div>
@@ -66,7 +66,7 @@
 
 
     </div>
-    <div class="footer container-element" onclick="dfsCreatorSudoku()">
+    <div class="footer container-element">
         <div id="copyright">
             &copy; 2020 <a href="http://www.thinkingtree.me/" target="_blank">Developed by Rahul Madhavan</a>,
         </div>
@@ -76,20 +76,7 @@
 </div>
 
 
-<script type="text/javascript" defer>
-    WebFontConfig = {
-        google: {
-            families: ['Lora', 'Open Sans', 'Alegreya SC']
-        }
-    };
 
-    (function (d) {
-        var wf = d.createElement('script'), s = d.scripts[0];
-        wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
-        wf.async = true;
-        s.parentNode.insertBefore(wf, s);
-    })(document);
-</script>
 
 </body>
 </html>

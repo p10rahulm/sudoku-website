@@ -35,7 +35,7 @@
 <body>
 <div class="container">
     <div class="header container-element">
-        <div class="HeaderTitle-text">Sudoku Solver</div>
+        <div id="HeaderTitle-text"><a class="heading-link" href="http://www.sudokusolver.in"> Sudoku Solver</a></div>
 
         <div id="navbar" class="header-elem">
             <div id="navbar-Home" class="navbar-active navbar_button">
@@ -58,21 +58,33 @@
             <div class="home-textpara">
                 The algorithm can be broken into three parts:
                 <ul>
-                    <li onclick="toggleDisplay('about-state');undisplay('about-update');undisplay('about-solution');">State &#9660</li>
-                    <li onclick="toggleDisplay('about-update');undisplay('about-state');undisplay('about-solution');">Update Step &#9660</li>
-                    <li onclick="toggleDisplay('about-solution');undisplay('about-update');undisplay('about-state');">Solving the Sudoku &#9660</li>
+                    <li onclick="toggleDisplay('about-state');undisplay('about-update');undisplay('about-solution');">
+                        State &#9660
+                    </li>
+                    <li onclick="toggleDisplay('about-update');undisplay('about-state');undisplay('about-solution');">
+                        Update Step &#9660
+                    </li>
+                    <li onclick="toggleDisplay('about-solution');undisplay('about-update');undisplay('about-state');">
+                        Solving the Sudoku &#9660
+                    </li>
                 </ul>
                 Click on any of the parts to know more
             </div>
             <div id="about-state" class="inactive home-textpara2">
                 <div class="home-header2">State</div>
-                    The state that we maintain consists of a
-                    <ul>
-                        <li onclick="toggleDisplay('about-game-global');undisplay('about-working-values');undisplay('about-heap');">A Game Global &#9660</li>
-                        <li onclick="toggleDisplay('about-working-values');undisplay('about-game-global');undisplay('about-heap');">Sudoku Working Values &#9660</li>
-                        <li onclick="toggleDisplay('about-heap');undisplay('about-working-values');undisplay('about-game-global');">Process Next Queue &#9660</li>
-                    </ul>
-                    <div class="home-textpara3">
+                The state that we maintain consists of a
+                <ul>
+                    <li onclick="toggleDisplay('about-game-global');undisplay('about-working-values');undisplay('about-heap');">
+                        A Game Global &#9660
+                    </li>
+                    <li onclick="toggleDisplay('about-working-values');undisplay('about-game-global');undisplay('about-heap');">
+                        Sudoku Working Values &#9660
+                    </li>
+                    <li onclick="toggleDisplay('about-heap');undisplay('about-working-values');undisplay('about-game-global');">
+                        Process Next Queue &#9660
+                    </li>
+                </ul>
+                <div class="home-textpara3">
                     <div id="about-game-global" class="inactive">
                         <div class="home-header3">Game Global</div>
                         Game global, which contains meta about what are the adjacent
@@ -99,7 +111,7 @@
                         <br><br>
                         Now that we have the priority and the index, we could have created a node which stores the
                         sorts based on priority and holds the value. But we can do still better by coding the element
-                        as a 3 digit number: the first digit being the priority  and the second and third being the
+                        as a 3 digit number: the first digit being the priority and the second and third being the
                         index. Thus index 15 having priority 3 is coded 315.
                         <br><br>
                         Our Process-Next queue is a priority queue which we have implemented with the primitive
@@ -113,18 +125,22 @@
                         copying the entire heap is inexpensive and we don't pay too much for holding an extra value.
                         Also if after processing 215, we get to 315, we don't spend any extra time processing it.
                     </div>
-                    </div>
+                </div>
 
 
             </div>
             <div class="inactive  home-textpara2" id="about-update">
                 <div class="home-header2">Updates</div>
-                    There are two parts to the update step.
-                    <ul>
-                        <li onclick="toggleDisplay('user-input-updates');undisplay('solution-updates');">During User Input &#9660</li>
-                        <li onclick="toggleDisplay('solution-updates');undisplay('user-input-updates');">During Solving &#9660</li>
-                    </ul>
-                    <div class="home-textpara3">
+                There are two parts to the update step.
+                <ul>
+                    <li onclick="toggleDisplay('user-input-updates');undisplay('solution-updates');">During User Input
+                        &#9660
+                    </li>
+                    <li onclick="toggleDisplay('solution-updates');undisplay('user-input-updates');">During Solving
+                        &#9660
+                    </li>
+                </ul>
+                <div class="home-textpara3">
                     <div id="user-input-updates" class="inactive">
                         <div class="home-header3">Updates during user input</div>
                         When the user is inputting states, we allow the user to only input some elements, which means
@@ -166,42 +182,93 @@
                         directions as we still are provided with only 1 thread on which to do the processing.
                     </div>
 
-                    </div>
                 </div>
             </div>
-            <div class="inactive  home-textpara2" id="about-solution">
-                <div class="home-header2">Solving</div>
-                <div class="home-textpara">
-                    For solution we use branch
-                    <ul>
-                        <li onclick="toggleDisplay('solution-techniques');undisplay('solution-variables');">Solution Techniques &#9660</li>
-                        <li onclick="toggleDisplay('solution-variables');undisplay('solution-techniques');">Solution Variables &#9660</li>
-                    </ul>
-                </div>
-                <div class="home-textpara3">
+        </div>
+        <div class="inactive  home-textpara2" id="about-solution">
+            <div class="home-header2">Solving</div>
+            <div class="home-textpara2">
+                For solution we use branch
+                <ul>
+                    <li onclick="toggleDisplay('solution-techniques');undisplay('solution-variables');">Solution
+                        Techniques &#9660
+                    </li>
+                    <li onclick="toggleDisplay('solution-variables');undisplay('solution-techniques');">Solution
+                        Variables &#9660
+                    </li>
+                </ul>
+            </div>
+            <div class="home-textpara3">
                 <div id="solution-techniques" class="inactive">
                     <div class="home-header3">Solution Technique</div>
-                    Game global, which contains meta about what are the adjacent
-                    elements to any given element - in it's row, in it's column and in it's box.
+                    The solution technique we have to solve the Sudoku is prioritized DFS with backtracking. Now
+                    let us go over each of these terms
+                    <br><br>
+                    So first step of this solution happens as the user is inputting the numbers of the Sudoku. At this
+                    stage a first level check on the elements on the same row, column and box not having the same
+                    number is done. Due to this pre-check, we already have some degree of processing in our hands.
+                    Though in terms of processing time this is not high, in terms of the user input incorrect numbers
+                    by mistake, we already have a better interface in terms of usability.
+                    <br><br>
+                    Post this stage, we may have some some elements which have just 1 possiblility waiting in a
+                    processed list. Apart from that all others have 2 or more "available-choices" which are stored
+                    in a heap in order of priority. Therefore we pick up the top element index from this above list
+                    and "add" it to the sudoku. When we add an element, we check its neighbours for the value and
+                    remove them through a binary and operation. Thus to remove the possibility of 3 from a list of
+                    available choices 1 through 9, we just take 511 & ~4. Note that ~4 gives us negation of 4 (switching
+                    ones for zeros and vice versa) and 4 is 2^(3-1), our representation of 3.
+                    <br><br>
+                    After such simple updates are done, we may find that we don't have any possible values to "simple-
+                    update". Then we go into the heap to look for an element which we can combinatorially evaluate.
+                    We get such an index using del-min operation. Note that our encoding was 3 digit with first letter
+                    for priority. Thus elem index 27 with priority 5 would be 527. We appropriately remove such an index
+                    and retrieve its available choice encoding. Such a choice would be a number which has 5 ones in its
+                    binary representation. We obtain the digits through binary operations. We would then, in this case
+                    take 5 copies of the original Sudoku object and insert the 5 choices into the appropriate
+                    index (27). Once this is done, we add these new Sudokus to a Sudoku Holder Stack.
+                    <br><br>
+                    The sudoku holder stack consists of all the sudoku's that we want to combinatorially look at. Since
+                    we are using a stack rather than a queue, we are looking to simulate DFS rather than BFS. Further,
+                    since we are choosing where to explore through a priority list, we can call this a prioritized DFS
+                    <br><br>
+                    While we attempt simple checks on the Sudoku according to the neighbours, since the Integer program
+                    is quite complex, we will often run into contradictions during our search for the solution. Such
+                    contradictions appear when we have no possible entry for a particular element. In such a case, we
+                    mark the contradiction in the particular Sudoku object and <b>backtrack</b> to a previous node
+                    in our graph of Sudoku solution searches. Thus our solution search method may be called as
+                    backtracking prioritized DFS search.
+                    <br><br>
+                    The implementation of the solver at this stage was initially recursive. But the recursive program
+                    was prone to stack overflows and also to excess time possibly due to function switch time. Thus
+                    we have coded the DFS search as an iterative program for speed benefits
                 </div>
                 <div id="solution-variables" class="inactive">
                     <div class="home-header3">State variables associated with the solution</div>
                     We store a class for the iteration associated with the solution. Since this is a class, there can
-                    be many instances. We use such programming methods to do averaging of multiple solutions.
-                </div>
+                    be many instances. We use such programming methods to do averaging of multiple solutions.Note that
+                    the iteration is a class instance used to store all kinds of variables associated with
+                    the program. In particular, we use it to store times associated with various parts of the program.
+                    <br><br>
+                    Since the basic idea is to optimize the speed to the extent possible, we have optimized one of
+                    the largest time taking areas of the code, viz. copying the Sudoku object. For this reason, we
+                    looked at various objects getting copied and found that array copy is fastest through the
+                    slice(0) method. While both arr[index] and hashmap[index] get us the required value in constant
+                    time, we find that creating a cloning of an array is much faster than cloning of what in js
+                    is known as an associative array.
                 </div>
             </div>
-
-        </div>
-
-        <div class="footer container-element">
-            <div id="copyright">
-                &copy; 2020 <a href="http://www.thinkingtree.me/" target="_blank">Developed by Rahul Madhavan</a>,
-            </div>
-
         </div>
 
     </div>
+
+    <div class="footer container-element">
+        <div id="copyright">
+            &copy; 2020 <a href="http://www.thinkingtree.me/" target="_blank">Developed by Rahul Madhavan</a>,
+        </div>
+
+    </div>
+
+</div>
 </div>
 <script type="text/javascript" defer>
     function toggleDisplay(divID) {
@@ -218,9 +285,10 @@
             divtoToggle.innerText.replace("see", "hide");
         }
     }
-    function undisplay(divID){
+
+    function undisplay(divID) {
         const divtoUndisplay = document.getElementById(divID);
-        if(divtoUndisplay.classList.contains("active")){
+        if (divtoUndisplay.classList.contains("active")) {
             divtoUndisplay.classList.remove("active");
             divtoUndisplay.classList.add("inactive");
         }

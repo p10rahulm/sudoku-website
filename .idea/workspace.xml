@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="74631bf2-b197-47e6-a7fe-3448746f7870" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/404.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/about.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/solver.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/solver.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,10 +98,10 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2478" y="146" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1589179626496" />
-    <state x="2576" y="278" width="1092" height="592" key="find.popup" timestamp="1589202655687">
+    <state x="2576" y="278" width="1092" height="592" key="find.popup" timestamp="1589233464821">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2576" y="278" width="1092" height="592" key="find.popup/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1589202655687" />
+    <state x="2576" y="278" width="1092" height="592" key="find.popup/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1589233464821" />
     <state x="2536" y="250" key="run.anything.popup" timestamp="1589011655509">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
