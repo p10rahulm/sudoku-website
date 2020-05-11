@@ -235,7 +235,7 @@ a:hover {
 .mainer .home-header2 {
     font-family: "Lora", Georgia, Cambria, Times, "Times New Roman", Serif;
     /*color: rgba(0, 67, 204, 0.85);*/
-    color: rgba(0, 67, 204, 0.85);
+    color: rgba(54, 106, 211, 0.85);
     font-size: max(16px, 1.5em);
     font-weight: bold;
     padding-top: 15px;
@@ -245,7 +245,8 @@ a:hover {
 .mainer .home-header3 {
     font-family: "Lora", Georgia, Cambria, Times, "Times New Roman", Serif;
     /*color: rgba(0, 67, 204, 0.85);*/
-    color: rgba(200, 0, 160, 0.85);
+    /*color: rgba(200, 0, 160, 0.85);*/
+    color: #59c075;
     font-size: max(16px, 1.25em);
     font-weight: bold;
     padding-top: 10px;
@@ -260,10 +261,20 @@ a:hover {
 }
 
 .mainer .home-textpara2 {
-    color: rgb(0, 67, 204);
+    color: rgb(154, 155, 182);
+    color: #d05a5a;
+    font-weight: bold;
     font-size: max(12px, 1em);
     padding: 10px 0px 15px 0px;
     font-family: Lora, Georgia, Cambria, Times, "Times New Roman", Serif;
+}
+
+.mainer .home-textpara3 {
+    color: rgb(59, 140, 213);
+    font-size: max(12px, 1em);
+    padding: 10px 0px 15px 0px;
+    font-family: Lora, Georgia, Cambria, Times, "Times New Roman", Serif;
+    font-weight: 400;
 }
 
 .mainer .home-textpara a {
@@ -313,12 +324,16 @@ a:hover {
         font-size: max(1em,12px);
     }
 }
+#text-input-hideshow{
+    width: 100%;
+}
 #text-input-holder .text-fill-input-button{
     margin-top: 15px;
     display: flex;
     align-items: center;
 
 }
+
 #text-input-holder #fill-sudoku-button{
     font-family: Lora, Georgia, Cambria, Times, "Times New Roman", Serif;
     font-size: max(1em,12px);

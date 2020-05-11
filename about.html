@@ -58,46 +58,139 @@
             <div class="home-textpara">
                 The algorithm can be broken into three parts:
                 <ul>
-                    <li>the state that's maintained</li>
-                    <li>the update step when adding a new number</li>
-                    <li>solving steps</li>
+                    <li onclick="toggleDisplay('about-state');undisplay('about-update');undisplay('about-solution');">State &#9660</li>
+                    <li onclick="toggleDisplay('about-update');undisplay('about-state');undisplay('about-solution');">Update Step &#9660</li>
+                    <li onclick="toggleDisplay('about-solution');undisplay('about-update');undisplay('about-state');">Solving the Sudoku &#9660</li>
                 </ul>
-                We will go into each of these by parts
+                Click on any of the parts to know more
             </div>
-            <div class="home-header2">State</div>
-            <div class="home-textpara">
-                The state that we maintain consists of a
-                <ul>
-                    <li>A Game Global</li>
-                    <li>Sudoku Working Values</li>
-                    <li>Process Next Queue</li>
-                </ul>
-                <div class="home-header3">Game Global</div>
-                Game global, which contains meta about what are the adjacent
-                elements to any given element - in it's row, in it's column and in it's box.
-                <div class="home-header3">Sudoku Working Values</div>
-                Sudoku working values are maintained as numbers from 1 to 511 representing each of the 2^11 options
-                that a single cell can take. Think of this as a 9 length array of the form [1,0,0,0,1,0,1,1,1] which
-                means that the cell can take values 9,5,3,2,and 1. This state is translated in binary as 279 and this
-                is the state of the cell. This is stored in an array. This makes it easier to perform operations as
-                we use bitwise operators to remove and add elements to such arrays.
-                <div class="home-header3">Process Next Queue</div>
-                Our Process-Next list consists of 2 queues. One is an
-                immediate process stack, where we have elements that can take up only 1 value.
-                The other is a priority heap where we store the next value to iterate.
+            <div id="about-state" class="inactive home-textpara2">
+                <div class="home-header2">State</div>
+                    The state that we maintain consists of a
+                    <ul>
+                        <li onclick="toggleDisplay('about-game-global');undisplay('about-working-values');undisplay('about-heap');">A Game Global &#9660</li>
+                        <li onclick="toggleDisplay('about-working-values');undisplay('about-game-global');undisplay('about-heap');">Sudoku Working Values &#9660</li>
+                        <li onclick="toggleDisplay('about-heap');undisplay('about-working-values');undisplay('about-game-global');">Process Next Queue &#9660</li>
+                    </ul>
+                    <div class="home-textpara3">
+                    <div id="about-game-global" class="inactive">
+                        <div class="home-header3">Game Global</div>
+                        Game global, which contains meta about what are the adjacent
+                        elements to any given element - in it's row, in it's column and in it's box.
+                    </div>
+                    <div id="about-working-values" class="inactive">
+                        <div class="home-header3">Sudoku Working Values</div>
+                        Sudoku working values are maintained as numbers from 1 to 511 representing each of the 2^11
+                        options that a single cell can take.
+                        <br><br>
+                        Think of this as a 9 length array of the form
+                        [1,0,0,0,1,0,1,1,1] which means that the cell can take values 9,5,3,2,and 1. This state is
+                        translated in binary as 279 and this is the state of the cell. This is stored in an array. This
+                        makes it easier to perform operations as we use bitwise operators to remove and add elements to
+                        such arrays.
+                    </div>
+                    <div id="about-heap" class="inactive">
+                        <div class="home-header3">Process Next Queue</div>
+                        First we look at how we store items in the process next queue. We have items indices from 0-80
+                        and priorities from 1 to 9 based on the number of digits that the particular cell can take.
+                        Thus if the priority is 1, then the cell can hold only 1 value and priority is 9 then
+                        the cell can take all 9 possible values. We get the priority by counting the number of bits
+                        in the working value.
+                        <br><br>
+                        Now that we have the priority and the index, we could have created a node which stores the
+                        sorts based on priority and holds the value. But we can do still better by coding the element
+                        as a 3 digit number: the first digit being the priority  and the second and third being the
+                        index. Thus index 15 having priority 3 is coded 315.
+                        <br><br>
+                        Our Process-Next queue is a priority queue which we have implemented with the primitive
+                        data structure of the heap. Since the main operations we are interested in is to get the
+                        least value element, we can keep adding elements to the heap. The cheap operations in the
+                        heap are delete min which takes O(log(n)) and addition to heap which also takes O(log(n)).
+                        The third operation which we should do is to delete elements whose priority changes. Thus
+                        if index 15 has priority 3, but due to some other element in same row, one of the possibilities
+                        is eliminated, it's priority changes to 2. Then the heap should change 315 to 215. In this
+                        case, we don't actually delete 315, but let it remain on the heap. The reason is that
+                        copying the entire heap is inexpensive and we don't pay too much for holding an extra value.
+                        Also if after processing 215, we get to 315, we don't spend any extra time processing it.
+                    </div>
+                    </div>
+
 
             </div>
-            <div class="home-header2">Updates</div>
-            <div class="home-textpara">
-                The update steps are different for when a new element is added and when we are solving. When we are
-                solving, then when a new element is added, we add it to the to be processed list.
-            </div>
-            <div class="home-header2">Solving</div>
-            <div class="home-textpara">
-                For solution we use branch
-            </div>
+            <div class="inactive  home-textpara2" id="about-update">
+                <div class="home-header2">Updates</div>
+                    There are two parts to the update step.
+                    <ul>
+                        <li onclick="toggleDisplay('user-input-updates');undisplay('solution-updates');">During User Input &#9660</li>
+                        <li onclick="toggleDisplay('solution-updates');undisplay('user-input-updates');">During Solving &#9660</li>
+                    </ul>
+                    <div class="home-textpara3">
+                    <div id="user-input-updates" class="inactive">
+                        <div class="home-header3">Updates during user input</div>
+                        When the user is inputting states, we allow the user to only input some elements, which means
+                        we are maintaining the list of allowed elements per cell. We store the list of allowed elements
+                        as a bit array which is encoded into a number.
+                        <br><br>
+                        For instance, if the list of allowed elements in a particular cell is 2, 3, 5 and 9, we have
+                        the corresponding bit array as [1,0,0,0,1,0,1,1,0]. This can be encoded as the number 278
+                        which is 2^8+2^4+2^2+2^1. This makes it easy for us to do binary operations.
+                        <br><br>
+                        When a user adds a new number, we have a fixed value in that cell now. Thus we can encode that
+                        cell as 2^(number-1). Now we can also eliminate the possibility that the number exists in any
+                        of it's neighboring cells in it's (1) row (2) column and (3) box. Further after multiple such
+                        deletions some element may itself have only one possible number left. In such case we can add
+                        it to a queue for processing. But we don't do this step until the solution has started in case
+                        the user decides to delete a number.
+                        <br><br>
+                        When the user adds a number we bitwise-and it with it's neighbours. When a user deletes a number
+                        that existed, we bitwise-or that number with it's neighbours
+                        <br><br>
+                        Finally we also have to account for the heap where neighbouring elements that have some of their
+                        values deleted have to move further up the heap. This is a simple operation that takes O(log(n))
+                        time on the heap.
+                    </div>
+                    <div id="solution-updates" class="inactive">
+                        <div class="home-header3">Updates during solving sudoku</div>
+                        All the update steps that are done when user is inputting values are also done when the
+                        sudoku is getting solved.
+                        <br><br>
+                        In addition, at any point where we are not further able to continue processing of the sudoku
+                        using simple steps, we also do combinatorial testing of cells to take on various values. The
+                        major test here is to not do a naive combinatorial test and instead we use the priority heap
+                        the highest priority (min-bits in allowed bit-encoding) cell is taken up and we fix a value
+                        and test further as to other values in the Sudoku
+                        <br><br>
+                        Note that since the depth of the sudoku may be extremely large, we take up a prioritized
+                        depth first search rather than a breadth first search as BFS may take up too much memory. We
+                        have also chosen not to take up parallelization like dynamic programming exploring all
+                        directions as we still are provided with only 1 thread on which to do the processing.
+                    </div>
 
-
+                    </div>
+                </div>
+            </div>
+            <div class="inactive  home-textpara2" id="about-solution">
+                <div class="home-header2">Solving</div>
+                <div class="home-textpara">
+                    For solution we use branch
+                    <ul>
+                        <li onclick="toggleDisplay('solution-techniques');undisplay('solution-variables');">Solution Techniques &#9660</li>
+                        <li onclick="toggleDisplay('solution-variables');undisplay('solution-techniques');">Solution Variables &#9660</li>
+                    </ul>
+                </div>
+                <div class="home-textpara3">
+                <div id="solution-techniques" class="inactive">
+                    <div class="home-header3">Solution Technique</div>
+                    Game global, which contains meta about what are the adjacent
+                    elements to any given element - in it's row, in it's column and in it's box.
+                </div>
+                <div id="solution-variables" class="inactive">
+                    <div class="home-header3">State variables associated with the solution</div>
+                    We store a class for the iteration associated with the solution. Since this is a class, there can
+                    be many instances. We use such programming methods to do averaging of multiple solutions.
+                </div>
+                </div>
+            </div>
 
         </div>
 
@@ -111,18 +204,27 @@
     </div>
 </div>
 <script type="text/javascript" defer>
-    WebFontConfig = {
-        google: {
-            families: ['Lora', 'Open Sans', 'Alegreya SC']
+    function toggleDisplay(divID) {
+        const divtoToggle = document.getElementById(divID);
+        if (divtoToggle.classList.contains("active")) {
+            divtoToggle.classList.remove("active");
+            divtoToggle.classList.add("inactive");
+            divtoToggle.innerText.replace("Enter", "Hide");
+            divtoToggle.innerText.replace("see", "hide");
+        } else if (divtoToggle.classList.contains("inactive")) {
+            divtoToggle.classList.remove("inactive");
+            divtoToggle.classList.add("active");
+            divtoToggle.innerText.replace("Enter", "Hide");
+            divtoToggle.innerText.replace("see", "hide");
         }
-    };
-
-    (function (d) {
-        var wf = d.createElement('script'), s = d.scripts[0];
-        wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
-        wf.async = true;
-        s.parentNode.insertBefore(wf, s);
-    })(document);
+    }
+    function undisplay(divID){
+        const divtoUndisplay = document.getElementById(divID);
+        if(divtoUndisplay.classList.contains("active")){
+            divtoUndisplay.classList.remove("active");
+            divtoUndisplay.classList.add("inactive");
+        }
+    }
 </script>
 
 </body>
