@@ -70,7 +70,7 @@ function powerofTwo(power) {
 
 
 function isSudokuDone(sudokuInput) {
-    if(globalDone){
+    if(solutionFound){
         return true;
     }
     let done = true;
@@ -81,8 +81,8 @@ function isSudokuDone(sudokuInput) {
     }
     return done;
 }
-function isSudokuDoneHeap(sudokuInput) {
-    if(globalDone||sudokuInput.numProcessed>=81){
+function isSudokuDoneHeap(sudokuInput,iteration) {
+    if(iteration.solutionFound||sudokuInput.numProcessed>=81){
         return true;
     }
 

@@ -9,7 +9,7 @@ Game = {};
 Sudoku = {};
 finalInputArray = [];
 sudokuElemOptionsShowing = false;
-globalDone = false;
+solutionFound = false;
 
 
 
@@ -17,7 +17,7 @@ function start() {
     buildSudoku();
     setIDs();
     createChoiceDivs();
-    startIter = new Iteration();
+
 }
 
 function createChoiceDivs() {
@@ -51,6 +51,7 @@ function buildSudoku() {
     }
     createNewSudokuHeap(sudokuInputArray);
     buildGameIndices();
+    startIter = new Iteration(Sudoku);
     // console.log("Sudoku = ", Sudoku);
 }
 

@@ -1,7 +1,7 @@
 /*
     * We will solve the sudoku using DFS guesses starting with the least index in workElemIndicesByLength
 */
-function copySudokuHeap(inputSudoku,iteration) {
+function copySudokuHeap(inputSudoku, iteration) {
     const copyTotalTS = performance.now();
     const copyinitTS = performance.now();
     const newSudoku = {};
@@ -56,22 +56,60 @@ function copySudoku(inputSudoku) {
 
 function dfsCreatorSudoku() {
 
-    iteration = new Iteration();
+    iteration = new Iteration(Sudoku);
     console.log("iteration", iteration);
-    const sudoFirstCopy = copySudokuHeap(Sudoku,iteration);
-    let sudokusHolder = [];
+    const sudoFirstCopy = copySudokuHeap(Sudoku, iteration);
+    const sudokusHolder = [];
     sudokusHolder.push(sudoFirstCopy);
 
     // runDFSSudokuRecursive(sudokusHolder);
-    runDFSSudokuIterativeHeap(sudokusHolder,iteration);
+    iteration = runDFSSudokuIterativeHeap(sudokusHolder, iteration);
+    if(iteration.solutionFound){
+        for (let i=0;i<10;i++){
+            const iterationLooper = new Iteration(Sudoku);
+            const sudoFirstCopy = copySudokuHeap(Sudoku, iteration);
+            const sudokusHolder = [];
+            sudokusHolder.push(sudoFirstCopy);
+            runDFSSudokuIterativeHeap(sudokusHolder, iterationLooper);
+            updateIter(iteration,iterationLooper,i+2);
+        }
+        doFinishedProcessing(iteration.solvedSudoku, iteration,1, 0,1,"Finished 10 iterations" );
+    } else {
+        doFinishedProcessing(Sudoku, iteration,0, 1, 1);
+    }
+
 
 }
+function updateIter(iteration,newAddition,additionCount){
+    iteration.numIterations +=1;
+    iteration.stackdepth = (additionCount-1)*iteration.stackdepth/additionCount + 1/additionCount*newAddition.stackdepth;
+    iteration.leastIndexIterationtimeTaken = (additionCount-1)*iteration.leastIndexIterationtimeTaken/additionCount + 1/additionCount*newAddition.leastIndexIterationtimeTaken;
+    iteration.copytimetaken = (additionCount-1)*iteration.copytimetaken/additionCount + 1/additionCount*newAddition.copytimetaken;
+    iteration.copyworkElemArrayTT = (additionCount-1)*iteration.copyworkElemArrayTT/additionCount + 1/additionCount*newAddition.copyworkElemArrayTT;
+    iteration.copyworkElemIndicesByLengthTT = (additionCount-1)*iteration.copyworkElemIndicesByLengthTT/additionCount + 1/additionCount*newAddition.copyworkElemIndicesByLengthTT;
+    iteration.copyprocessedTT = (additionCount-1)*iteration.copyprocessedTT/additionCount + 1/additionCount*newAddition.copyprocessedTT;
+    iteration.copyinitTT = (additionCount-1)*iteration.copyinitTT/additionCount + 1/additionCount*newAddition.copyinitTT;
+    iteration.copycontradictionTT = (additionCount-1)*iteration.copycontradictionTT/additionCount + 1/additionCount*newAddition.copycontradictionTT;
+    iteration.copyTotalTT = (additionCount-1)*iteration.copyTotalTT/additionCount + 1/additionCount*newAddition.copyTotalTT;
+    iteration.updateWEIBLTimeTaken = (additionCount-1)*iteration.updateWEIBLTimeTaken/additionCount + 1/additionCount*newAddition.updateWEIBLTimeTaken;
+    iteration.updateAdditionForElemsTimeTaken = (additionCount-1)*iteration.updateAdditionForElemsTimeTaken/additionCount + 1/additionCount*newAddition.updateAdditionForElemsTimeTaken;
+    iteration.addinputSudokuTT = (additionCount-1)*iteration.addinputSudokuTT/additionCount + 1/additionCount*newAddition.addinputSudokuTT;
+    iteration.AddInputTT = (additionCount-1)*iteration.AddInputTT/additionCount + 1/additionCount*newAddition.AddInputTT;
+    iteration.skpushTT = (additionCount-1)*iteration.skpushTT/additionCount + 1/additionCount*newAddition.skpushTT;
+    iteration.flTT = (additionCount-1)*iteration.flTT/additionCount + 1/additionCount*newAddition.flTT;
+    iteration.poppingTT = (additionCount-1)*iteration.poppingTT/additionCount + 1/additionCount*newAddition.poppingTT;
+    iteration.afterIsDoneTT = (additionCount-1)*iteration.afterIsDoneTT/additionCount + 1/additionCount*newAddition.afterIsDoneTT;
+    iteration.totalRunDFSTT = (additionCount-1)*iteration.totalRunDFSTT/additionCount + 1/additionCount*newAddition.totalRunDFSTT;
+    iteration.nflTT = (additionCount-1)*iteration.nflTT/additionCount + 1/additionCount*newAddition.nflTT;
+    iteration.AddInputDirectLoopTT = (additionCount-1)*iteration.AddInputDirectLoopTT/additionCount + 1/additionCount*newAddition.AddInputDirectLoopTT;
+    iteration.hitsDelete = (additionCount-1)*iteration.hitsDelete/additionCount + 1/additionCount*newAddition.hitsDelete;
 
+}
 class Iteration {
-    constructor() {
+    constructor(Sudoku) {
         this.startTime = performance.now();
         this.stackdepth = 0;
-        this.globalDone = false;
+        this.solutionFound = false;
 
         this.leastIndexIterationtimeTaken = 0;
         this.copytimetaken = 0;
@@ -94,7 +132,9 @@ class Iteration {
         this.AddInputDirectLoopTT = 0;
 
 
-        this.hitsDelete = 0;
+        this.numIterations = 0;
+        this.solutionFound = 0;
+        this.solvedSudoku = Sudoku;
     }
 
 }
@@ -109,12 +149,12 @@ function runDFSSudokuRecursive(sudokuHolder) {
     // drawSudoku(runningSudoku,document.getElementById("output-boxes"),"div");
     // console.log("sudokuHolder popped current sudokuHolder = ", sudokuHolder);
     // console.log("sudoku popped  = ",runningSudoku);
-    if (globalDone) {
+    if (solutionFound) {
         return;
     }
     if (isSudokuDone(runningSudoku)) {
         afterIsDoneTS = performance.now();
-        globalDone = true;
+        solutionFound = true;
         const timeTaken = performance.now() - startTime;
         // console.log("sudokuis done! sudokuInput=", runningSudoku)
         const holder = document.getElementById("output-boxes");
@@ -186,7 +226,7 @@ function runDFSSudokuRecursive(sudokuHolder) {
     // console.log("availableChoices=",availableChoices);
     nflTT += performance.now() - nflTS;
     flTS = performance.now();
-    for (let choiceIndex = 0; choiceIndex < availableChoices.length && !globalDone; choiceIndex++) {
+    for (let choiceIndex = 0; choiceIndex < availableChoices.length && !solutionFound; choiceIndex++) {
         // console.log("choiceIndex=",choiceIndex);
         const choice = availableChoices[choiceIndex];
         // console.log("choice=",choice);
@@ -210,11 +250,11 @@ function runDFSSudokuRecursive(sudokuHolder) {
 
 }
 
-function runDFSSudokuIterativeHeap(sudokuHolder,iteration) {
+function runDFSSudokuIterativeHeap(sudokuHolder, iteration) {
     const totalRunDFSTS = performance.now();
     let times = 0;
-    // while (sudokuHolder.length != 0 && !globalDone && times<5000){
-    while (sudokuHolder.length != 0 && !iteration.globalDone) {
+
+    while (sudokuHolder.length != 0 && !iteration.solutionFound) {
         times++;
         const nflTS = performance.now();
         const poppingTS = performance.now();
@@ -227,11 +267,11 @@ function runDFSSudokuIterativeHeap(sudokuHolder,iteration) {
         // console.log("isSudokuDoneHeap(runningSudoku)  = ", isSudokuDoneHeap(runningSudoku));
 
         iteration.poppingTT += performance.now() - poppingTS;
-        if (isSudokuDoneHeap(runningSudoku)) {
+        if (isSudokuDoneHeap(runningSudoku,iteration)) {
             iteration.totalRunDFSTT = performance.now() - totalRunDFSTS
-            iteration.globalDone = true;
-            doFinishedProcessing(runningSudoku, 1, 0,iteration);
-            continue;
+            iteration.solutionFound = true;
+            iteration.solvedSudoku = runningSudoku;
+            return iteration;
         }
         const leastIndexIterationTS = performance.now();
 
@@ -251,50 +291,50 @@ function runDFSSudokuIterativeHeap(sudokuHolder,iteration) {
         iteration.leastIndexIterationtimeTaken += (performance.now() - leastIndexIterationTS);
         iteration.nflTT += performance.now() - nflTS;
         const flTS = performance.now();
-        for (let choiceIndex = 0; choiceIndex < availableChoices.length && !globalDone; choiceIndex++) {
+        for (let choiceIndex = 0; choiceIndex < availableChoices.length && !iteration.solutionFound; choiceIndex++) {
             // console.log("choiceIndex=",choiceIndex);
             const choice = availableChoices[choiceIndex];
             // console.log("choice=",choice);
             const copyTimeStart = performance.now();
-            const runningSudokuCopy = copySudokuHeap(runningSudoku,iteration);
+            const runningSudokuCopy = copySudokuHeap(runningSudoku, iteration);
             iteration.copytimetaken += (performance.now() - copyTimeStart);
             const AddInputTS = performance.now();
-            addInputSudokuHeap(runningSudokuCopy, indexToIterate, choice, 1,iteration);
+            addInputSudokuHeap(runningSudokuCopy, indexToIterate, choice, 1, iteration);
             iteration.AddInputTT += (performance.now() - AddInputTS);
             const AddInputDirectLoopTS = performance.now();
             while (runningSudokuCopy.toProcess.length !== 0) {
                 const elemIndextoUpdate = runningSudokuCopy.toProcess.pop();
                 const elemVal = getlog2for2Power(runningSudokuCopy.workElemArray[elemIndextoUpdate]);
-                addInputSudokuHeap(runningSudokuCopy, elemIndextoUpdate, elemVal, 1,iteration);
+                addInputSudokuHeap(runningSudokuCopy, elemIndextoUpdate, elemVal, 1, iteration);
             }
-            iteration.AddInputDirectLoopTT +=  (performance.now() - AddInputDirectLoopTS);
+            iteration.AddInputDirectLoopTT += (performance.now() - AddInputDirectLoopTS);
             const skpushTS = performance.now();
             if (!runningSudokuCopy.contradiction) {
                 sudokuHolder.push(runningSudokuCopy);
             }
-            iteration.skpushTT +=  (performance.now() - skpushTS);
+            iteration.skpushTT += (performance.now() - skpushTS);
             // console.log("sudokusHolder=",sudokusHolder)
         }
         iteration.flTT += performance.now() - flTS;
     }
-    if (!iteration.globalDone) {
-        doFinishedProcessing(Sudoku, 0, 1,iteration);
-    }
+    iteration.totalRunDFSTT = performance.now() - totalRunDFSTS;
+    iteration.solutionFound = false;
+    return iteration
 }
 
 
 function runDFSSudokuIterative(sudokuHolder) {
     totalRunDFSTS = performance.now();
 
-    while (sudokuHolder.length != 0 && !globalDone) {
+    while (sudokuHolder.length != 0 && !solutionFound) {
         nflTS = performance.now();
         poppingTS = performance.now();
         // stackdepth++;console.log("stackdepth = ",stackdepth);
         const runningSudoku = sudokuHolder.pop();
         poppingTT += performance.now() - poppingTS;
-        if (isSudokuDoneHeap(runningSudoku)) {
+        if (isSudokuDone(runningSudoku)) {
             totalRunDFSTT = performance.now() - totalRunDFSTS
-            globalDone = true;
+            solutionFound = true;
             doFinishedProcessing(runningSudoku, 1, 0);
             continue;
         }
@@ -312,7 +352,7 @@ function runDFSSudokuIterative(sudokuHolder) {
         leastIndexIterationtimeTaken = leastIndexIterationtimeTaken + (performance.now() - leastIndexIterationTS);
         nflTT += performance.now() - nflTS;
         flTS = performance.now();
-        for (let choiceIndex = 0; choiceIndex < availableChoices.length && !globalDone; choiceIndex++) {
+        for (let choiceIndex = 0; choiceIndex < availableChoices.length && !solutionFound; choiceIndex++) {
             // console.log("choiceIndex=",choiceIndex);
             const choice = availableChoices[choiceIndex];
             // console.log("choice=",choice);
@@ -338,12 +378,12 @@ function runDFSSudokuIterative(sudokuHolder) {
         }
         flTT += performance.now() - flTS;
     }
-    if (!globalDone) {
+    if (!solutionFound) {
         doFinishedProcessing(runningSudoku, 0, 0);
     }
 }
 
-function doFinishedProcessing(runningSudoku, solutionFound, errorlog = 0,iteration) {
+function doFinishedProcessing(runningSudoku,iteration, solutionFound, errorlog = 0, verboseTime=1,message="") {
 
     const holder = document.getElementById("output-boxes");
     if (!errorlog) {
@@ -352,7 +392,7 @@ function doFinishedProcessing(runningSudoku, solutionFound, errorlog = 0,iterati
 
     const solutionHeadingDiv = document.createElement("div");
     if (solutionFound) {
-        solutionHeadingDiv.innerHTML = "Solution: Done in ";
+        solutionHeadingDiv.innerHTML = "Solution:";
     } else {
         solutionHeadingDiv.innerHTML = "Solution could not be found";
     }
@@ -362,34 +402,36 @@ function doFinishedProcessing(runningSudoku, solutionFound, errorlog = 0,iterati
 
 
     const solutionTextDiv = document.createElement("div");
-    const timeTaken = performance.now() - iteration.startTime;
-    let outText = "Total Time Taken: " + timeTaken + "ms.<br>";
-    outText += "totalRunDFSTT = " + iteration.totalRunDFSTT + "ms<br>";
-    outText += "non-for loop time taken = " + iteration.nflTT + "ms<br>";
-    outText += "for loop time taken = " + iteration.flTT + "ms<br><br><br>";
-    outText += "Non-forloop<br>";
-    outText += "least Index time taken = " + iteration.leastIndexIterationtimeTaken + "ms.<br>";
-    outText += "afterIsDoneTT = " + iteration.afterIsDoneTT + "ms<br>";
+    const timeTaken = (performance.now() - iteration.startTime)/iteration.numIterations;
+    let outText = message+"<br><br>";
 
-    outText += "sudokuHolder popping time taken = " + iteration.poppingTT + "ms<br>";
-    outText += "<br>Forloop<br>";
-    outText += "copy time taken = " + iteration.copytimetaken + "ms.<br>";
-    outText += "AddInputTT time taken = " + iteration.AddInputTT + "ms.<br>";
-    outText += "DirectProcessing time taken = " + iteration.AddInputDirectLoopTT + "ms.<br>";
-    outText += "sudokuHolder push time taken = " + iteration.skpushTT + "ms.<br>";
-    outText += "<br>Other pages:Deepdive<br>";
+    outText += "Time Taken: " + timeTaken + "ms.<br>";
+    if (verboseTime) {
+        outText += "totalRunDFSTT = " + iteration.totalRunDFSTT + "ms<br>";
+        outText += "non-for loop time taken = " + iteration.nflTT + "ms<br>";
+        outText += "for loop time taken = " + iteration.flTT + "ms<br><br><br>";
+        outText += "Non-forloop<br>";
+        outText += "least Index time taken = " + iteration.leastIndexIterationtimeTaken + "ms.<br>";
+        outText += "afterIsDoneTT = " + iteration.afterIsDoneTT + "ms<br>";
 
-    outText += "copy function: total time taken = " + iteration.copyTotalTT + "ms.<br>";
-    outText += "copy function: initialize time taken = " + iteration.copyinitTT + "ms.<br>";
-    outText += "copy function: workElemArray time taken = " + iteration.copyworkElemArrayTT + "ms.<br>"
-    outText += "copy function: workElemIndicesByLength time taken = " + iteration.copyworkElemIndicesByLengthTT + "ms.<br>"
-    outText += "copy function: processed time taken = " + iteration.copyprocessedTT + "ms.<br>";
-    outText += "copy function: contradiction time taken = " + iteration.copycontradictionTT + "ms.<br>";
-    outText += "updateWEIBL Function time taken = " + iteration.updateWEIBLTimeTaken + "ms.<br>";
-    outText += "function updateAdditionForElems time taken = " + iteration.updateAdditionForElemsTimeTaken + "ms.<br>";
-    outText += "function: addInputSudoku time taken = " + iteration.addinputSudokuTT + "ms.<br>";
-    outText += "Number of times delete was hit = " + iteration.hitsDelete + "\n";
+        outText += "sudokuHolder popping time taken = " + iteration.poppingTT + "ms<br>";
+        outText += "<br>Forloop<br>";
+        outText += "copy time taken = " + iteration.copytimetaken + "ms.<br>";
+        outText += "AddInputTT time taken = " + iteration.AddInputTT + "ms.<br>";
+        outText += "DirectProcessing time taken = " + iteration.AddInputDirectLoopTT + "ms.<br>";
+        outText += "sudokuHolder push time taken = " + iteration.skpushTT + "ms.<br>";
+        outText += "<br>Other pages:Deepdive<br>";
 
+        outText += "copy function: total time taken = " + iteration.copyTotalTT + "ms.<br>";
+        outText += "copy function: initialize time taken = " + iteration.copyinitTT + "ms.<br>";
+        outText += "copy function: workElemArray time taken = " + iteration.copyworkElemArrayTT + "ms.<br>"
+        outText += "copy function: workElemIndicesByLength time taken = " + iteration.copyworkElemIndicesByLengthTT + "ms.<br>"
+        outText += "copy function: processed time taken = " + iteration.copyprocessedTT + "ms.<br>";
+        outText += "copy function: contradiction time taken = " + iteration.copycontradictionTT + "ms.<br>";
+        outText += "updateWEIBL Function time taken = " + iteration.updateWEIBLTimeTaken + "ms.<br>";
+        outText += "function updateAdditionForElems time taken = " + iteration.updateAdditionForElemsTimeTaken + "ms.<br>";
+        outText += "function: addInputSudoku time taken = " + iteration.addinputSudokuTT + "ms.<br>";
+    }
     solutionTextDiv.innerHTML = outText;
 
     solutionTextDiv.className = "output-text";
