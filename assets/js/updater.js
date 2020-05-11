@@ -92,7 +92,6 @@ function addInputSudoku(inputSudoku, inputValID, inputValue, callerFuncLocation 
     const oldWorkingVal = inputSudoku.workElemArray[inputValID]
     inputSudoku.workElemArray[inputValID] = workingAddVal;
     const numBits = bitCount(oldWorkingVal);
-    hitsDelete+=1;
     inputSudoku.workElemIndicesByLength[numBits].delete(inputValID);
 
     addinputSudokuTT = addinputSudokuTT + (performance.now() -  addinputSudokuTS);
@@ -208,7 +207,6 @@ function updateWEIBL(sudokuInput, elemID, oldWorkingVal, newWorkingVal) {
     updateWEIBLTimeStart = performance.now();
 
     const bitCountOld = bitCount(oldWorkingVal);
-    hitsDelete+=1;
     sudokuInput.workElemIndicesByLength[bitCountOld].delete(elemID);
 
     const numBits = bitCount(newWorkingVal);

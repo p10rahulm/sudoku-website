@@ -12,7 +12,6 @@
     <script type="text/javascript" src="assets/js/builder.js"></script>
     <script type="text/javascript" src="assets/js/utilities.js"></script>
     <script type="text/javascript" src="assets/js/updater.js"></script>
-    <script type="text/javascript" src="assets/js/ui-elements.js"></script>
     <script type="text/javascript" src="assets/js/solver.js"></script>
     <script type="text/javascript" src="assets/js/sudoku-ui.js"></script>
 
@@ -64,109 +63,10 @@
             <div class="home-textpara">
                 Please input your contents below and then click on submit. You will see your results below
             </div>
-            <input type="text" id="sudokuTextInput"style="width:50%" onchange="inputfromText()">
+            <input type="text" id="sudokuTextInput" size="81" maxlength="81" onchange="inputfromText()">
             <div id="sudoku-box-holder" class="gameBox-holder">
                 <div id="sudoku-box" class="gameBox">
                     <div id ="elem-options-holder" class="options-box invisibleOptionsList"></div>
-                    <div class="sudoku-box-row">
-                        <input type="text" class="input-elem outer-left outer-top">
-                        <input type="text" class="input-elem outer-top">
-                        <input type="text" class="input-elem inner-right outer-top">
-                        <input type="text" class="input-elem inner-left outer-top">
-                        <input type="text" class="input-elem outer-top">
-                        <input type="text" class="input-elem inner-right outer-top">
-                        <input type="text" class="input-elem inner-left outer-top">
-                        <input type="text" class="input-elem outer-top">
-                        <input type="text" class="input-elem outer-right outer-top">
-                    </div>
-                    <div class="sudoku-box-row">
-                        <input type="text" class="input-elem outer-left">
-                        <input type="text" class="input-elem">
-                        <input type="text" class="input-elem inner-right">
-                        <input type="text" class="input-elem inner-left">
-                        <input type="text" class="input-elem">
-                        <input type="text" class="input-elem inner-right">
-                        <input type="text" class="input-elem inner-left">
-                        <input type="text" class="input-elem">
-                        <input type="text" class="input-elem outer-right">
-                    </div>
-                    <div class="sudoku-box-row">
-                        <input type="text" class="input-elem outer-left inner-bottom">
-                        <input type="text" class="input-elem inner-bottom">
-                        <input type="text" class="input-elem inner-right inner-bottom">
-                        <input type="text" class="input-elem inner-left inner-bottom">
-                        <input type="text" class="input-elem inner-bottom">
-                        <input type="text" class="input-elem inner-right inner-bottom">
-                        <input type="text" class="input-elem inner-left inner-bottom">
-                        <input type="text" class="input-elem inner-bottom">
-                        <input type="text" class="input-elem outer-right inner-bottom">
-                    </div>
-                    <div class="sudoku-box-row">
-                        <input type="text" class="input-elem outer-left inner-top">
-                        <input type="text" class="input-elem inner-top">
-                        <input type="text" class="input-elem inner-right inner-top">
-                        <input type="text" class="input-elem inner-left inner-top">
-                        <input type="text" class="input-elem inner-top">
-                        <input type="text" class="input-elem inner-right inner-top">
-                        <input type="text" class="input-elem inner-left inner-top">
-                        <input type="text" class="input-elem inner-top">
-                        <input type="text" class="input-elem outer-right inner-top">
-                    </div>
-                    <div class="sudoku-box-row">
-                        <input type="text" class="input-elem outer-left">
-                        <input type="text" class="input-elem">
-                        <input type="text" class="input-elem inner-right">
-                        <input type="text" class="input-elem inner-left">
-                        <input type="text" class="input-elem">
-                        <input type="text" class="input-elem inner-right">
-                        <input type="text" class="input-elem inner-left">
-                        <input type="text" class="input-elem">
-                        <input type="text" class="input-elem outer-right">
-                    </div>
-                    <div class="sudoku-box-row">
-                        <input type="text" class="input-elem outer-left inner-bottom">
-                        <input type="text" class="input-elem inner-bottom">
-                        <input type="text" class="input-elem inner-right inner-bottom">
-                        <input type="text" class="input-elem inner-left inner-bottom">
-                        <input type="text" class="input-elem inner-bottom">
-                        <input type="text" class="input-elem inner-right inner-bottom">
-                        <input type="text" class="input-elem inner-left inner-bottom">
-                        <input type="text" class="input-elem inner-bottom">
-                        <input type="text" class="input-elem outer-right inner-bottom">
-                    </div>
-                    <div class="sudoku-box-row">
-                        <input type="text" class="input-elem outer-left inner-top">
-                        <input type="text" class="input-elem inner-top">
-                        <input type="text" class="input-elem inner-right inner-top">
-                        <input type="text" class="input-elem inner-left inner-top">
-                        <input type="text" class="input-elem inner-top">
-                        <input type="text" class="input-elem inner-right inner-top">
-                        <input type="text" class="input-elem inner-left inner-top">
-                        <input type="text" class="input-elem inner-top">
-                        <input type="text" class="input-elem outer-right inner-top">
-                    </div>
-                    <div class="sudoku-box-row">
-                        <input type="text" class="input-elem outer-left">
-                        <input type="text" class="input-elem">
-                        <input type="text" class="input-elem inner-right">
-                        <input type="text" class="input-elem inner-left">
-                        <input type="text" class="input-elem">
-                        <input type="text" class="input-elem inner-right">
-                        <input type="text" class="input-elem inner-left">
-                        <input type="text" class="input-elem">
-                        <input type="text" class="input-elem outer-right">
-                    </div>
-                    <div class="sudoku-box-row">
-                        <input type="text" class="input-elem outer-left outer-bottom">
-                        <input type="text" class="input-elem outer-bottom">
-                        <input type="text" class="input-elem inner-right outer-bottom">
-                        <input type="text" class="input-elem inner-left outer-bottom">
-                        <input type="text" class="input-elem outer-bottom">
-                        <input type="text" class="input-elem inner-right outer-bottom">
-                        <input type="text" class="input-elem inner-left outer-bottom">
-                        <input type="text" class="input-elem outer-bottom">
-                        <input type="text" class="input-elem outer-right outer-bottom">
-                    </div>
                 </div>
             </div>
             <div id="buttons-holder">
@@ -209,21 +109,6 @@
 
 </div>
 
-<script type="text/javascript" async src="assets/js/swiped-events.min.js"></script>
-<script type="text/javascript" defer>
-    WebFontConfig = {
-        google: {
-            families: ['Lora', 'Open Sans', 'Alegreya SC']
-        }
-    };
-
-    (function (d) {
-        var wf = d.createElement('script'), s = d.scripts[0];
-        wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
-        wf.async = true;
-        s.parentNode.insertBefore(wf, s);
-    })(document);
-</script>
 
 </body>
 </html>

@@ -67,7 +67,23 @@ function drawSudoku(inputSudoku,holdingBox,type) {
             const allowedString = getAllowedNumbersforIndex(currIndex,inputSudoku).join("");
             const elemDiv = document.createElement(type);
             elemDiv.className="input-elem"
-            elemDiv.innerHTML=allowedString;
+            if(i==0){elemDiv.classList.add("outer-top");}
+            if(i==2||i==5){elemDiv.classList.add("inner-bottom");}
+            if(i==3||i==6){elemDiv.classList.add("inner-top");}
+
+            if(i==8){elemDiv.classList.add("outer-bottom");}
+            if(j==0){elemDiv.classList.add("outer-left");}
+            if(j==2||j==5){elemDiv.classList.add("inner-right");}
+            if(j==3||j==6){elemDiv.classList.add("inner-left");}
+            if(j==8){elemDiv.classList.add("outer-right");}
+            if(type=="div"){
+                elemDiv.innerHTML=allowedString;
+            } else {
+                elemDiv.setAttribute("size",1);
+                elemDiv.setAttribute("maxlength",1);
+                elemDiv.setAttribute("autocomplete","off");
+            }
+
             row.appendChild(elemDiv);
         }
         outputBox.appendChild(row);

@@ -57,7 +57,6 @@ function copySudoku(inputSudoku) {
 function dfsCreatorSudoku() {
 
     iteration = new Iteration(Sudoku);
-    console.log("iteration", iteration);
     const sudoFirstCopy = copySudokuHeap(Sudoku, iteration);
     const sudokusHolder = [];
     sudokusHolder.push(sudoFirstCopy);
@@ -65,7 +64,7 @@ function dfsCreatorSudoku() {
     // runDFSSudokuRecursive(sudokusHolder);
     iteration = runDFSSudokuIterativeHeap(sudokusHolder, iteration);
     if(iteration.solutionFound){
-        for (let i=0;i<10;i++){
+        for (let i=0;i<100;i++){
             const iterationLooper = new Iteration(Sudoku);
             const sudoFirstCopy = copySudokuHeap(Sudoku, iteration);
             const sudokusHolder = [];
@@ -73,7 +72,8 @@ function dfsCreatorSudoku() {
             runDFSSudokuIterativeHeap(sudokusHolder, iterationLooper);
             updateIter(iteration,iterationLooper,i+2);
         }
-        doFinishedProcessing(iteration.solvedSudoku, iteration,1, 0,1,"Finished 10 iterations" );
+        console.log("iteration=",iteration);
+        doFinishedProcessing(iteration.solvedSudoku, iteration,1, 0,0,"Finished 10 iterations. Average time values below:" );
     } else {
         doFinishedProcessing(Sudoku, iteration,0, 1, 1);
     }
@@ -102,7 +102,7 @@ function updateIter(iteration,newAddition,additionCount){
     iteration.totalRunDFSTT = (additionCount-1)*iteration.totalRunDFSTT/additionCount + 1/additionCount*newAddition.totalRunDFSTT;
     iteration.nflTT = (additionCount-1)*iteration.nflTT/additionCount + 1/additionCount*newAddition.nflTT;
     iteration.AddInputDirectLoopTT = (additionCount-1)*iteration.AddInputDirectLoopTT/additionCount + 1/additionCount*newAddition.AddInputDirectLoopTT;
-    iteration.hitsDelete = (additionCount-1)*iteration.hitsDelete/additionCount + 1/additionCount*newAddition.hitsDelete;
+    iteration.numLoops = ((additionCount-1)*iteration.numLoops + newAddition.numLoops)/additionCount;
 
 }
 class Iteration {
@@ -133,6 +133,7 @@ class Iteration {
 
 
         this.numIterations = 0;
+        this.numLoops = 0;
         this.solutionFound = 0;
         this.solvedSudoku = Sudoku;
     }
@@ -252,10 +253,9 @@ function runDFSSudokuRecursive(sudokuHolder) {
 
 function runDFSSudokuIterativeHeap(sudokuHolder, iteration) {
     const totalRunDFSTS = performance.now();
-    let times = 0;
 
     while (sudokuHolder.length != 0 && !iteration.solutionFound) {
-        times++;
+        iteration.numLoops++;
         const nflTS = performance.now();
         const poppingTS = performance.now();
         // stackdepth++;console.log("stackdepth = ",stackdepth);
@@ -403,9 +403,11 @@ function doFinishedProcessing(runningSudoku,iteration, solutionFound, errorlog =
 
     const solutionTextDiv = document.createElement("div");
     const timeTaken = (performance.now() - iteration.startTime)/iteration.numIterations;
-    let outText = message+"<br><br>";
+    let outText ="<b>"+ message+"</b><br>";
 
     outText += "Time Taken: " + timeTaken + "ms.<br>";
+    console.log("iteration.numLoops=",iteration.numLoops);
+    outText += "Number of Guesses: " + (iteration.numLoops -1).toString() + ".<br>";
     if (verboseTime) {
         outText += "totalRunDFSTT = " + iteration.totalRunDFSTT + "ms<br>";
         outText += "non-for loop time taken = " + iteration.nflTT + "ms<br>";
@@ -428,7 +430,7 @@ function doFinishedProcessing(runningSudoku,iteration, solutionFound, errorlog =
         outText += "copy function: workElemIndicesByLength time taken = " + iteration.copyworkElemIndicesByLengthTT + "ms.<br>"
         outText += "copy function: processed time taken = " + iteration.copyprocessedTT + "ms.<br>";
         outText += "copy function: contradiction time taken = " + iteration.copycontradictionTT + "ms.<br>";
-        outText += "updateWEIBL Function time taken = " + iteration.updateWEIBLTimeTaken + "ms.<br>";
+        outText += "function updateheap time taken = " + iteration.updateWEIBLTimeTaken + "ms.<br>";
         outText += "function updateAdditionForElems time taken = " + iteration.updateAdditionForElemsTimeTaken + "ms.<br>";
         outText += "function: addInputSudoku time taken = " + iteration.addinputSudokuTT + "ms.<br>";
     }
