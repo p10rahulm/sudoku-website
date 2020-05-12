@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+
+    <link rel="stylesheet" href="assets/css/styles.min.css">
+
+
+    <!--
+        Most Important Scripts
+        <script type="text/javascript" src="assets/js/builder.js"></script>
+        <script type="text/javascript" src="assets/js/utilities.js"></script>
+        <script type="text/javascript" src="assets/js/updater.js"></script>
+        <script type="text/javascript" src="assets/js/solver.js"></script>
+        <script type="text/javascript" src="assets/js/sudoku-ui.js"></script>
+
+        <link rel="stylesheet" href="assets/css/styles.css">
+
+    -->
+
+    <script type="text/javascript" src="assets/js/allJS.min.js"></script>
+
+    <link rel="icon" type="image/png" href="assets/images/sudoku.png">
+
+
+    <!--Social Media Tags-->
+    <meta property="og:title" content="Sudoku Solver">
+    <meta property="og:site_name" content="Sudoku Solver">
+    <meta property="og:image" itemprop="image"
+          content="assets/images/solver.png"/>
+    <meta property="og:updated_time" content="2020-04-30T18:19:00+05:30"/>
+    <meta property="og:description"
+          content="Solves your sudoku in double quick time! Check it out!">
+    <meta property="og:url" content="http://www.sudokusolver.in/">
+    <meta property="og:updated_time" content="1440432930"/>
+    <meta name="twitter:card" content="summary_large_image">
+
+
+    <!--Title-->
+    <title>Fast Sudoku Solver</title>
+</head>
+<body onload="start()">
+<div class="container">
+    <div class="header container-element">
+        <div id="HeaderTitle-text"><a class="heading-link" href="http://www.sudokusolver.in"> Sudoku Solver</a></div>
+
+        <div id="navbar" class="header-elem">
+            <div id="navbar-Home" class="navbar-active navbar_button">
+                <a href="/">Game</a>
+            </div>
+            <div id="navbar-Students" class="navbar_button">
+                <a href="/solver.html">Solver</a>
+            </div>
+            <div id="navbar-Labs" class="navbar_button">
+                <a href="/about.html">About</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="mainer container-element">
+        <div id="Home" class="main active">
+            <div class="home-header">Sudoku Solver</div>
+            <div class="home-textpara" onclick="toggleDisplay('home-instructions')">
+                Click to see instructions
+            </div>
+            <div id="home-instructions" class="home-textpara2 inactive">
+                Please enter the type of Game you want to play - easy medium or hard.
+            </div>
+            <div id="text-input-sizer" class="gameBox-holder">
+                <div id="text-input-holder">
+                    <div class="text-input-button" onclick="toggleDisplay('text-input-hideshow')">
+                        Enter Text Input
+                    </div>
+                    <div id="text-input-hideshow" class="inactive">
+                        <div class="text-fill-input-button">
+                            <input type="text" id="sudokuTextInput" size="48" maxlength="81"
+                                   placeholder="Ex: '8..........36......7..9.2...5...7.......457.....1...3...1....68..85...1..9....4'">
+                            <div id="fill-sudoku-button" onclick="inputfromText()">
+                                Fill Sudoku
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="sudoku-box-holder" class="gameBox-holder">
+                <div id="sudoku-box" class="gameBox">
+                    <div id="elem-options-holder" class="options-box invisibleOptionsList"></div>
+                </div>
+            </div>
+            <div id="buttons-holder">
+                <div id="iteration-holder">
+
+                    <div id="iteration-options-box">
+                        <label class="iteration-option">
+                            Number of Iterations:
+                            <input type="number" class="iteration-option" id="num-iterations-option" max="10000" min="10"
+                                   autocomplete="on" value="10" size="5">
+                        </label>
+                        <label class="iteration-option">
+                            View Verbose:
+                            <input type="checkbox" class="iteration-option" id="verbose-time-results-option"
+                                   autocomplete="on">
+                        </label>
+                    </div>
+                    <div id="solve-button" onclick="dfsCreatorSudoku()">Solve!</div>
+
+                </div>
+            </div>
+
+            <div id="output">
+                <div id="output-errors"></div>
+                <div id="output-boxes"></div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="footer container-element">
+        <div id="copyright">
+            &copy; 2020 <a href="http://www.thinkingtree.me/" target="_blank">Developed by Rahul Madhavan</a>,
+        </div>
+
+    </div>
+
+</div>
+
+
+</body>
+</html>
