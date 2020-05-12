@@ -147,3 +147,6 @@ function swap(inputArr,index1,index2){
     inputArr[index1] = inputArr[index2];
     inputArr[index2] = temp;
 }
+function dec2bin(dec){
+    return (dec >>> 0).toString(2);
+}

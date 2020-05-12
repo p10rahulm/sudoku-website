@@ -2,11 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="74631bf2-b197-47e6-a7fe-3448746f7870" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/css/gameStyles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/404.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/allJS.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/builder.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/builder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/sudoku-ui.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/sudoku-ui.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/updater.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/updater.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/utilities.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/utilities.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game.html" beforeDir="false" afterPath="$PROJECT_DIR$/game.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,11 +25,15 @@
       <list>
         <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="NamedScopeManager">
+    <scope name="NonBackups" pattern="file[sudoku]:assets//*" />
   </component>
   <component name="ProjectId" id="1bcbJPjMb9NFFYz2fDbBUrSF30f" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -37,6 +48,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -89,6 +101,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="2472" y="198" key="#Libraries" timestamp="1589303186330">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2472" y="198" key="#Libraries/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1589303186330" />
     <state x="2726" y="250" key="RollbackChangesDialog" timestamp="1589145902156">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -97,14 +113,18 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2478" y="146" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1589179626496" />
-    <state x="2576" y="278" width="1092" height="592" key="find.popup" timestamp="1589233464821">
+    <state x="2028" y="34" width="1804" height="962" key="find.popup" timestamp="1589318225421">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2576" y="278" width="1092" height="592" key="find.popup/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1589233464821" />
+    <state x="2028" y="34" width="1804" height="962" key="find.popup/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1589318225421" />
     <state x="2536" y="250" key="run.anything.popup" timestamp="1589011655509">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2536" y="250" key="run.anything.popup/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1589011655509" />
+    <state x="2714" y="232" key="scopes" timestamp="1589303325619">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2714" y="232" key="scopes/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1589303325619" />
     <state x="2543" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1588964536004">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>

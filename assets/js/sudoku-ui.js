@@ -1,9 +1,21 @@
 function createOptions(event) {
-    const xPosition = event.clientX;
-    const yPosition = event.clientY;
+    const xPosition = event.pageX;
+    const yPosition = event.pageY;
     const inputBoxID = event.target.id;
+    const inputVal = event.target.value;
+    if(event.target.nodeName!="INPUT"||event.target.type!="text"){
+        return;
+    }
+    if(inputVal){
+        createRemoveOption(xPosition,yPosition,inputBoxID,inputVal);
+    } else {
+        createNumberOptions(xPosition,yPosition,inputBoxID);
+    }
 
 
+
+}
+function createNumberOptions(xPosition,yPosition,inputBoxID){
     const allowedNumbers = getAllowedNumbersforIndex(inputBoxID,Sudoku);
 
     const sudokuElemOptionsDiv = document.getElementById("elem-options-holder");
@@ -25,23 +37,58 @@ function createOptions(event) {
 
     sudokuElemOptionsShowing = true;
 }
+function createRemoveOption(xPosition,yPosition,inputBoxID,existingValue){
 
-function removeChildren(someDiv) {
-    while (someDiv.hasChildNodes()) {
-        someDiv.removeChild(someDiv.firstChild);
+    const sudokuElemOptionsDiv = document.getElementById("elem-options-holder");
+    // sudokuElemOptionsDiv.removeAttribute("onclick");
+    removeChildren(sudokuElemOptionsDiv);
+    let removeDiv = document.createElement("div");
+    removeDiv.className = "sudokuElem-number"
+    removeDiv.innerHTML = "Remove: "+existingValue;
+    sudokuElemOptionsDiv.appendChild(removeDiv);
+    removeDiv.setAttribute("onclick", "removeValueofSudokuElemfromNumChoice(" + inputBoxID.valueOf() + "," + existingValue.valueOf() + ")");
+    // sudokuElemOptionsDiv.style.left =xPosition;
+    // sudokuElemOptionsDiv.style.top =yPosition;
+    sudokuElemOptionsDiv.classList.add("visibleOptionsList");
+    sudokuElemOptionsDiv.classList.remove("invisibleOptionsList");
+    sudokuElemOptionsDiv.setAttribute("style", "left: " + xPosition + "px; top: " + yPosition + "px;");
+
+    sudokuElemOptionsShowing = true;
+}
+
+function removeChildren(someDiv,exceptionsArray=[]) {
+    for (let i =0;i<someDiv.childNodes.length;) {
+        const childIter = someDiv.childNodes[i];
+        if(exceptionsArray.indexOf(childIter.id)==-1){
+            someDiv.removeChild(childIter);
+        } else {
+            i++;
+        }
     }
+}
+
+function setUIonOptionClick(){
+    const sudokuElemOptionsDiv = document.getElementById("elem-options-holder");
+    sudokuElemOptionsDiv.removeAttribute("onclick");
+    removeChildren(sudokuElemOptionsDiv);
+    sudokuElemOptionsDiv.classList.remove("visibleOptionsList");
+    sudokuElemOptionsDiv.classList.add("invisibleOptionsList");
 }
 
 function setValueofSudokuElemfromNumChoice(divID, inputValue) {
     const sBox = document.getElementById("sudoku-box");
     const sudokuElemDivs = sBox.getElementsByTagName("input");
     sudokuElemDivs[divID].value = inputValue;
-    const sudokuElemOptionsDiv = document.getElementById("elem-options-holder");
-    sudokuElemOptionsDiv.removeAttribute("onclick");
-    removeChildren(sudokuElemOptionsDiv);
-    sudokuElemOptionsDiv.classList.remove("visibleOptionsList");
-    sudokuElemOptionsDiv.classList.add("invisibleOptionsList");
-    checkInput(divID, inputValue.toString());
+    setUIonOptionClick();
+    addInput(divID, inputValue.toString());
+}
+
+function removeValueofSudokuElemfromNumChoice(divID, existingValue) {
+    const sBox = document.getElementById("sudoku-box");
+    const sudokuElemDivs = sBox.getElementsByTagName("input");
+    sudokuElemDivs[divID].value = "";
+    setUIonOptionClick();
+    removeInput(divID, existingValue);
 }
 
 function clearOptionsDiv() {
@@ -100,4 +147,8 @@ function toggleDisplay(divID){
         divtoToggle.innerText.replace("Enter","Hide");
         divtoToggle.innerText.replace("see","hide");
     }
+}
+
+function getSudokuInputs(sudokuElemDivs){
+    return Array.from(sudokuElemDivs).map(x=>{return Number(x.value)});
 }

@@ -8,9 +8,8 @@
 
 
 class SudokuClass {
-    constructor(sudokuInputArray) {
+    constructor() {
         //sudokuWorkArray contains the 81 variables corresponding to numbers between 1 and 512 (2^9)
-        this.sudokuInputArray = sudokuInputArray;
         this.workElemArray = new Array(81).fill(511);
         this.workElemIndicesByLength = [0].concat(Array.from(Array(81), (e, i) => i + 900));
 
@@ -91,7 +90,6 @@ class Iteration {
 
 
 // Sudoku = new SudokuClass([]);
-finalInputArray = [];
 sudokuElemOptionsShowing = false;
 
 
@@ -101,11 +99,12 @@ function start() {
     drawFirstSudoku();
 }
 
+/*
 function checkInputDiv(event) {
     clearOptionsDiv();
-    checkInput(event.target.id, event.target.value);
+    addInput(event.target.id, event.target.value);
 }
-
+*/
 
 function buildSudoku() {
 
@@ -118,6 +117,7 @@ function buildSudoku() {
 buildSudoku();
 function drawFirstSudoku(){
     const sBox = document.getElementById("sudoku-box");
+    removeChildren(sBox,["elem-options-holder"]);
     drawSudoku(Sudoku, sBox, "input");
     const sudokuElemDivs = sBox.getElementsByTagName("input");
     setAttributes(sudokuElemDivs);
@@ -129,37 +129,13 @@ function setAttributes(sudokuElemDivs) {
         const elemDiv =sudokuElemDivs[i];
         elemDiv.id = i;
         elemDiv.addEventListener("click", createOptions, false);
-        elemDiv.addEventListener("change", checkInputDiv, false);
+        // elemDiv.addEventListener("change", checkInputDiv, false);
         elemDiv.setAttribute("size",1);
         elemDiv.setAttribute("maxlength",1);
         elemDiv.setAttribute("autocomplete","off");
+        elemDiv.readOnly = true
     }
 }
 
 
-function createNewSudoku(sudokuInputArray) {
-    //sudokuWorkArray contains the 81 variables corresponding to numbers between 1 and 512 (2^9)
-    const workElemArray = new Array(81);
 
-    const workElemIndicesByLength = {};
-    for (let i = 1; i <= 9; i++) {
-        workElemIndicesByLength[i] = new Set();
-    }
-
-    for (let i = 0; i < 81; i++) {
-        if (sudokuInputArray[i] == 0) {
-            workElemArray[i] = 511;
-            workElemIndicesByLength[9].add(i);
-        }
-    }
-
-    Sudoku.sudokuInputArray = sudokuInputArray;
-    Sudoku.workElemArray = workElemArray;
-    Sudoku.workElemIndicesByLength = workElemIndicesByLength;
-
-    Sudoku.done = false;
-    // Sudoku.processed = new Array(81).fill(0);
-    Sudoku.toProcess = [];
-    Sudoku.contradiction = false;
-    return Sudoku;
-}
