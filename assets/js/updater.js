@@ -24,34 +24,13 @@ function inputfromText() {
 // 8..........36......7..9.2...5...7.......457.....1...3...1....68..85...1..9....4
 function addInput(id, value) {
     logError("");
-    // const elemChanged = document.getElementById(id);
-    // const allowedArray = getAllowedNumbersforIndex(id, Sudoku).toString().split(",");
-    // const allowed = new Set(allowedArray);
+
 
     const valID = Number(id);
     const valNum = Number(value);
+    Sudoku.SudokuPrefill[valID] = valNum
     Sudoku = addInputSudokuHeap(Sudoku, valID, valNum, 0);
-    /*
-    if (allowed.has(value)) {
-        Sudoku = addInputSudokuHeap(Sudoku, valID, valNum, 0);
-    } else {
-        elemChanged.value = "";
-        let alertText;
 
-        //in case valid previous value existed at id fix Sudoku.
-        const prevInputValue = Sudoku.sudokuInputArray[valID];
-        if (prevInputValue != 0) {
-            Sudoku = deleteInputSudoku(Sudoku, valID, prevInputValue);
-            console.log("Sudoku =", Sudoku);
-            alertText = "Your input: \"" + value + "\" lead to an Error! There was a previous value here: " + prevInputValue + " which is now deleted.";
-        } else {
-            alertText = "Error! You have input value = '" + value + "'. The allowed values are: " + allowedArray.toString();
-        }
-        logError(alertText);
-
-    }
-    finalInputArray = Sudoku.sudokuInputArray;
-     */
 
 }
 
@@ -59,6 +38,7 @@ function removeInput(id, existingValue) {
     logError("");
     const elemChanged = document.getElementById(id);
     elemChanged.value = ""
+    Sudoku.SudokuPrefill[id] = 0
     Sudoku = deleteInputSudoku(Sudoku, id, existingValue);
     // finalInputArray = Sudoku.sudokuInputArray;
 }
@@ -173,31 +153,27 @@ function updateAdditionForElems(inputSudoku, elemsinSameGroup, inputValID, worki
 
 function deleteInputSudoku(inputSudoku, inputValID, inputValueDeleted) {
     const workingValofItemDeleted = powerofTwo(inputValueDeleted - 1);
-    const sBox = document.getElementById("sudoku-box");
-    const sudokuElemDivs = sBox.getElementsByTagName("input");
-    const valArray = getSudokuInputs(sudokuElemDivs)
-    // console.log("sudokuElemDivs=",sudokuElemDivs);
     const [row, col, box] = Game.elemIndices[inputValID];
     const elemsinRow = Game.indicesinRows[row];
     const elemsinCol = Game.indicesinCols[col];
     const elemsinBox = Game.indicesinBoxes[box];
     let newWorkingValofID = 511;
-    newWorkingValofID = updateDeletionforElems(inputSudoku, elemsinRow, inputValID, workingValofItemDeleted, newWorkingValofID, valArray);
-    newWorkingValofID = updateDeletionforElems(inputSudoku, elemsinCol, inputValID, workingValofItemDeleted, newWorkingValofID, valArray);
-    newWorkingValofID = updateDeletionforElems(inputSudoku, elemsinBox, inputValID, workingValofItemDeleted, newWorkingValofID, valArray);
+    newWorkingValofID = updateDeletionforElems(inputSudoku, elemsinRow, inputValID, workingValofItemDeleted, newWorkingValofID);
+    newWorkingValofID = updateDeletionforElems(inputSudoku, elemsinCol, inputValID, workingValofItemDeleted, newWorkingValofID);
+    newWorkingValofID = updateDeletionforElems(inputSudoku, elemsinBox, inputValID, workingValofItemDeleted, newWorkingValofID);
     inputSudoku.workElemArray[inputValID] = newWorkingValofID;
     //heap is reset
-    resetHeap(inputSudoku, valArray);
+    resetHeap(inputSudoku);
     inputSudoku.numProcessed -= 1;
     return inputSudoku;
 }
 
-function updateDeletionforElems(inputSudoku, elemsinSameGroup, inputValID, workingValOfItemDeleted, newWorkingValofID, sudokuValueArray) {
+function updateDeletionforElems(inputSudoku, elemsinSameGroup, inputValID, workingValOfItemDeleted, newWorkingValofID) {
     let updatedInputWorkingVar = newWorkingValofID;
     for (let i = 0; i < elemsinSameGroup.length; i++) {
         const currSudokuIndex = elemsinSameGroup[i];
         if (currSudokuIndex != inputValID) {
-            const currentElemVal = sudokuValueArray[currSudokuIndex];
+            const currentElemVal = inputSudoku.SudokuPrefill[currSudokuIndex];
             if (!currentElemVal) {
                 inputSudoku.workElemArray[currSudokuIndex] = inputSudoku.workElemArray[currSudokuIndex] | workingValOfItemDeleted;
             } else {
@@ -230,10 +206,10 @@ function updateWEIBL(sudokuInput, elemID, oldWorkingVal, newWorkingVal) {
     updateWEIBLTimeTaken = updateWEIBLTimeTaken + (performance.now() - updateWEIBLTimeStart);
 }
 
-function resetHeap(inputSudoku, valArray) {
+function resetHeap(inputSudoku) {
     inputSudoku.workElemIndicesByLength = []
     for (let i = 0; i < 81; i++) {
-        if (!valArray[i]) {
+        if (!inputSudoku.SudokuPrefill[i]) {
             const val = inputSudoku.workElemArray[i];
             const numbits = bitCount(val);
             const heapVal = numbits * 100 + i;

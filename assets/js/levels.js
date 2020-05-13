@@ -1,12 +1,12 @@
 function fillSudk(numToFill, minChoice = 2) {
-    let solutionfound = false
-    let attempts=0;
+    let solutionfound = false;
+    let attempts = 0;
+    // Array.from(document.querySelectorAll('INPUT')).map(x=>x.style.cursor = 'wait');
+    document.body.style.cursor = 'wait';
     while (!solutionfound) {
-        console.log("attempts",++attempts);
+        ++attempts;
         buildSudoku();
-        drawGameSudoku();
-        const sBox = document.getElementById("sudoku-box");
-        const sudokuElemDivs = sBox.getElementsByTagName("input");
+        //
         let filled = 0;
         while (filled < numToFill) {
             const elemIndex = getRandomIntBelow(80);
@@ -15,19 +15,19 @@ function fillSudk(numToFill, minChoice = 2) {
                 continue;
             }
             const arrIndex = getRandomIntBelow(allowed.length);
-            const val = allowed[arrIndex]
-            sudokuElemDivs[elemIndex].value = val;
-            sudokuElemDivs[elemIndex].classList.add("pre-filled")
+            const val = allowed[arrIndex];
             addInput(elemIndex, val);
             filled++;
         }
-        getSudokuInputs(sudokuElemDivs)
-        solutionfound = solutionExists(Sudoku) && checkSolution(Sudoku,getSudokuInputs(sudokuElemDivs),minChoice)
-        if(solutionfound){setGameAttributes(sudokuElemDivs)}
+        solutionfound = solutionExists(Sudoku) && checkSolution(Sudoku, minChoice)
     }
-
-    const timeStart = new Date().getTime()
-    setInterval(function() { startTimer(timeStart); }, 1000);
+    console.log("attempts to generate game:", attempts);
+    drawGameSudoku(Sudoku);
+    document.body.style.cursor = 'default';
+    const timeStart = new Date().getTime();
+    setInterval(function () {
+        startTimer(timeStart);
+    }, 1000);
 }
 
 function solutionExists(inputSudoku) {
@@ -45,7 +45,7 @@ function solutionExists(inputSudoku) {
 function startTimer(timeStart) {
     const dateNow = new Date()
     const timeNow = dateNow.getTime();
-    const timeElapsedInSec = ((timeNow -timeStart) / 1000)|0;
+    const timeElapsedInSec = ((timeNow - timeStart) / 1000) | 0;
     //https://jsperf.com/math-floor-alternatives
     const days = (timeElapsedInSec / 86400) | 0;
     const hours = (timeElapsedInSec / 3600) | 0;
@@ -66,12 +66,35 @@ function startTimer(timeStart) {
 
 }
 
-function checkSolution(Sudoku,elemNums,minChoice){
-    for(let i=0;i<81;i++){
-
-        if(!elemNums[i] && bitCount(Sudoku.workElemArray[i])<minChoice){
+function checkSolution(Sudoku, minChoice) {
+    for (let i = 0; i < 81; i++) {
+        if (!Sudoku.SudokuPrefill[i] && bitCount(Sudoku.workElemArray[i]) < minChoice) {
             return false;
         }
     }
     return true;
 }
+
+function drawGameSudoku() {
+    const sBox = document.getElementById("sudoku-box");
+    removeChildren(sBox, ["elem-options-holder", "timer"]);
+    drawSudoku(Sudoku, sBox, "input");
+    const sudokuElemDivs = sBox.getElementsByTagName("input");
+    setGameAttributes(sudokuElemDivs);
+}
+
+function setGameAttributes(sudokuElemDivs) {
+    for (let i = 0; i < sudokuElemDivs.length; i++) {
+        const elemDiv = sudokuElemDivs[i];
+        elemDiv.id = i;
+        if (!elemDiv.classList.contains("pre-filled")) {
+            elemDiv.addEventListener("click", createOptions, false);
+        }
+        // elemDiv.addEventListener("change", checkInputDiv, false);
+        elemDiv.setAttribute("size", 1);
+        elemDiv.setAttribute("maxlength", 1);
+        elemDiv.setAttribute("autocomplete", "off");
+        elemDiv.readOnly = true
+    }
+}
+

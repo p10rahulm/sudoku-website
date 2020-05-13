@@ -1,5 +1,5 @@
 function createOptions(event) {
-    const xPosition = event.pageX;
+    const xPosition = Math.min(event.pageX,window.innerWidth-50);
     const yPosition = event.pageY;
     const inputBoxID = event.target.id;
     const inputVal = event.target.value;
@@ -21,6 +21,12 @@ function createNumberOptions(xPosition, yPosition, inputBoxID) {
     const sudokuElemOptionsDiv = document.getElementById("elem-options-holder");
     sudokuElemOptionsDiv.removeAttribute("onclick");
     removeChildren(sudokuElemOptionsDiv);
+    if(allowedNumbers.length==0){
+        let numberDiv = document.createElement("div");
+        numberDiv.className = "sudokuElem-number"
+        numberDiv.innerHTML = "No Options";
+        sudokuElemOptionsDiv.appendChild(numberDiv);
+    }
     for (let i = 0; i < allowedNumbers.length; i++) {
         let numberDiv = document.createElement("div");
         numberDiv.className = "sudokuElem-number"
@@ -112,7 +118,7 @@ function drawSudoku(inputSudoku, holdingBox, type) {
         row.className = "sudoku-box-row"
         for (let j = 0; j < 9; j++) {
             const currIndex = i * 9 + j;
-            const allowedString = getAllowedNumbersforIndex(currIndex, inputSudoku).join("");
+
             const elemDiv = document.createElement(type);
             elemDiv.className = "input-elem"
             if (i == 0) {
@@ -141,7 +147,14 @@ function drawSudoku(inputSudoku, holdingBox, type) {
                 elemDiv.classList.add("outer-right");
             }
             if (type == "div") {
-                elemDiv.innerHTML = allowedString;
+                elemDiv.innerHTML = getAllowedNumbersforIndex(currIndex, inputSudoku).join("");
+            } else {
+                const preFill = inputSudoku.SudokuPrefill[currIndex];
+                if (preFill) {
+                    elemDiv.value = preFill
+                    elemDiv.classList.add("pre-filled");
+                }
+
             }
             row.appendChild(elemDiv);
         }
@@ -170,27 +183,5 @@ function getSudokuInputs(sudokuElemDivs) {
     return Array.from(sudokuElemDivs).map(x => {
         return Number(x.value)
     });
-}
-
-function drawGameSudoku() {
-    const sBox = document.getElementById("sudoku-box");
-    removeChildren(sBox, ["elem-options-holder", "timer"]);
-    drawSudoku(Sudoku, sBox, "input");
-    const sudokuElemDivs = sBox.getElementsByTagName("input");
-}
-
-function setGameAttributes(sudokuElemDivs) {
-    for (let i = 0; i < sudokuElemDivs.length; i++) {
-        const elemDiv = sudokuElemDivs[i];
-        elemDiv.id = i;
-        if (!elemDiv.classList.contains("pre-filled")) {
-            elemDiv.addEventListener("click", createOptions, false);
-        }
-        // elemDiv.addEventListener("change", checkInputDiv, false);
-        elemDiv.setAttribute("size", 1);
-        elemDiv.setAttribute("maxlength", 1);
-        elemDiv.setAttribute("autocomplete", "off");
-        elemDiv.readOnly = true
-    }
 }
 

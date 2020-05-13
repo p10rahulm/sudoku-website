@@ -9,6 +9,7 @@
 
 class SudokuClass {
     constructor() {
+        this.SudokuPrefill = new Array(81).fill(0);
         //sudokuWorkArray contains the 81 variables corresponding to numbers between 1 and 512 (2^9)
         this.workElemArray = new Array(81).fill(511);
         this.workElemIndicesByLength = [0].concat(Array.from(Array(81), (e, i) => i + 900));
