@@ -24,8 +24,6 @@ function inputfromText() {
 // 8..........36......7..9.2...5...7.......457.....1...3...1....68..85...1..9....4
 function addInput(id, value) {
     logError("");
-
-
     const valID = Number(id);
     const valNum = Number(value);
     Sudoku.SudokuPrefill[valID] = valNum
@@ -38,8 +36,8 @@ function removeInput(id, existingValue) {
     logError("");
     const elemChanged = document.getElementById(id);
     elemChanged.value = ""
-    Sudoku.SudokuPrefill[id] = 0
-    Sudoku = deleteInputSudoku(Sudoku, id, existingValue);
+
+    Sudoku = deleteInputSudoku(Sudoku, id);
     // finalInputArray = Sudoku.sudokuInputArray;
 }
 
@@ -47,7 +45,9 @@ function addInputSudokuHeap(inputSudoku, inputValID, inputValue, callerFuncLocat
     const addinputSudokuTS = performance.now()
     const workingAddVal = powerofTwo(inputValue - 1);
 
-
+    const neighbours = Game.neighbours[inputValID];
+    updateAdditionForElemsHeap(inputSudoku, neighbours, inputValID, workingAddVal, iteration);
+    /*
     const [row, col, box] = Game.elemIndices[inputValID];
     const elemsinRow = Game.indicesinRows[row];
     const elemsinCol = Game.indicesinCols[col];
@@ -56,6 +56,8 @@ function addInputSudokuHeap(inputSudoku, inputValID, inputValue, callerFuncLocat
     updateAdditionForElemsHeap(inputSudoku, elemsinRow, inputValID, workingAddVal, iteration);
     updateAdditionForElemsHeap(inputSudoku, elemsinCol, inputValID, workingAddVal, iteration);
     updateAdditionForElemsHeap(inputSudoku, elemsinBox, inputValID, workingAddVal, iteration);
+
+     */
     if (inputSudoku.contradiction) {
         return inputSudoku;
     }
@@ -105,21 +107,19 @@ function updateAdditionForElemsHeap(inputSudoku, elemsinSameGroup, inputValID, w
     const updateAdditionForElemsTS = performance.now();
     for (let i = 0; i < elemsinSameGroup.length; i++) {
         const currSudokuIndex = elemsinSameGroup[i];
-        if (currSudokuIndex !== inputValID) {
-            const oldWorkingVal = inputSudoku.workElemArray[currSudokuIndex];
-            const newWorkingVal = inputSudoku.workElemArray[currSudokuIndex] & ~workingAddVal;
-            inputSudoku.workElemArray[currSudokuIndex] = newWorkingVal;
-            if (newWorkingVal === 0) {
-                inputSudoku.contradiction = true;
-                return inputSudoku;
+        const oldWorkingVal = inputSudoku.workElemArray[currSudokuIndex];
+        const newWorkingVal = inputSudoku.workElemArray[currSudokuIndex] & ~workingAddVal;
+        inputSudoku.workElemArray[currSudokuIndex] = newWorkingVal;
+        if (newWorkingVal === 0) {
+            inputSudoku.contradiction = true;
+            return inputSudoku;
+        }
+        if (oldWorkingVal !== newWorkingVal) {
+            const newNumbits = bitCount(newWorkingVal);
+            if (newNumbits === 1) {
+                inputSudoku.toProcess.push(currSudokuIndex)
             }
-            if (oldWorkingVal !== newWorkingVal) {
-                const newNumbits = bitCount(newWorkingVal);
-                if (newNumbits === 1) {
-                    inputSudoku.toProcess.push(currSudokuIndex)
-                }
-                updateHeap(inputSudoku, currSudokuIndex, newNumbits, newWorkingVal, iteration);
-            }
+            updateHeap(inputSudoku, currSudokuIndex, newNumbits, newWorkingVal, iteration);
         }
     }
     iteration.updateAdditionForElemsTimeTaken += (performance.now() - updateAdditionForElemsTS);
@@ -151,9 +151,12 @@ function updateAdditionForElems(inputSudoku, elemsinSameGroup, inputValID, worki
     updateAdditionForElemsTimeTaken = updateAdditionForElemsTimeTaken + (performance.now() - updateAdditionForElemsTS);
 }
 
-function deleteInputSudoku(inputSudoku, inputValID, inputValueDeleted) {
+function deleteInputSudoku(inputSudoku, inputValID) {
+    /*
     const workingValofItemDeleted = powerofTwo(inputValueDeleted - 1);
+
     const [row, col, box] = Game.elemIndices[inputValID];
+
     const elemsinRow = Game.indicesinRows[row];
     const elemsinCol = Game.indicesinCols[col];
     const elemsinBox = Game.indicesinBoxes[box];
@@ -161,11 +164,47 @@ function deleteInputSudoku(inputSudoku, inputValID, inputValueDeleted) {
     newWorkingValofID = updateDeletionforElems(inputSudoku, elemsinRow, inputValID, workingValofItemDeleted, newWorkingValofID);
     newWorkingValofID = updateDeletionforElems(inputSudoku, elemsinCol, inputValID, workingValofItemDeleted, newWorkingValofID);
     newWorkingValofID = updateDeletionforElems(inputSudoku, elemsinBox, inputValID, workingValofItemDeleted, newWorkingValofID);
-    inputSudoku.workElemArray[inputValID] = newWorkingValofID;
+     */
+    inputSudoku.SudokuPrefill[inputValID] = 0
+    const neighbours = Game.neighbours[inputValID];
+
+
+    inputSudoku.workElemArray[inputValID] = getWVfromSudkFilled(inputSudoku, inputValID);
+    const prefilled = inputSudoku.SudokuPrefill
+    for (let i = 0; i < neighbours.length; i++) {
+        const neighbourIndex = neighbours[i];
+        if (prefilled[neighbourIndex]) {
+            continue;
+        }
+        inputSudoku.workElemArray[neighbourIndex] = getWVfromSudkFilled(inputSudoku, neighbourIndex);
+    }
+
     //heap is reset
     resetHeap(inputSudoku);
     inputSudoku.numProcessed -= 1;
     return inputSudoku;
+}
+
+function getWVfromSudkFilled(inputSudoku, inputValID) {
+    return getAllowedWorkingVal(Game.neighbours[inputValID], inputSudoku.SudokuPrefill);
+}
+
+function getAllowedWorkingVal(neighbours, filledArray) {
+    // const nPT = neighbours.map(x=>(filledArray[x])).filter(x => x!==0).map(x=>{return powerofTwo(x-1)});
+    //faster: https://stackoverflow.com/questions/34398279/map-and-filter-an-array-at-the-same-time
+    // const nPT = neighbours.flatMap(x => (filledArray[x] ? [powerofTwo(filledArray[x] - 1)] : []));
+    // console.log("nPT=",nPT);
+    // return nPT.reduce(andNot, 511);
+    // even faster
+    const result = neighbours.reduce(function (accumulator, x, currentIndex, array) {
+        return (filledArray[x] ? (accumulator & ~powerofTwo(filledArray[x] - 1)) : accumulator);
+    }, 511);
+    // console.log("result=",dec2bin(result));
+    return result;
+}
+
+function andNot(accumulator, num) {
+    return accumulator & ~num;
 }
 
 function updateDeletionforElems(inputSudoku, elemsinSameGroup, inputValID, workingValOfItemDeleted, newWorkingValofID) {

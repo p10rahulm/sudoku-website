@@ -35,7 +35,7 @@
     <meta property="og:image" itemprop="image" content="http://www.sudokusolver.in/assets/images/sudoku.png"/>
     <meta property="og:updated_time" content="2020-04-30T18:19:00+05:30"/>
     <meta property="og:description"
-          content="Solves your sudoku in double quick time! Check it out!">
+          content="Really Hard Sudokus! Can you solve this Sudoku Challenge? Check it out!">
     <meta property="og:url" content="http://www.sudokusolver.in/">
     <meta property="og:updated_time" content="1440432930"/>
     <meta name="twitter:card" content="summary_large_image">
@@ -74,7 +74,7 @@
                         </div>
 
                         <div class="level-choice"
-                             onclick="toggleDisplay('levels-show-hide');toggleDisplay('sudoku-box-holder');fillSudk(30,2);">
+                             onclick="toggleDisplay('levels-show-hide');toggleDisplay('sudoku-box-holder');fillSudk(30,1);">
                             Easy
                         </div>
                         <div class="level-choice"
@@ -82,7 +82,7 @@
                             Medium
                         </div>
                         <div class="level-choice"
-                             onclick="toggleDisplay('levels-show-hide');toggleDisplay('sudoku-box-holder');fillSudk(22,2);">
+                             onclick="toggleDisplay('levels-show-hide');toggleDisplay('sudoku-box-holder');fillSudk(22,3);">
                             Hard
                         </div>
                     </div>
@@ -93,11 +93,42 @@
                         <div id="elem-options-holder" class="options-box invisibleOptionsList"></div>
                     </div>
                 </div>
+                <div id="congratulations-box-holder" class="inactive">
+                    <div id="congratulations-box">
+                        <div id="congratulations-message-holder" class="home-header">Congratulations!<br> You have
+                            solved the Sudoku!
+                        </div>
+                        <div id="best-times-holder">
+                            <div class="best-time-text">
+                                <span id="today-time">--</span>
+                            </div>
+                            <div class="home-header2">Best Times so far</div>
+
+                            <div class="best-time-text">
+                                <span class="congratulations-time-label">Easy:</span>
+                                <span id="easy-best-time">--</span>
+                            </div>
+                            <div class="best-time-text">
+                                <span class="congratulations-time-label">Medium:</span>
+                                <span id="medium-best-time">--</span>
+                            </div>
+                            <div class="best-time-text">
+                                <span class="congratulations-time-label">Hard:</span>
+                                <span id="hard-best-time">--</span>
+                            </div>
+                        </div>
+                        <div id="play-again" onclick="toggleDisplay('levels-show-hide');toggleDisplay('congratulations-box-holder')">
+                            Play Again!
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div id="output">
             <div id="output-errors"></div>
-            <div id="output-boxes"></div>
+            <div id="output-boxes">
+
+            </div>
         </div>
 
     </div>

@@ -137,8 +137,6 @@ a:hover {
     position: sticky;
     position: -webkit-sticky;
     z-index: 100;
-
-
 }
 
 .header .header-elem {
@@ -169,6 +167,9 @@ a:hover {
 }
 
 @media screen and (max-width: 725px) {
+    .header {
+        justify-content: center;
+    }
     .header #logo-image {
         display: none;
     }
@@ -615,4 +616,41 @@ a:hover {
     font-family: "Alegreya SC",Lora,Cambria,"Times New Roman",Times,Serif;
     font-weight: 1.25em;
     text-align: right;
+}
+#congratulations-box{
+    display: flex;
+    align-content: space-around;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+#congratulations-message-holder{
+    flex-basis: 100%;
+    flex-shrink: 1;
+    flex-grow: 0;
+    text-align: center;
+}
+#best-times-holder{
+    flex-basis: 75%;
+    flex-grow: 0;
+    flex-shrink: 1;
+    margin-top: 10px;
+
+}
+#play-again{
+    margin-top: 25px;
+    background: rebeccapurple;
+    color: wheat;
+    padding: 20px 10px;
+    border-radius: 50px;
+    text-align: center;
+    font-family: Lora, Georgia, Cambria, Times, "Times New Roman", Serif;
+    flex-basis: 100px;
+}
+
+.best-time-text{
+    color: #59c075;
+    font-size: max(12px, 1em);
+    padding: 10px 0px 10px 0px;
+    font-family: Lora, Georgia, Cambria, Times, "Times New Roman", Serif;
+    font-weight: 400;
 }

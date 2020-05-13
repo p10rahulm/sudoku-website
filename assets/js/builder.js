@@ -37,6 +37,7 @@ class GameClass {
         this.indicesinRows = [];
         this.indicesinCols = [];
         this.indicesinBoxes = [];
+        this.neighbours=[]
         // const indicesinRows = {};
         // const indicesinCols = {};
         // const indicesinBoxes = {};
@@ -49,6 +50,12 @@ class GameClass {
             this.indicesinRows[this.elemIndices[i][0]].push(i);
             this.indicesinCols[this.elemIndices[i][1]].push(i);
             this.indicesinBoxes[this.elemIndices[i][2]].push(i);
+        }
+        for (let i = 0; i < 81; i++) {
+            //https://stackoverflow.com/questions/9229645/remove-duplicate-values-from-js-array?answertab=votes#tab-top
+            const seti = new Set(this.indicesinRows[this.elemIndices[i][0]].concat(this.indicesinCols[this.elemIndices[i][1]]).concat(this.indicesinBoxes[this.elemIndices[i][2]]));
+            //filter and sort numeric
+            this.neighbours.push([...seti].filter(x => (x !== i)).sort(function(a, b){return a - b}));
         }
 
     }
@@ -90,13 +97,7 @@ class Iteration {
 }
 
 
-// Sudoku = new SudokuClass([]);
-sudokuElemOptionsShowing = false;
-
-
-
 function start() {
-    // buildSudoku();
     drawFirstSudoku();
 }
 
@@ -107,18 +108,23 @@ function checkInputDiv(event) {
 }
 */
 
+function buildFirstSudoku() {
+    Game = new GameClass();
+    Sudoku = new SudokuClass([]);
+    startIter = new Iteration(Sudoku);
+}
+
+buildFirstSudoku();
+
 function buildSudoku() {
 
     Sudoku = new SudokuClass([]);
-    Game = new GameClass();
-
     startIter = new Iteration(Sudoku);
-    // console.log("Sudoku = ", Sudoku);
 }
-buildSudoku();
-function drawFirstSudoku(){
+
+function drawFirstSudoku() {
     const sBox = document.getElementById("sudoku-box");
-    removeChildren(sBox,["elem-options-holder","timer"]);
+    removeChildren(sBox, ["elem-options-holder", "timer"]);
     drawSudoku(Sudoku, sBox, "input");
     const sudokuElemDivs = sBox.getElementsByTagName("input");
     setAttributes(sudokuElemDivs);
@@ -127,13 +133,13 @@ function drawFirstSudoku(){
 
 function setAttributes(sudokuElemDivs) {
     for (let i = 0; i < sudokuElemDivs.length; i++) {
-        const elemDiv =sudokuElemDivs[i];
+        const elemDiv = sudokuElemDivs[i];
         elemDiv.id = i;
         elemDiv.addEventListener("click", createOptions, false);
         // elemDiv.addEventListener("change", checkInputDiv, false);
-        elemDiv.setAttribute("size",1);
-        elemDiv.setAttribute("maxlength",1);
-        elemDiv.setAttribute("autocomplete","off");
+        elemDiv.setAttribute("size", 1);
+        elemDiv.setAttribute("maxlength", 1);
+        elemDiv.setAttribute("autocomplete", "off");
         elemDiv.readOnly = true
     }
 }

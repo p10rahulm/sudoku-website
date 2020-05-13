@@ -14,6 +14,7 @@ function copySudokuHeap(inputSudoku, iteration) {
     iteration.copyworkElemIndicesByLengthTT += performance.now() - copyworkElemIndicesByLengthTS;
     const copyprocessedTS = performance.now()
     newSudoku.toProcess = inputSudoku.toProcess.slice(0);
+    newSudoku.SudokuPrefill = inputSudoku.SudokuPrefill.slice(0);
     //no need for processed as of now
     // newSudoku.processed = new Set(inputSudoku.processed);
     // newSudoku.processed = inputSudoku.processed.slice(0);
