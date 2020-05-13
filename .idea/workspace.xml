@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="74631bf2-b197-47e6-a7fe-3448746f7870" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/solver.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/solver.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/updater.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/updater.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/404.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/allJS.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/allJS.min.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game.html" beforeDir="false" afterPath="$PROJECT_DIR$/game.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
@@ -17,8 +18,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
-        <option value="JavaScript File" />
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -87,7 +88,7 @@
       <updated>1588934256599</updated>
       <workItem from="1588934257812" duration="83253000" />
       <workItem from="1589139318091" duration="1693000" />
-      <workItem from="1589399102156" duration="6649000" />
+      <workItem from="1589399102156" duration="7811000" />
     </task>
     <servers />
   </component>
