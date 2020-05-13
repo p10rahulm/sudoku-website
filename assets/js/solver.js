@@ -83,9 +83,8 @@ function dfsCreatorSudoku() {
         doFinishedProcessing(Sudoku, iteration,0, 0, verboseTimeResultOption);
 
     }
-
-
 }
+
 function updateIter(iteration,newAddition,additionCount){
     iteration.numIterations +=1;
     iteration.stackdepth = (additionCount-1)*iteration.stackdepth/additionCount + 1/additionCount*newAddition.stackdepth;

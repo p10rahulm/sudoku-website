@@ -405,7 +405,9 @@ a:hover {
         font-size: max(1em, 10px);
     }
 }
-
+.gameBox .pre-filled{
+    background-color: #f0eef9;
+}
 .gameBox input::-webkit-calendar-picker-indicator {
     display: none;
 }
@@ -551,4 +553,67 @@ a:hover {
     flex-basis: 300px;
     flex-grow: 1;
     flex-shrink: 1;
+}
+
+#game-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#everything-box{
+    width: 450px;
+}
+#levels-holder{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+
+    align-self: center;
+    align-items: center;
+    vertical-align: middle;
+    margin: min(20vh,20vw) 20px;
+
+}
+#level-choice-heading{
+    flex-basis: 100%;
+    flex-grow: 1;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0px;
+}
+#level-choice-circle{
+    padding: 20px 0;
+    width: 100px;
+    /*height: 100px;*/
+    border-radius: 50%;
+    text-align: center;
+    padding: 25px 10px;
+    background-color: #33aaff;
+    color: white;
+    font-weight: bold;
+    font-family: Lora, Georgia, Cambria, Times, "Times New Roman", Serif;
+    font-size: max(16px,1.5em);
+}
+.level-choice{
+    flex-basis: 0;
+    border-radius: 50%;
+    text-align: center;
+    background-color: #005999;
+    background-color: #99007d;
+    padding: 030px 0;
+    min-width: 90px;
+    font-weight: bold;
+    font-family: Lora, Georgia, Cambria, Times, "Times New Roman", Serif;
+    color: white;
+    align-items: center;
+    margin: 0 30px;
+}
+
+#timer{
+    font-family: "Alegreya SC",Lora,Cambria,"Times New Roman",Times,Serif;
+    font-weight: 1.25em;
+    text-align: right;
 }

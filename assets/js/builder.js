@@ -117,7 +117,7 @@ function buildSudoku() {
 buildSudoku();
 function drawFirstSudoku(){
     const sBox = document.getElementById("sudoku-box");
-    removeChildren(sBox,["elem-options-holder"]);
+    removeChildren(sBox,["elem-options-holder","timer"]);
     drawSudoku(Sudoku, sBox, "input");
     const sudokuElemDivs = sBox.getElementsByTagName("input");
     setAttributes(sudokuElemDivs);

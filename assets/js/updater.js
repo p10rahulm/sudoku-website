@@ -12,8 +12,8 @@ function inputfromText() {
     const sudokuElemDivs = sBox.getElementsByTagName("input");
 
     for (let i = 0; i < Math.min(81, textinput.length); i++) {
-        sudokuElemDivs[i].value = '';
         if (textinput[i] == '.') {
+            sudokuElemDivs[i].value = '';
             continue;
         }
         sudokuElemDivs[i].value = textinput[i];
@@ -24,9 +24,9 @@ function inputfromText() {
 // 8..........36......7..9.2...5...7.......457.....1...3...1....68..85...1..9....4
 function addInput(id, value) {
     logError("");
-    const elemChanged = document.getElementById(id);
-    const allowedArray = getAllowedNumbersforIndex(id, Sudoku).toString().split(",");
-    const allowed = new Set(allowedArray);
+    // const elemChanged = document.getElementById(id);
+    // const allowedArray = getAllowedNumbersforIndex(id, Sudoku).toString().split(",");
+    // const allowed = new Set(allowedArray);
 
     const valID = Number(id);
     const valNum = Number(value);
@@ -176,7 +176,6 @@ function deleteInputSudoku(inputSudoku, inputValID, inputValueDeleted) {
     const sBox = document.getElementById("sudoku-box");
     const sudokuElemDivs = sBox.getElementsByTagName("input");
     const valArray = getSudokuInputs(sudokuElemDivs)
-    console.log("valArray=", valArray);
     // console.log("sudokuElemDivs=",sudokuElemDivs);
     const [row, col, box] = Game.elemIndices[inputValID];
     const elemsinRow = Game.indicesinRows[row];

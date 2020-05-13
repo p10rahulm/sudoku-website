@@ -16,7 +16,12 @@ function logError(message){
     errorsDiv.appendChild(newError);
     // alert(message);
 }
-
+function getRandomIntBetween(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+}
+function getRandomIntBelow(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+}
 function isPowerOf2(someNum) {
     return someNum && !(someNum & (someNum - 1));
 }
@@ -116,6 +121,8 @@ function delMinHeap(heap){
     heapifyDown(heap,1);
     return minval;
 }
+
+
 
 function heapifyDown(Arr,index) {
     const leftChildIndex = index*2;

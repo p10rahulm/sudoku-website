@@ -6,14 +6,14 @@
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
 
 
-
     <script type="text/javascript" src="assets/js/builder.js"></script>
     <script type="text/javascript" src="assets/js/utilities.js"></script>
     <script type="text/javascript" src="assets/js/updater.js"></script>
     <script type="text/javascript" src="assets/js/solver.js"></script>
     <script type="text/javascript" src="assets/js/sudoku-ui.js"></script>
+    <script type="text/javascript" src="assets/js/levels.js"></script>
 
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/gameStyles.css">
 
 
     <!--
@@ -24,7 +24,6 @@
 
 
     -->
-
 
 
     <link rel="icon" type="image/png" href="assets/images/sudoku.png">
@@ -64,81 +63,42 @@
         </div>
     </div>
     <div class="mainer container-element">
-        <div id="Home" class="main active">
-            <div class="home-header">Welcome to the Game of Sudoku</div>
-            <div class="home-textpara" onclick="toggleDisplay('home-instructions')">
-                Click to see instructions
-            </div>
-            <div id="home-instructions" class="home-textpara2 inactive">
-                <div class="home-header2"><b>The Rules of Sudoku</b></div>
+        <div id="game-container">
+            <div id="everything-box">
+                <div id="levels-show-hide" class="active">
+                    <div id="levels-holder">
+                        <div id="level-choice-heading">
+                            <div id="level-choice-circle">
+                                Choose a level
+                            </div>
+                        </div>
 
-                <br><br>
-                While solving Sudoku puzzles can be significant challenge, the rules for traditional solution finding
-                are quite straight forward:
-                <ul>
-                    <li>
-                        Each row, column, and box can contain each number (typically 1 to 9) exactly once.
-                    </li>
-                    <li>
-                        Every row column and box must contain all the numbers between 1 and 9.
-                    </li>
-                    <li>
-                        Always have fun while playing!
-                    </li>
-                </ul>
-
-
-            </div>
-            <div id="text-input-sizer" class="gameBox-holder">
-                <div id="game-input-holder">
-                    Choose a level
-                    <div class="level-choice">
-                        Easy
+                        <div class="level-choice"
+                             onclick="toggleDisplay('levels-show-hide');toggleDisplay('sudoku-box-holder');fillSudk(30,3);">
+                            Easy
+                        </div>
+                        <div class="level-choice"
+                             onclick="toggleDisplay('levels-show-hide');toggleDisplay('sudoku-box-holder');fillSudk(25,3);">
+                            Medium
+                        </div>
+                        <div class="level-choice"
+                             onclick="toggleDisplay('levels-show-hide');toggleDisplay('sudoku-box-holder');fillSudk(22,3);">
+                            Hard
+                        </div>
                     </div>
-                    <div class="level-choice">
-                        Medium
-                    </div>
-                    <div class="level-choice">
-                        Hard
-                    </div>
-                    <div class="game-choice-button inactive">
-                        Start
-                    </div>
-
                 </div>
-            </div>
-            <div id="sudoku-box-holder" class="gameBox-holder">
-                <div id="sudoku-box" class="gameBox">
-                    <div id="elem-options-holder" class="options-box invisibleOptionsList"></div>
-                </div>
-            </div>
-            <div id="buttons-holder">
-                <div id="iteration-holder">
-
-                    <div id="iteration-options-box">
-                        <label class="iteration-option">
-                            Number of Iterations:
-                            <input type="number" class="iteration-option" id="num-iterations-option" max="10000"
-                                   min="10"
-                                   autocomplete="on" value="10" size="5">
-                        </label>
-                        <label class="iteration-option">
-                            View Verbose:
-                            <input type="checkbox" class="iteration-option" id="verbose-time-results-option"
-                                   autocomplete="on">
-                        </label>
+                <div id="sudoku-box-holder" class="gameBox-holder inactive">
+                    <div id="sudoku-box" class="gameBox">
+                        <div id="timer"></div>
+                        <div id="elem-options-holder" class="options-box invisibleOptionsList"></div>
                     </div>
-                    <div id="solve-button" onclick="dfsCreatorSudoku()">Solve!</div>
-
                 </div>
-            </div>
-
-            <div id="output">
-                <div id="output-errors"></div>
-                <div id="output-boxes"></div>
             </div>
         </div>
-
+        <div id="output">
+            <div id="output-errors"></div>
+            <div id="output-boxes"></div>
+        </div>
 
     </div>
     <div class="footer container-element">
