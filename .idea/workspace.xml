@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="74631bf2-b197-47e6-a7fe-3448746f7870" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GoogleCloudStorageUpdate.sh" beforeDir="false" afterPath="$PROJECT_DIR$/GoogleCloudStorageUpdate.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/solver.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/solver.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/updater.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/updater.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game.html" beforeDir="false" afterPath="$PROJECT_DIR$/game.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,6 +87,7 @@
       <updated>1588934256599</updated>
       <workItem from="1588934257812" duration="83253000" />
       <workItem from="1589139318091" duration="1693000" />
+      <workItem from="1589399102156" duration="6649000" />
     </task>
     <servers />
   </component>
@@ -103,10 +107,10 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2478" y="146" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1589179626496" />
-    <state x="2028" y="34" width="1804" height="962" key="find.popup" timestamp="1589383216589">
+    <state x="2028" y="34" width="1804" height="962" key="find.popup" timestamp="1589405063819">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2028" y="34" width="1804" height="962" key="find.popup/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1589383216589" />
+    <state x="2028" y="34" width="1804" height="962" key="find.popup/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1589405063819" />
     <state x="2536" y="250" key="run.anything.popup" timestamp="1589011655509">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>

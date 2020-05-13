@@ -40,34 +40,23 @@ function removeInput(id, existingValue) {
     Sudoku = deleteInputSudoku(Sudoku, id);
     // finalInputArray = Sudoku.sudokuInputArray;
 }
-
+j=0
 function addInputSudokuHeap(inputSudoku, inputValID, inputValue, callerFuncLocation = 0, iteration = startIter) {
     const addinputSudokuTS = performance.now()
     const workingAddVal = powerofTwo(inputValue - 1);
-
+    inputSudoku.workElemArray[inputValID] = workingAddVal;
     const neighbours = Game.neighbours[inputValID];
     updateAdditionForElemsHeap(inputSudoku, neighbours, inputValID, workingAddVal, iteration);
-    /*
-    const [row, col, box] = Game.elemIndices[inputValID];
-    const elemsinRow = Game.indicesinRows[row];
-    const elemsinCol = Game.indicesinCols[col];
-    const elemsinBox = Game.indicesinBoxes[box];
-
-    updateAdditionForElemsHeap(inputSudoku, elemsinRow, inputValID, workingAddVal, iteration);
-    updateAdditionForElemsHeap(inputSudoku, elemsinCol, inputValID, workingAddVal, iteration);
-    updateAdditionForElemsHeap(inputSudoku, elemsinBox, inputValID, workingAddVal, iteration);
-
-     */
     if (inputSudoku.contradiction) {
         return inputSudoku;
     }
-
-    // inputSudoku.processed[inputValID] =1;
     inputSudoku.workElemArray[inputValID] = workingAddVal;
     iteration.addinputSudokuTT += (performance.now() - addinputSudokuTS);
     inputSudoku.numProcessed += 1;
     return inputSudoku;
 }
+
+
 
 function addInputSudoku(inputSudoku, inputValID, inputValue, callerFuncLocation = 0) {
     addinputSudokuTS = performance.now()
@@ -119,7 +108,7 @@ function updateAdditionForElemsHeap(inputSudoku, elemsinSameGroup, inputValID, w
             if (newNumbits === 1) {
                 inputSudoku.toProcess.push(currSudokuIndex)
             }
-            updateHeap(inputSudoku, currSudokuIndex, newNumbits, newWorkingVal, iteration);
+            // updateHeap(inputSudoku, currSudokuIndex, newNumbits, newWorkingVal, iteration);
         }
     }
     iteration.updateAdditionForElemsTimeTaken += (performance.now() - updateAdditionForElemsTS);
@@ -180,7 +169,7 @@ function deleteInputSudoku(inputSudoku, inputValID) {
     }
 
     //heap is reset
-    resetHeap(inputSudoku);
+    // resetHeap(inputSudoku);
     inputSudoku.numProcessed -= 1;
     return inputSudoku;
 }

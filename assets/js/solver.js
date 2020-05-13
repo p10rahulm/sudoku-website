@@ -247,14 +247,25 @@ function runDFSSudokuIterativeHeap(sudokuHolder, iteration) {
         }
         const leastIndexIterationTS = performance.now();
 
-        let indexToIterate = delMinHeap(runningSudoku.workElemIndicesByLength) % 100;
+        const heap = runningSudoku.workElemArray.reduce(function (accumulator,element,index){
+            const bitC =bitCount(element);
+            const heapVal = bitC*100+index;
+            return ((bitC >1 && heapVal < accumulator) ? heapVal : accumulator);
+        },Infinity)
+
+
+        // console.log("heap=",heap);
+        // let indexToIterate = delMinHeap(runningSudoku.workElemIndicesByLength) % 100;
+        let indexToIterate = heap%100;
+        // console.log("indexToIterate=",indexToIterate);
+
         // console.log("indexToIterate  = ", indexToIterate);
         let availableChoices = getAllowedNumbersforIndex(indexToIterate, runningSudoku);
         // console.log("availableChoices  = ", availableChoices);
-        while (availableChoices.length == 1) {
-            indexToIterate = delMinHeap(runningSudoku.workElemIndicesByLength) % 100;
-            availableChoices = getAllowedNumbersforIndex(indexToIterate, runningSudoku);
-        }
+        // while (availableChoices.length == 1) {
+        //     indexToIterate = delMinHeap(runningSudoku.workElemIndicesByLength) % 100;
+        //     availableChoices = getAllowedNumbersforIndex(indexToIterate, runningSudoku);
+        // }
         if (availableChoices.length == 0) {
             continue;
         }
