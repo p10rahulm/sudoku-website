@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="74631bf2-b197-47e6-a7fe-3448746f7870" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/assets/css/gameStyles.min.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/gameStyles.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/gameStyles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/builder.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/builder.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/levels.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/levels.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/solver.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/solver.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/sudoku-ui.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/sudoku-ui.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/updater.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/updater.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/404.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/styles.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/styles.min.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game.html" beforeDir="false" afterPath="$PROJECT_DIR$/game.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
